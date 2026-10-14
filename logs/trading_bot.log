@@ -1,0 +1,5 @@
+2026-10-14 18:02:04,311 INFO ---- Run started ----
+2026-10-14 18:02:04,823 INFO AAPL: 100 days of data through 2026-10-13, close 341.27
+2026-10-14 18:02:04,823 INFO 2026-10-12: SMA20 335.78 vs SMA50 323.00  ->  2026-10-13: SMA20 336.28 vs SMA50 323.77
+2026-10-14 18:02:04,855 INFO Paper account ending YUU8: cash 48121.14, buying power 197639.78, holding 0 AAPL
+2026-10-14 18:02:04,856 INFO No crossover. SMA20 is above SMA50; nothing to do.
