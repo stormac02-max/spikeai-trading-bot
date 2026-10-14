@@ -1,0 +1,14 @@
+# Moving average crossover bot settings.
+
+# Ticker to trade.
+symbol = "AAPL"
+
+# Moving average periods, in trading days. short_window must be smaller than long_window.
+short_window = 20
+long_window = 50
+
+# Shares to buy or sell on each crossover.
+trade_qty = 1
+
+# Trading days of price history to fetch from yfinance (must be more than long_window).
+lookback_days = 100

@@ -1,0 +1,65 @@
+name: MA crossover bot
+
+on:
+  schedule:
+    # Weekdays at 13:20 UTC = 9:20 AM EDT (summer) / 8:20 AM EST (winter).
+    # GitHub cron is UTC-only, so this starts a little early and the bot
+    # waits for the 9:30 AM ET open itself (--wait-for-open).
+    - cron: "20 13 * * 1-5"
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Dry run (check the signal without placing orders)"
+        type: boolean
+        default: true
+
+permissions:
+  contents: write # to commit the log back to the repository
+
+concurrency:
+  group: trading-bot
+  cancel-in-progress: false
+
+jobs:
+  run-bot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run bot
+        env:
+          APCA_API_KEY_ID: ${{ secrets.APCA_API_KEY_ID }}
+          APCA_API_SECRET_KEY: ${{ secrets.APCA_API_SECRET_KEY }}
+          TRADING_BOT_LOG: logs/trading_bot.log
+          # Scheduled runs wait for the open; manual runs go straight away.
+          BOT_ARGS: >-
+            ${{ github.event_name == 'schedule' && '--wait-for-open' || '' }}
+            ${{ inputs.dry_run && '--dry-run' || '' }}
+        run: python trading_bot.py $BOT_ARGS
+
+      - name: Save log to the repository
+        if: always()
+        run: |
+          if [ ! -f logs/trading_bot.log ]; then
+            echo "The bot did not write a log this run."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add logs/trading_bot.log
+          if git diff --cached --quiet; then
+            echo "No log changes to save."
+            exit 0
+          fi
+          git commit -m "Bot log $(date -u +%Y-%m-%d)"
+          git pull --rebase
+          git push

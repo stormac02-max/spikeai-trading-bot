@@ -1,0 +1,8 @@
+# API keys - never commit these. On GitHub they live in repository secrets.
+.env
+
+# Log from runs on this PC. Runs on GitHub write to logs/trading_bot.log instead.
+/trading_bot.log
+
+__pycache__/
+*.pyc
