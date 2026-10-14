@@ -180,11 +180,9 @@ def run(config, dry_run, wait):
     long_window = config["long_window"]
     qty = config["trade_qty"]
 
-    client = None
-    if wait:
-        client = make_client()
-        if not wait_for_open(client):
-            return
+    client = make_client()
+    if wait and not wait_for_open(client):
+        return
 
     closes = fetch_closes(symbol, config["lookback_days"])
     signal, d = detect_crossover(closes, short_window, long_window)
@@ -199,6 +197,14 @@ def run(config, dry_run, wait):
         d["curr_date"], short_window, d["curr_short"], long_window, d["curr_long"],
     )
 
+    # Checked on every run, so bad or expired keys fail loudly even on quiet days.
+    account = client.get_account()
+    owned = held_qty(client, symbol)
+    log.info(
+        "Paper account ending %s: cash %s, buying power %s, holding %g %s",
+        account.account_number[-4:], account.cash, account.buying_power, owned, symbol,
+    )
+
     if signal is None:
         trend = "above" if d["curr_short"] > d["curr_long"] else "below"
         log.info("No crossover. SMA%d is %s SMA%d; nothing to do.", short_window, trend, long_window)
@@ -207,14 +213,6 @@ def run(config, dry_run, wait):
     log.info(
         "Crossover on %s: SMA%d crossed %s SMA%d -> %s signal.",
         d["curr_date"], short_window, "above" if signal == "buy" else "below", long_window, signal.upper(),
-    )
-
-    client = client or make_client()
-    account = client.get_account()
-    owned = held_qty(client, symbol)
-    log.info(
-        "Paper account ending %s: cash %s, buying power %s, holding %g %s",
-        account.account_number[-4:], account.cash, account.buying_power, owned, symbol,
     )
 
     if signal == "sell" and owned < qty:
