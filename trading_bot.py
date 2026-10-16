@@ -1,13 +1,15 @@
 """Moving average crossover bot for an Alpaca paper trading account.
 
-Fetches recent daily prices from yfinance, computes a short and a long simple
-moving average, and places a market order when the short average crosses the
-long average between the last two completed trading days:
+For each stock on the watchlist, fetches recent daily prices from yfinance,
+computes a short and a long simple moving average, and places a market order
+when the short average crosses the long average between the last two
+completed trading days:
 
   short crosses above long -> buy  trade_qty shares
   short crosses below long -> sell trade_qty shares (only if they are held)
 
-Settings live in config.toml; API keys are read from .env or, when running on
+Each stock is checked and traded on its own signal. Settings (including the
+watchlist) live in config.toml; API keys are read from .env or, when running on
 GitHub Actions, from environment variables. Orders always go to the paper
 trading endpoint. The log goes to trading_bot.log, or to the path in the
 TRADING_BOT_LOG environment variable.
@@ -48,17 +50,21 @@ def load_config(path):
     with open(path, "rb") as f:
         config = tomllib.load(f)
 
-    required = ("symbol", "short_window", "long_window", "trade_qty", "lookback_days")
+    required = ("symbols", "short_window", "long_window", "trade_qty", "lookback_days")
     missing = [key for key in required if key not in config]
     if missing:
         raise ValueError(f"{path} is missing: {', '.join(missing)}")
+    symbols = config["symbols"]
+    if not isinstance(symbols, list) or not symbols or not all(isinstance(s, str) and s.strip() for s in symbols):
+        raise ValueError('symbols must be a non-empty list of tickers, e.g. symbols = ["AAPL", "MSFT"]')
     if not 0 < config["short_window"] < config["long_window"]:
         raise ValueError("short_window must be positive and smaller than long_window")
     if config["lookback_days"] <= config["long_window"]:
         raise ValueError("lookback_days must be greater than long_window")
     if config["trade_qty"] <= 0:
         raise ValueError("trade_qty must be positive")
-    config["symbol"] = config["symbol"].upper()
+    # Uppercase and drop repeats, keeping the order they were listed in.
+    config["symbols"] = list(dict.fromkeys(s.strip().upper() for s in symbols))
     return config
 
 
@@ -142,13 +148,6 @@ def wait_for_open(client):
     return True
 
 
-def held_qty(client, symbol):
-    for position in client.get_all_positions():
-        if position.symbol == symbol:
-            return float(position.qty)
-    return 0.0
-
-
 def place_order(client, symbol, side, qty, signal_date):
     # One order per symbol, side and signal day: Alpaca rejects a reused
     # client_order_id, so running the bot twice on the same day can't double up.
@@ -174,56 +173,74 @@ def place_order(client, symbol, side, qty, signal_date):
     return order
 
 
-def run(config, dry_run, wait):
-    symbol = config["symbol"]
+def check_symbol(client, config, symbol, owned, dry_run):
+    """Check one stock for a crossover and trade it. Returns the action taken."""
     short_window = config["short_window"]
     long_window = config["long_window"]
     qty = config["trade_qty"]
-
-    client = make_client()
-    if wait and not wait_for_open(client):
-        return
 
     closes = fetch_closes(symbol, config["lookback_days"])
     signal, d = detect_crossover(closes, short_window, long_window)
 
     log.info(
-        "%s: %d days of data through %s, close %.2f",
-        symbol, len(closes), d["curr_date"], d["close"],
+        "%s: %d days of data through %s, close %.2f, holding %g",
+        symbol, len(closes), d["curr_date"], d["close"], owned,
     )
     log.info(
-        "%s: SMA%d %.2f vs SMA%d %.2f  ->  %s: SMA%d %.2f vs SMA%d %.2f",
+        "%s: %s SMA%d %.2f vs SMA%d %.2f  ->  %s SMA%d %.2f vs SMA%d %.2f",
+        symbol,
         d["prev_date"], short_window, d["prev_short"], long_window, d["prev_long"],
         d["curr_date"], short_window, d["curr_short"], long_window, d["curr_long"],
     )
 
-    # Checked on every run, so bad or expired keys fail loudly even on quiet days.
-    account = client.get_account()
-    owned = held_qty(client, symbol)
-    log.info(
-        "Paper account ending %s: cash %s, buying power %s, holding %g %s",
-        account.account_number[-4:], account.cash, account.buying_power, owned, symbol,
-    )
-
     if signal is None:
         trend = "above" if d["curr_short"] > d["curr_long"] else "below"
-        log.info("No crossover. SMA%d is %s SMA%d; nothing to do.", short_window, trend, long_window)
-        return
+        log.info("%s: no crossover (SMA%d is %s SMA%d); nothing to do.", symbol, short_window, trend, long_window)
+        return "no signal"
 
     log.info(
-        "Crossover on %s: SMA%d crossed %s SMA%d -> %s signal.",
-        d["curr_date"], short_window, "above" if signal == "buy" else "below", long_window, signal.upper(),
+        "%s: crossover on %s, SMA%d crossed %s SMA%d -> %s signal.",
+        symbol, d["curr_date"], short_window, "above" if signal == "buy" else "below", long_window, signal.upper(),
     )
 
     if signal == "sell" and owned < qty:
-        log.info("Sell signal, but only %g %s held (need %d); not opening a short.", owned, symbol, qty)
-        return
+        log.info("%s: sell signal, but only %g held (need %d); not opening a short.", symbol, owned, qty)
+        return "sell skipped (not held)"
 
     side = OrderSide.BUY if signal == "buy" else OrderSide.SELL
     if dry_run:
-        log.info("Dry run: would %s %d %s at market.", side.value, qty, symbol)
-        return
-    place_order(client, symbol, side, qty, d["curr_date"])
+        log.info("%s: dry run, would %s %d at market.", symbol, side.value, qty)
+        return f"would {side.value}"
+    order = place_order(client, symbol, side, qty, d["curr_date"])
+    return f"{side.value} order placed" if order else "already ordered"
+
+
+def run(config, dry_run, wait):
+    """Check every stock on the watchlist. Returns False if any of them failed."""
+    client = make_client()
+    if wait and not wait_for_open(client):
+        return True
+
+    # Checked on every run, so bad or expired keys fail loudly even on quiet days.
+    account = client.get_account()
+    holdings = {p.symbol: float(p.qty) for p in client.get_all_positions()}
+    log.info(
+        "Paper account ending %s: cash %s, buying power %s",
+        account.account_number[-4:], account.cash, account.buying_power,
+    )
+    log.info("Watchlist: %s", ", ".join(config["symbols"]))
+
+    results = {}
+    for symbol in config["symbols"]:
+        # One bad ticker or data hiccup shouldn't stop the rest of the watchlist.
+        try:
+            results[symbol] = check_symbol(client, config, symbol, holdings.get(symbol, 0.0), dry_run)
+        except Exception:
+            log.exception("%s: check failed", symbol)
+            results[symbol] = "FAILED"
+
+    log.info("Summary: %s", "; ".join(f"{s} {r}" for s, r in results.items()))
+    return "FAILED" not in results.values()
 
 
 def main():
@@ -246,11 +263,11 @@ def main():
 
     log.info("---- Run started%s ----", " (dry run)" if args.dry_run else "")
     try:
-        run(load_config(args.config), args.dry_run, args.wait_for_open)
+        ok = run(load_config(args.config), args.dry_run, args.wait_for_open)
     except Exception:
         log.exception("Bot run failed")
         return 1
-    return 0
+    return 0 if ok else 1
 
 
 if __name__ == "__main__":

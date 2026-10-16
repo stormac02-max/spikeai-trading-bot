@@ -40,6 +40,7 @@ jobs:
           APCA_API_KEY_ID: ${{ secrets.APCA_API_KEY_ID }}
           APCA_API_SECRET_KEY: ${{ secrets.APCA_API_SECRET_KEY }}
           TRADING_BOT_LOG: logs/trading_bot.log
+          TZ: America/New_York # log timestamps in market time instead of UTC
           # Scheduled runs wait for the open; manual runs go straight away.
           BOT_ARGS: >-
             ${{ github.event_name == 'schedule' && '--wait-for-open' || '' }}

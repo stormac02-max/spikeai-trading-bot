@@ -1,13 +1,14 @@
 # Moving average crossover bot settings.
 
-# Ticker to trade.
-symbol = "AAPL"
+# Watchlist: every ticker here is checked each run and traded on its own crossover.
+# Add or remove tickers in quotes, separated by commas, e.g. ["AAPL", "MSFT", "NVDA"].
+symbols = ["AAPL"]
 
 # Moving average periods, in trading days. short_window must be smaller than long_window.
 short_window = 20
 long_window = 50
 
-# Shares to buy or sell on each crossover.
+# Shares to buy or sell on each crossover (applies to every stock on the watchlist).
 trade_qty = 1
 
 # Trading days of price history to fetch from yfinance (must be more than long_window).
