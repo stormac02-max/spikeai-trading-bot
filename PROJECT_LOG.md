@@ -193,3 +193,22 @@ use the Alpaca tools. The bots don't use the MCP server, so they're unaffected.
 - Follow-up: after the user reconnected the server inside the same session, it still got 401, so reconnecting
   doesn't pick up the new keys. Verified with a fresh server process started from the saved config: its keys
   match `.env` exactly and `get_account_info` succeeds. Only a new session fixes the old one.
+
+### 2026-11-01: Strategy research (Satoshi Nakamoto, James Fickel, James Wynn)
+- The user asked Claude to think like a crypto expert and study these three. Claude agreed to study them but
+  won't claim to be real people. Summary, from public reporting (figures vary between sources):
+  - **Satoshi:** builder, not trader. An estimated ~1.1M BTC mined in 2009–10 (Lerner's "Patoshi" pattern),
+    believed never moved. The "strategy" is fixed rules (21M cap, halvings) and extreme long-term holding.
+  - **Fickel:** early ETH buyer (reportedly about $400k near $0.80), founder of Amaranth Foundation (longevity).
+    In 2024 he went long ETH/BTC on Aave by borrowing ~3,061 WBTC and swapping it for ETH, betting against the
+    ratio's downtrend. Closed Dec 2024 with a reported ~20,600 ETH (~$69M) loss.
+  - **Wynn:** high-leverage momentum trader. Memecoins (PEPE), then 40x BTC perps on Hyperliquid, peaking at a
+    ~$1.25B notional long and reportedly ~$82M profit in 2025. Lost ~$100M in May 2025. In 2026 he flipped
+    to 40x shorts and was liquidated repeatedly (six times in two weeks in April, account down to ~$900; again
+    in June and September).
+- Constraint: Alpaca crypto is spot only, with no leverage and no shorting, so Wynn-style perps and
+  Fickel-style borrowing can't be copied here.
+- Candidate strategies to discuss with the user (none added): (a) Satoshi-style accumulation / dollar-cost
+  averaging; (b) a ratio trend, such as holding whichever of ETH/BTC is winning on a ratio moving average,
+  following the trend Fickel fought; (c) momentum breakouts with hard stops and no leverage; (d) a risk layer
+  for every strategy: max size per coin, stop-losses, max daily loss. Backtest each before going live.
