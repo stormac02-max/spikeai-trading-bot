@@ -1,0 +1,16 @@
+# Crypto moving average crossover bot settings.
+
+# Coins to trade, as Alpaca crypto pairs in quotes, separated by commas, e.g. ["BTC/USD", "ETH/USD"].
+# Each coin is checked once a day and traded on its own crossover.
+symbols = []
+
+# Moving average periods, in days. short_window must be smaller than long_window.
+# Crypto trades every day, so these count calendar days (weekends included).
+short_window = 20
+long_window = 50
+
+# Dollars to buy on each buy signal. A sell signal sells that coin's whole position.
+trade_usd = 500
+
+# Days of daily price history to use (must be more than long_window).
+lookback_days = 100

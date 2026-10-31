@@ -243,6 +243,16 @@ def run(config, dry_run, wait):
     return "FAILED" not in results.values()
 
 
+def setup_logging(log_file):
+    """Log to `log_file` (relative to the project folder) and to the console, if there is one."""
+    log_file = BASE_DIR / log_file
+    log_file.parent.mkdir(parents=True, exist_ok=True)
+    handlers = [logging.FileHandler(log_file, encoding="utf-8")]
+    if sys.stdout is not None:  # None under pythonw.exe (scheduled runs have no console)
+        handlers.append(logging.StreamHandler(sys.stdout))
+    logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s", handlers=handlers)
+
+
 def main():
     parser = argparse.ArgumentParser(description="Moving average crossover bot (Alpaca paper trading).")
     parser.add_argument("--config", default=BASE_DIR / "config.toml", type=Path, help="path to config file")
@@ -254,13 +264,7 @@ def main():
     )
     args = parser.parse_args()
 
-    log_file = BASE_DIR / os.getenv("TRADING_BOT_LOG", "trading_bot.log")
-    log_file.parent.mkdir(parents=True, exist_ok=True)
-    handlers = [logging.FileHandler(log_file, encoding="utf-8")]
-    if sys.stdout is not None:  # None under pythonw.exe (scheduled runs have no console)
-        handlers.append(logging.StreamHandler(sys.stdout))
-    logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s", handlers=handlers)
-
+    setup_logging(os.getenv("TRADING_BOT_LOG", "trading_bot.log"))
     log.info("---- Run started%s ----", " (dry run)" if args.dry_run else "")
     try:
         ok = run(load_config(args.config), args.dry_run, args.wait_for_open)

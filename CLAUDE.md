@@ -1,7 +1,7 @@
 # SpikeAI
 
-Alpaca paper trading project: a moving average crossover bot that runs on GitHub Actions, with a backup scheduled
-task on this PC. Crypto paper trading is next.
+Alpaca paper trading project. It now trades crypto only: `crypto_bot.py` runs daily on GitHub Actions. The
+stock bot (`trading_bot.py`) is stopped but kept.
 
 ## Project memory: PROJECT_LOG.md
 
@@ -19,4 +19,5 @@ task on this PC. Crypto paper trading is next.
 - Paper trading only. Keep the paper endpoint pinned (`TradingClient(..., paper=True)`).
 - Don't recommend which stocks or coins to buy. The user picks; Claude can scan, backtest or run the user's own
   strategy on the user's list.
+- Discuss any new trading strategy with the user before adding it.
 - The user is in Pakistan (PKT, UTC+5). Give times in both ET and PKT.

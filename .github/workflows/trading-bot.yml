@@ -1,11 +1,13 @@
-name: MA crossover bot
+name: MA crossover bot (stocks)
 
 on:
-  schedule:
-    # Weekdays at 13:20 UTC = 9:20 AM EDT (summer) / 8:20 AM EST (winter).
-    # GitHub cron is UTC-only, so this starts a little early and the bot
-    # waits for the 9:30 AM ET open itself (--wait-for-open).
-    - cron: "20 13 * * 1-5"
+  # Schedule stopped on 2026-10-31 (switched to crypto, see crypto-bot.yml).
+  # To resume stocks, restore:
+  #   schedule:
+  #     # Weekdays at 13:20 UTC = 9:20 AM EDT (summer) / 8:20 AM EST (winter).
+  #     # GitHub cron is UTC-only, so this starts a little early and the bot
+  #     # waits for the 9:30 AM ET open itself (--wait-for-open).
+  #     - cron: "20 13 * * 1-5"
   workflow_dispatch:
     inputs:
       dry_run:

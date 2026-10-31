@@ -13,40 +13,54 @@ Times: the user is in Pakistan (PKT, UTC+5, no daylight saving). The US market i
 
 ## Current state (updated 2026-10-31)
 
+**Focus: crypto.** Since 2026-10-31 the project trades crypto only. The stock bot is stopped but kept, so it
+can be resumed.
+
 **Alpaca paper account** ending `YUU8`: opened 2026-10-14 with $50,000. Crypto trading is enabled on it.
-- Cash $48,121.13 (last seen in the bot log, 2026-10-30).
-- Holding 2 MU (Micron), bought by hand on 2026-10-14 at $939.93 and $938.93.
+- Cash $48,121.13. Crypto buying power $49,005.87 (crypto can't use margin).
+- Holding 2 MU (Micron), bought by hand on 2026-10-14 at $939.93 and $938.93. At $884.74 on 2026-10-31 that's
+  down $109.38. The stock bot never traded. No crypto held yet.
 - The old $500 paper account ending `DUM9` was deleted by the user on 2026-10-14. Its keys are dead.
 
-**Stock bot** (`trading_bot.py`): 20/50-day simple moving average crossover on daily closes. Watchlist
-`symbols = ["AAPL"]`, 1 share per trade, long-only (sells only shares it holds, never shorts). No bot trades
-yet: AAPL's 20-day average has been above its 50-day since the buy crossover on 2026-09-15, so every run so
-far has ended in "no signal".
+**Crypto bot** (`crypto_bot.py` + `crypto_config.toml`): the same 20/50-day simple moving average crossover, on
+Alpaca's daily crypto candles. A buy signal buys `trade_usd = 500` dollars' worth. A sell signal sells that
+coin's whole position, or is skipped if none is held. Market orders, time in force GTC. **Watchlist is empty
+(`symbols = []`) until the user picks coins.** Until then each run only logs the account and "No coins on the
+watchlist yet".
+
+**Stock bot** (`trading_bot.py` + `config.toml`): **stopped 2026-10-31.** 20/50-day crossover on yfinance
+daily closes, watchlist `["AAPL"]`, 1 share per trade, long-only. It never traded: AAPL's 20-day stayed above
+its 50-day from 2026-09-15 through 2026-10-30.
 
 **Automation**
-- **GitHub Actions** (main runner): private repo `stormac02-max/spikeai-trading-bot`, workflow
-  `.github/workflows/trading-bot.yml`. Cron is weekdays 13:20 UTC and the bot waits for the 9:30 ET open, but
-  GitHub has started every run late, between 1:27 and 3:21 PM ET. After each run the log is committed to
-  `logs/trading_bot.log` (times in ET since 2026-10-16; the first two days are in UTC). Secrets:
-  `APCA_API_KEY_ID`, `APCA_API_SECRET_KEY`. Manual runs: Actions tab → MA crossover bot → Run workflow
-  (dry run is ticked by default).
-- **Windows Task Scheduler** (backup on this PC): task `SpikeAI MA Crossover Bot`, weekdays at 13:30 UTC
-  (6:30 PM PKT). It runs `pythonw.exe trading_bot.py --wait-for-open`, which skips market holidays and waits
-  for 9:30 ET. It only runs when the PC is on and the user is signed in, and catches up on a missed run when
-  the PC comes back on. Its log is `trading_bot.log` in the project folder, which is not in git.
-- **No double orders:** each order uses client_order_id `macross-{SYMBOL}-{buy|sell}-{signal date}`, and
-  Alpaca rejects a reused ID, so the GitHub and PC runs can't both trade the same signal.
+- **GitHub Actions**: private repo `stormac02-max/spikeai-trading-bot`. Secrets: `APCA_API_KEY_ID`,
+  `APCA_API_SECRET_KEY`.
+  - `crypto-bot.yml` (**active**): every day at 00:15 UTC (5:15 AM PKT), just after Alpaca's daily candle
+    closes at 00:00 UTC. GitHub usually starts scheduled runs late, which is fine for a daily signal. The log is
+    committed to `logs/crypto_bot.log`, with times in PKT. Manual run: Actions tab → "MA crossover bot
+    (crypto)" → Run workflow (dry run is ticked by default).
+  - `trading-bot.yml` (stocks): **schedule removed**, manual runs only. The schedule is kept as a comment in
+    the file. GitHub ran it every weekday 2026-10-14 to 10-30, starting 1:27–3:21 PM ET. Log is
+    `logs/trading_bot.log`.
+  - Both workflows share the concurrency group `trading-bot`, so their log commits never collide.
+- **Windows Task Scheduler**: task `SpikeAI MA Crossover Bot` (stocks) is **disabled** (2026-10-31), not deleted.
+  There is no PC task for crypto.
+- **No double orders:** orders use client_order_id `macross-{SYMBOL without slash}-{buy|sell}-{signal date}`,
+  and Alpaca rejects a reused ID.
 
 **Claude Code MCP:** the `alpaca` MCP server (`uvx alpaca-mcp-server` v2) is registered at user scope with the
 YUU8 keys. Its read tools work, but `place_stock_order` fails with "request body format is invalid", so orders
 are placed with the REST API or alpaca-py instead.
 
 **Open items**
-- Crypto paper trading: the user asked for it on 2026-10-31. Details still to be agreed.
-- GitHub runs start about 4–5 hours late. Possible fixes: a cron-job.org timer that starts the workflow at
-  9:30 ET (needs a GitHub token), or a small cloud server. Not decided.
-- US daylight saving ends 2026-11-01. From Nov 2 the open is 7:30 PM PKT. The bot already handles this by
-  starting at 13:30 UTC and waiting for 9:30 ET.
+- **Coins for the crypto watchlist:** waiting on the user. Claude does not pick them. Alpaca has 36 tradable
+  USD pairs: AAVE, ADA, ARB, AVAX, BAT, BCH, BONK, BTC, CRV, DOGE, DOT, ETH, FIL, GRT, HYPE, LDO, LINK, LTC,
+  ONDO, PAXG, PEPE, POL, RENDER, SHIB, SKY, SOL, SUSHI, TRUMP, UNI, USDC, USDG, USDT, WIF, XRP, XTZ, YFI (each
+  `/USD`).
+- **More strategies:** the user plans to add more. Each one is to be discussed with the user before it's added.
+  Keep the moving average strategy as it is.
+- If stocks resume: GitHub runs were 4–5 hours late (fixes: a cron-job.org trigger or a cloud server), and
+  from 2026-11-02 the 9:30 ET open is 7:30 PM PKT (already handled by the 13:30 UTC start plus waiting).
 
 ---
 
@@ -63,35 +77,44 @@ are placed with the REST API or alpaca-py instead.
 
 | File | Purpose |
 |---|---|
-| `trading_bot.py` | The bot. `--dry-run` reports without ordering; `--wait-for-open` skips holidays and waits for 9:30 ET; `--config` picks a config file. |
-| `config.toml` | `symbols`, `short_window` (20), `long_window` (50), `trade_qty` (1), `lookback_days` (100 trading days). |
+| `crypto_bot.py` | Crypto bot (active). `--dry-run` reports without ordering; `--config` picks a config file. Reuses `detect_crossover`, `make_client` and `setup_logging` from `trading_bot.py`. |
+| `crypto_config.toml` | `symbols` (Alpaca pairs like `"BTC/USD"`), `short_window` (20), `long_window` (50), `trade_usd` (500), `lookback_days` (100 days). |
+| `trading_bot.py` | Stock bot (stopped). `--dry-run` reports without ordering; `--wait-for-open` skips holidays and waits for 9:30 ET; `--config` picks a config file. |
+| `config.toml` | Stock settings: `symbols`, `short_window` (20), `long_window` (50), `trade_qty` (1 share), `lookback_days` (100 trading days). |
 | `test_alpaca_connection.py` | Read-only check: account and market clock. Auto-detects paper vs live keys. |
 | `requirements.txt` | alpaca-py, python-dotenv, yfinance. |
-| `.github/workflows/trading-bot.yml` | GitHub schedule. Commits `logs/trading_bot.log` after each run. |
+| `.github/workflows/crypto-bot.yml` | Crypto schedule (daily, 00:15 UTC). Commits `logs/crypto_bot.log` after each run. |
+| `.github/workflows/trading-bot.yml` | Stock workflow, manual runs only. Commits `logs/trading_bot.log` after each run. |
 | `.env` | Alpaca keys (`APCA_API_KEY_ID`, `APCA_API_SECRET_KEY`). Git-ignored and never committed. |
-| `trading_bot.log` | Log from this PC's runs. Git-ignored. |
-| `logs/trading_bot.log` | Log from GitHub's runs, committed by the workflow. |
+| `crypto_bot.log`, `trading_bot.log` | Logs from runs on this PC. Git-ignored. |
+| `logs/crypto_bot.log`, `logs/trading_bot.log` | Logs from GitHub's runs, committed by the workflows. |
 | `PROJECT_LOG.md` | This file. |
 | `CLAUDE.md` | Tells Claude to read and update this log. |
 
-**How the bot decides**
-- Uses the last 100 completed trading days from yfinance. Today's bar is dropped while the market is open.
-- Buy when SMA20 goes from ≤ SMA50 to > SMA50 between the last two days. Sell when it goes from ≥ to <.
-- A sell is skipped if fewer than `trade_qty` shares are held. Market orders, time in force DAY.
-- Every run logs the account's cash and buying power. A failing ticker is logged and skipped, and the run exits
-  with code 1 so GitHub emails the user.
+**How the bots decide**
+- Both: buy when SMA20 goes from ≤ SMA50 to > SMA50 between the last two completed days. Sell when it goes from
+  ≥ to <. Every run logs the account. A failing ticker or coin is logged and skipped, and the run exits with code
+  1 so GitHub emails the user.
+- **Crypto:** daily candles from Alpaca's crypto data (00:00–24:00 UTC, so 20/50 are calendar days). The
+  unfinished current-day candle is dropped. Buy = $`trade_usd` notional. Sell = the whole position
+  (`qty_available`). Market, GTC (crypto accepts GTC or IOC only). Alpaca lists crypto positions as `BTCUSD`
+  (no slash); the bot matches on that.
+- **Stocks:** last 100 completed trading days from yfinance; today's bar is dropped while the market is open.
+  Buy/sell `trade_qty` shares, and a sell is skipped if fewer are held. Market, DAY.
 
 **Ground rules**
 - Paper trading only. The code pins the paper endpoint (`paper=True`).
 - Claude does not recommend which stocks or coins to buy, because it is not a licensed advisor. The user chooses
   the tickers. Claude can scan, backtest or run the user's own strategy on the user's list.
+- New strategies are discussed with the user before they're added. The moving average strategy stays as is.
 - The user makes account changes in the Alpaca dashboard (new paper accounts, API keys) and on GitHub
   (repository, secrets).
 
 **Useful commands** (run in the project folder)
 - `python test_alpaca_connection.py`: is the account reachable?
-- `python trading_bot.py --dry-run`: what would the bot do right now?
-- `python trading_bot.py`: run it for real (paper).
+- `python crypto_bot.py --dry-run`: what would the crypto bot do right now?
+- `python crypto_bot.py`: run the crypto bot for real (paper).
+- `python trading_bot.py --dry-run`: the same for the stock bot.
 
 ---
 
@@ -143,5 +166,17 @@ are placed with the REST API or alpaca-py instead.
   Created `PROJECT_LOG.md` (this file) and `CLAUDE.md`, which tells Claude to read this log at the start of
   every session and update it after every significant action. Also saved a note in Claude's own memory
   pointing here.
-- The internet was down at the time (GitHub and Alpaca unreachable), so the account and crypto details could
-  not be checked live yet.
+- The internet dropped for a few minutes. Once it was back, pushed the log to GitHub and checked the account:
+  crypto ACTIVE, 36 tradable USD pairs, MU at $884.74.
+- User's decisions: the bot trades crypto automatically; **stop the stock bot**; $500 per buy; keep the 20/50
+  moving average strategy as is. More strategies will come later, each discussed before it's added.
+- Built `crypto_bot.py` and `crypto_config.toml`, using Alpaca's crypto data rather than yfinance (Alpaca's
+  pair names match trading, while Yahoo uses odd codes for some coins). Found that Alpaca's daily crypto candles
+  start at 00:00 UTC and that the unfinished current-day candle is included, so the bot drops it. Moved
+  `setup_logging` into `trading_bot.py` so both bots share it.
+- Tests: crypto dry run on a test list of BTC/USD, ETH/USD, BONK/USD and a fake pair (all "no signal"; the fake
+  pair failed on its own; duplicates and lowercase cleaned up). Against a fake Alpaca client: a buy sends
+  $500 notional GTC, a sell sends the exact held quantity, a sell with nothing held is skipped, and a duplicate
+  is skipped. The stock bot still dry-runs fine.
+- Added the `crypto-bot.yml` workflow (daily 00:15 UTC). Removed the stock workflow's schedule (manual only
+  now). Disabled the PC task. The crypto watchlist is left empty for the user to fill in.
