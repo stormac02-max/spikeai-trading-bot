@@ -69,9 +69,10 @@ use the Alpaca tools. The bots don't use the MCP server, so they're unaffected.
   altcoins, new projects and memecoins, both **spot and futures** (paper only). Alpaca is spot-only and lists
   ~30 non-BTC/ETH/stablecoin pairs. **Futures: the simulated paper account (decided 2026-11-01).** Brand-new
   DEX tokens will need a similar simulated spot account later.
-- **Futures strategy: not chosen.** The user asked what exists beyond crossovers. Options were presented, with a
-  shortlist of breakout (Donchian), momentum rotation and MA crossover, each with a stop-loss. Plan: backtest the
-  shortlist on the user's coins and let the user pick.
+- **Futures coins (decided 2026-11-01):** each Monday 00:00 UTC, the 20 most-traded Hyperliquid perps by 7-day volume,
+  excluding BTC/ETH (`universe_size`, `universe_exclude` in `futures_config.toml`).
+- **Futures strategy: not chosen yet.** Backtest done (see History 2026-11-01). Best results: MA crossover at 2–3x
+  with an 8% stop, roughly break-even. Everything at 5x lost money. Waiting on the user to pick strategy and leverage.
 - **More strategies:** the user plans to add more. Each one is to be discussed with the user before it's added.
   Keep the moving average strategy as it is.
 - If stocks resume: GitHub runs were 4–5 hours late (fixes: a cron-job.org trigger or a cloud server), and
@@ -259,3 +260,23 @@ use the Alpaca tools. The bots don't use the MCP server, so they're unaffected.
   a round trip costs ~$2.28.
 - Note for the GitHub runner: Hyperliquid's API worked from Pakistan. Binance and Bybit public APIs usually block
   US IPs, which is where GitHub's runners are, so Hyperliquid is the safer data source.
+
+### 2026-11-01: Futures universe chosen, backtest of three strategies
+- User chose the universe: the 20 most-traded futures, refreshed weekly (BTC/ETH excluded).
+- Built `backtest_futures.py`. It downloads daily candles for all Hyperliquid markets, live and delisted (203
+  with data, cached in `data/`, which is git-ignored; ~10 minutes because of rate limits). It rebuilds each week's
+  top-20 universe (52 weeks, 65 different coins), then simulates with $500 margin, a $10k balance, 0.045% fee plus
+  5 bp slippage, and baseline funding. Stops and liquidations use daily high/low. Synthetic checks passed, and
+  every strategy reconciles to the dollar.
+- Results, 2025-11-01 to 2026-10-30. Benchmark (hold the top 20 at 1x): **−38%**, worst drawdown −60%.
+
+  | Strategy | 2x, 8% stop | 3x, 8% stop | 5x, 8% stop | 5x, no stop |
+  |---|---|---|---|---|
+  | MA crossover 20/50 | **+1.7%** (DD −32%) | **+3.0%** (DD −48%) | −16% (DD −73%) | −98% (23 liquidations) |
+  | Momentum 14d 5L/5S | −5.1% (DD −30%) | −7.7% (DD −45%) | −28% (DD −92%) | −98% |
+  | Breakout 20/10 | −44% | −61% | −96% | −98% |
+
+  Wider 15% stops and no stops were worse at every leverage. Shorts outperformed longs (a bearish year for
+  altcoins). Caveats: one year in one market regime, tested on the same data used to compare (overfitting risk),
+  daily-candle approximation, baseline funding.
+- The October 10, 2025 crash (altcoins wicking 50–80% in a day) is in the data. It's real, not a glitch.

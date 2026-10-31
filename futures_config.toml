@@ -1,8 +1,10 @@
 # Simulated futures account settings (the account itself is paper_futures.py).
 
-# Coins to trade, by their Hyperliquid names, e.g. ["SOL", "kPEPE", "WIF"]. Memecoins worth fractions
-# of a cent are quoted per 1,000 coins with a "k" prefix (kPEPE, kBONK, kSHIB, kFLOKI).
-symbols = []
+# Which coins to trade: every Monday at 00:00 UTC (5:00 AM PKT, 7:00 PM ET Sunday), the
+# `universe_size` most-traded Hyperliquid perps by volume over the past 7 days, minus `universe_exclude`.
+# Hyperliquid quotes memecoins worth fractions of a cent per 1,000 coins with a "k" prefix (kPEPE, kBONK).
+universe_size = 20
+universe_exclude = ["BTC", "ETH"]
 
 # Leverage for every trade, capped at each coin's exchange maximum (3x on many coins).
 leverage = 5

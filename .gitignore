@@ -7,3 +7,6 @@
 
 __pycache__/
 *.pyc
+
+# Cached market data for backtests
+/data/
