@@ -59,6 +59,10 @@ use the Alpaca tools. The bots don't use the MCP server, so they're unaffected.
   USD pairs: AAVE, ADA, ARB, AVAX, BAT, BCH, BONK, BTC, CRV, DOGE, DOT, ETH, FIL, GRT, HYPE, LDO, LINK, LTC,
   ONDO, PAXG, PEPE, POL, RENDER, SHIB, SKY, SOL, SUSHI, TRUMP, UNI, USDC, USDG, USDT, WIF, XRP, XTZ, YFI (each
   `/USD`).
+- **Scope decided 2026-11-01:** no BTC or ETH trading (they're still watched as market indicators). Trade
+  altcoins, new projects and memecoins, both **spot and futures** (paper only). Alpaca is spot-only and lists
+  ~30 non-BTC/ETH/stablecoin pairs, so futures and brand-new DEX tokens need another venue or a simulated
+  paper ledger. Not decided yet.
 - **More strategies:** the user plans to add more. Each one is to be discussed with the user before it's added.
   Keep the moving average strategy as it is.
 - If stocks resume: GitHub runs were 4–5 hours late (fixes: a cron-job.org trigger or a cloud server), and
@@ -212,3 +216,19 @@ use the Alpaca tools. The bots don't use the MCP server, so they're unaffected.
   averaging; (b) a ratio trend, such as holding whichever of ETH/BTC is winning on a ratio moving average,
   following the trend Fickel fought; (c) momentum breakouts with hard stops and no leverage; (d) a risk layer
   for every strategy: max size per coin, stop-losses, max daily loss. Backtest each before going live.
+
+### 2026-11-01: New scope (altcoins, memecoins, new projects; spot and futures) and the analysis plan
+- User decision: no BTC/ETH. Trade other coins, new projects and memecoins, both spot and futures, paper only.
+- Venue findings: Alpaca's broker has no crypto futures or perpetuals; it is spot only, and its lineup grew in May
+  2026. Futures paper options to verify, including access from Pakistan: Bybit testnet/demo, OKX demo trading
+  (simulated API), Hyperliquid testnet (perps, API supported) and Binance futures testnet. Alternatively, a
+  simulated paper ledger on real market data, covering any perp market and DEX-only new tokens, with leverage,
+  funding and liquidation modelled. New DEX tokens aren't on any exchange's paper system, so they need the
+  simulated ledger either way.
+- Analysis plan proposed to the user. Pipeline: universe screen → safety gate (rug checks) → multi-factor
+  scoring (price/volume, liquidity, on-chain holders, derivatives funding/OI, social, fundamentals) → market
+  regime filter (BTC trend and dominance, Fear & Greed, macro calendar) → strategy signal → risk sizing
+  (leverage cap) → execution → log. Sources: CoinGecko/CMC, DexScreener/GeckoTerminal/Birdeye, exchange APIs
+  via ccxt, Coinglass, Hyperliquid info API, block explorers and Helius, GoPlus/RugCheck/Honeypot.is/Bubblemaps,
+  Arkham/Nansen/Dune, DeFiLlama/Tokenomist/CryptoRank/GitHub, CryptoPanic/LunarCrush/Santiment/X/Telegram,
+  Alternative.me Fear & Greed, FRED and the economic calendar, Farside ETF flows. Free sources first.
