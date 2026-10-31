@@ -28,6 +28,12 @@ coin's whole position, or is skipped if none is held. Market orders, time in for
 (`symbols = []`) until the user picks coins.** Until then each run only logs the account and "No coins on the
 watchlist yet".
 
+**Simulated futures account** (`paper_futures.py` + `futures_config.toml`): built 2026-11-01, **not trading yet**
+(no strategy chosen, no coins). It's our own paper account on Hyperliquid's real public data (no account or
+keys needed): fills walk the live order book, 0.045% taker fee, isolated margin, hourly funding, and stop-losses
+and liquidations replayed hour by hour from candles. User settings: **5x leverage** (capped per coin), **$500
+margin per trade**, **$10,000 starting balance**. State will live in `state/futures_account.json`.
+
 **Stock bot** (`trading_bot.py` + `config.toml`): **stopped 2026-10-31.** 20/50-day crossover on yfinance
 daily closes, watchlist `["AAPL"]`, 1 share per trade, long-only. It never traded: AAPL's 20-day stayed above
 its 50-day from 2026-09-15 through 2026-10-30.
@@ -61,8 +67,11 @@ use the Alpaca tools. The bots don't use the MCP server, so they're unaffected.
   `/USD`).
 - **Scope decided 2026-11-01:** no BTC or ETH trading (they're still watched as market indicators). Trade
   altcoins, new projects and memecoins, both **spot and futures** (paper only). Alpaca is spot-only and lists
-  ~30 non-BTC/ETH/stablecoin pairs, so futures and brand-new DEX tokens need another venue or a simulated
-  paper ledger. Not decided yet.
+  ~30 non-BTC/ETH/stablecoin pairs. **Futures: the simulated paper account (decided 2026-11-01).** Brand-new
+  DEX tokens will need a similar simulated spot account later.
+- **Futures strategy: not chosen.** The user asked what exists beyond crossovers. Options were presented, with a
+  shortlist of breakout (Donchian), momentum rotation and MA crossover, each with a stop-loss. Plan: backtest the
+  shortlist on the user's coins and let the user pick.
 - **More strategies:** the user plans to add more. Each one is to be discussed with the user before it's added.
   Keep the moving average strategy as it is.
 - If stocks resume: GitHub runs were 4–5 hours late (fixes: a cron-job.org trigger or a cloud server), and
@@ -85,6 +94,8 @@ use the Alpaca tools. The bots don't use the MCP server, so they're unaffected.
 |---|---|
 | `crypto_bot.py` | Crypto bot (active). `--dry-run` reports without ordering; `--config` picks a config file. Reuses `detect_crossover`, `make_client` and `setup_logging` from `trading_bot.py`. |
 | `crypto_config.toml` | `symbols` (Alpaca pairs like `"BTC/USD"`), `short_window` (20), `long_window` (50), `trade_usd` (500), `lookback_days` (100 days). |
+| `paper_futures.py` | Simulated futures account on Hyperliquid data: `get_markets`, `fill`, `FuturesAccount.open/close/sync/equity`. |
+| `futures_config.toml` | `symbols` (Hyperliquid names, e.g. `kPEPE`), `leverage` (5), `margin_usd` (500), `starting_balance` (10000), `taker_fee`. |
 | `trading_bot.py` | Stock bot (stopped). `--dry-run` reports without ordering; `--wait-for-open` skips holidays and waits for 9:30 ET; `--config` picks a config file. |
 | `config.toml` | Stock settings: `symbols`, `short_window` (20), `long_window` (50), `trade_qty` (1 share), `lookback_days` (100 trading days). |
 | `test_alpaca_connection.py` | Read-only check: account and market clock. Auto-detects paper vs live keys. |
@@ -232,3 +243,19 @@ use the Alpaca tools. The bots don't use the MCP server, so they're unaffected.
   via ccxt, Coinglass, Hyperliquid info API, block explorers and Helius, GoPlus/RugCheck/Honeypot.is/Bubblemaps,
   Arkham/Nansen/Dune, DeFiLlama/Tokenomist/CryptoRank/GitHub, CryptoPanic/LunarCrush/Santiment/X/Telegram,
   Alternative.me Fear & Greed, FRED and the economic calendar, Farside ETF flows. Free sources first.
+
+### 2026-11-01: Simulated futures account built
+- User chose the simulated paper account for futures, with 5x leverage, $500 margin per trade and a $10,000
+  balance. For direction the user asked Claude to suggest. Claude suggested long + short with an 8% stop-loss
+  (at 5x, liquidation comes after roughly an 11–16% move). The user then asked about strategies other than the
+  crossover, so the strategy is still open.
+- Data source: Hyperliquid's public info API, with 179 live perp markets (many memecoins and new projects).
+  Leverage caps: 3x on 89 markets, 5x on 56, 10x on 30. Memecoins worth fractions of a cent use a `k` prefix
+  (kPEPE = 1,000 PEPE).
+- Built `paper_futures.py`. Tests: 9 synthetic checks covering size, fee, liquidation price, hourly funding for
+  longs and shorts, the stop-loss, liquidation, a short squeeze hitting the stop, a gap through both levels with
+  the loss capped at margin, the duplicate-signal guard and the leverage cap. All matched hand calculations.
+  Live test on a throwaway file: $2,500 fills cost 0.05 bp of slippage on SOL and ~3–4 bp on kPEPE/FARTCOIN;
+  a round trip costs ~$2.28.
+- Note for the GitHub runner: Hyperliquid's API worked from Pakistan. Binance and Bybit public APIs usually block
+  US IPs, which is where GitHub's runners are, so Hyperliquid is the safer data source.

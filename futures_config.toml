@@ -1,0 +1,19 @@
+# Simulated futures account settings (the account itself is paper_futures.py).
+
+# Coins to trade, by their Hyperliquid names, e.g. ["SOL", "kPEPE", "WIF"]. Memecoins worth fractions
+# of a cent are quoted per 1,000 coins with a "k" prefix (kPEPE, kBONK, kSHIB, kFLOKI).
+symbols = []
+
+# Leverage for every trade, capped at each coin's exchange maximum (3x on many coins).
+leverage = 5
+
+# Margin put up per trade, in USDC. Position size = margin x leverage.
+margin_usd = 500
+
+# Starting balance of the simulated account, in USDC. Only used when the account is first created.
+starting_balance = 10000
+
+# Hyperliquid's base taker fee (0.045%), charged on every simulated fill.
+taker_fee = 0.00045
+
+# Strategy: not chosen yet. No trades are placed until it is (see PROJECT_LOG.md).
