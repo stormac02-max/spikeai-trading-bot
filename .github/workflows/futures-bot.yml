@@ -1,0 +1,55 @@
+name: Futures strategies (simulated)
+
+on:
+  schedule:
+    # Every day at 00:20 UTC (5:20 AM PKT), just after Hyperliquid's daily candle closes at 00:00 UTC.
+    - cron: "20 0 * * *"
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Dry run (run everything but save nothing)"
+        type: boolean
+        default: true
+
+permissions:
+  contents: write # to commit the simulated accounts and the log back to the repository
+
+concurrency:
+  group: trading-bot # shared with the other workflows so their commits never collide
+  cancel-in-progress: false
+
+jobs:
+  run-bot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run futures strategies
+        env:
+          FUTURES_BOT_LOG: logs/futures_bot.log
+          TZ: Asia/Karachi # log timestamps in Pakistan time
+          BOT_ARGS: ${{ inputs.dry_run && '--dry-run' || '' }}
+        run: python futures_bot.py $BOT_ARGS
+
+      - name: Save accounts and log to the repository
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add state logs/futures_bot.log 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo "Nothing to save."
+            exit 0
+          fi
+          git commit -m "Futures paper accounts $(date -u +%Y-%m-%d)"
+          git pull --rebase
+          git push

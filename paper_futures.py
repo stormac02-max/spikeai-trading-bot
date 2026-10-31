@@ -67,13 +67,14 @@ def get_markets():
 
 
 def get_candles(coin, interval, start_ms, end_ms):
-    """Candles as dicts with t (start ms), end (ms), o, h, l, c."""
+    """Candles as dicts with t (start ms), end (ms), o, h, l, c and v (volume in coins)."""
     rows = hl_info({
         "type": "candleSnapshot",
         "req": {"coin": coin, "interval": interval, "startTime": int(start_ms), "endTime": int(end_ms)},
     })
     return [
-        {"t": r["t"], "end": r["T"], "o": float(r["o"]), "h": float(r["h"]), "l": float(r["l"]), "c": float(r["c"])}
+        {"t": r["t"], "end": r["T"], "o": float(r["o"]), "h": float(r["h"]), "l": float(r["l"]),
+         "c": float(r["c"]), "v": float(r["v"])}
         for r in rows
     ]
 

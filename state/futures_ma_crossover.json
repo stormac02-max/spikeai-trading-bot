@@ -1,0 +1,42 @@
+{
+  "created": "2026-10-31 20:46 UTC",
+  "starting_balance": 10000,
+  "balance": 9499.55,
+  "last_sync": 1793476800000,
+  "positions": {
+    "SUI": {
+      "side": "short",
+      "size": 1115.0633913537986,
+      "entry": 0.89681,
+      "leverage": 2,
+      "margin": 500,
+      "mm_rate": 0.05,
+      "stop": 0.9685548,
+      "opened": 1793479572393,
+      "funding": 0.0,
+      "signal_id": "ma_crossover-SUI-short-2026-10-30"
+    }
+  },
+  "history": [
+    {
+      "time": "2026-10-31 20:46 UTC",
+      "coin": "SUI",
+      "action": "open",
+      "side": "short",
+      "size": 1115.0633913537986,
+      "price": 0.89681,
+      "leverage": 2,
+      "fee": 0.45,
+      "pnl": 0.0,
+      "funding": 0.0,
+      "balance": 9499.55,
+      "signal_id": "ma_crossover-SUI-short-2026-10-30"
+    }
+  ],
+  "equity_history": [
+    {
+      "date": "2026-10-30",
+      "equity": 9999.54
+    }
+  ]
+}

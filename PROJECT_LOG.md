@@ -28,11 +28,15 @@ coin's whole position, or is skipped if none is held. Market orders, time in for
 (`symbols = []`) until the user picks coins.** Until then each run only logs the account and "No coins on the
 watchlist yet".
 
-**Simulated futures account** (`paper_futures.py` + `futures_config.toml`): built 2026-11-01, **not trading yet**
-(no strategy chosen, no coins). It's our own paper account on Hyperliquid's real public data (no account or
-keys needed): fills walk the live order book, 0.045% taker fee, isolated margin, hourly funding, and stop-losses
-and liquidations replayed hour by hour from candles. User settings: **5x leverage** (capped per coin), **$500
-margin per trade**, **$10,000 starting balance**. State will live in `state/futures_account.json`.
+**Futures: three-way paper test, live since 2026-10-31** (`futures_bot.py` + `futures_config.toml`, running on
+`paper_futures.py`). MA crossover 20/50, Breakout 20/10 and Momentum 14d (5 long/5 short) each trade their own
+simulated $10,000 account (`state/futures_<name>.json`) on the weekly top-20 universe (`state/futures_universe.json`).
+Settings: **2x leverage, 8% stop-loss, $500 margin per trade**, long and short. The user first picked 5x, then
+said to test all three and "go for the best"; 2x is the backtest's best risk-adjusted setting. **Evaluation ends
+2026-12-27:** compare return and worst drawdown (each account keeps an `equity_history`), keep the best, and
+discuss with the user. Simulation: our own paper accounts on Hyperliquid's public data (order-book fills, 0.045%
+fee, isolated margin, hourly funding, hourly-replayed stops and liquidations). Momentum rebalances only on weekly
+(Monday) refreshes.
 
 **Stock bot** (`trading_bot.py` + `config.toml`): **stopped 2026-10-31.** 20/50-day crossover on yfinance
 daily closes, watchlist `["AAPL"]`, 1 share per trade, long-only. It never traded: AAPL's 20-day stayed above
@@ -48,7 +52,9 @@ its 50-day from 2026-09-15 through 2026-10-30.
   - `trading-bot.yml` (stocks): **schedule removed**, manual runs only. The schedule is kept as a comment in
     the file. GitHub ran it every weekday 2026-10-14 to 10-30, starting 1:27–3:21 PM ET. Log is
     `logs/trading_bot.log`.
-  - Both workflows share the concurrency group `trading-bot`, so their log commits never collide.
+  - `futures-bot.yml` (**active**): every day at 00:20 UTC (5:20 AM PKT). Commits `state/` (the simulated
+    accounts) and `logs/futures_bot.log` (PKT times). Manual run: Actions → "Futures strategies (simulated)".
+  - All workflows share the concurrency group `trading-bot`, so their commits never collide.
 - **Windows Task Scheduler**: task `SpikeAI MA Crossover Bot` (stocks) is **disabled** (2026-10-31), not deleted.
   There is no PC task for crypto.
 - **No double orders:** orders use client_order_id `macross-{SYMBOL without slash}-{buy|sell}-{signal date}`,
@@ -71,8 +77,10 @@ use the Alpaca tools. The bots don't use the MCP server, so they're unaffected.
   DEX tokens will need a similar simulated spot account later.
 - **Futures coins (decided 2026-11-01):** each Monday 00:00 UTC, the 20 most-traded Hyperliquid perps by 7-day volume,
   excluding BTC/ETH (`universe_size`, `universe_exclude` in `futures_config.toml`).
-- **Futures strategy: not chosen yet.** Backtest done (see History 2026-11-01). Best results: MA crossover at 2–3x
-  with an 8% stop, roughly break-even. Everything at 5x lost money. Waiting on the user to pick strategy and leverage.
+- **Futures evaluation on 2026-12-27:** compare the three accounts, keep the best strategy, and discuss with the
+  user. Backtest context: MA crossover 2x/8% +1.7%, momentum −5.1%, breakout −44%, while holding the top 20 lost 38%.
+- **Check the first GitHub futures runs:** Hyperliquid's API worked from Pakistan, but GitHub runners are in the US.
+  If the API refuses them, `logs/futures_bot.log` and a failure email will show it.
 - **More strategies:** the user plans to add more. Each one is to be discussed with the user before it's added.
   Keep the moving average strategy as it is.
 - If stocks resume: GitHub runs were 4–5 hours late (fixes: a cron-job.org trigger or a cloud server), and
@@ -96,6 +104,9 @@ use the Alpaca tools. The bots don't use the MCP server, so they're unaffected.
 | `crypto_bot.py` | Crypto bot (active). `--dry-run` reports without ordering; `--config` picks a config file. Reuses `detect_crossover`, `make_client` and `setup_logging` from `trading_bot.py`. |
 | `crypto_config.toml` | `symbols` (Alpaca pairs like `"BTC/USD"`), `short_window` (20), `long_window` (50), `trade_usd` (500), `lookback_days` (100 days). |
 | `paper_futures.py` | Simulated futures account on Hyperliquid data: `get_markets`, `fill`, `FuturesAccount.open/close/sync/equity`. |
+| `futures_bot.py` | Runs the futures strategies side by side daily. `--dry-run` saves nothing. |
+| `backtest_futures.py` | Backtester. Its strategy functions (`ma_crossover`, `breakout`, `momentum`, `build_indicators`) are shared with `futures_bot.py`. |
+| `state/` | Simulated futures accounts and the weekly universe (JSON), committed by the workflow. Local real runs change them too; `git pull` first. |
 | `futures_config.toml` | `symbols` (Hyperliquid names, e.g. `kPEPE`), `leverage` (5), `margin_usd` (500), `starting_balance` (10000), `taker_fee`. |
 | `trading_bot.py` | Stock bot (stopped). `--dry-run` reports without ordering; `--wait-for-open` skips holidays and waits for 9:30 ET; `--config` picks a config file. |
 | `config.toml` | Stock settings: `symbols`, `short_window` (20), `long_window` (50), `trade_qty` (1 share), `lookback_days` (100 trading days). |
@@ -280,3 +291,15 @@ use the Alpaca tools. The bots don't use the MCP server, so they're unaffected.
   altcoins). Caveats: one year in one market regime, tested on the same data used to compare (overfitting risk),
   daily-candle approximation, baseline funding.
 - The October 10, 2025 crash (altcoins wicking 50–80% in a day) is in the data. It's real, not a glitch.
+
+### 2026-10-31 (UTC) / 2026-11-01 (PKT): Futures three-way paper test started
+- User: "test trade against all these and go for the best". So all three strategies are paper traded side by
+  side at 2x with an 8% stop (the backtest's best risk-adjusted setting; 5x lost money with every strategy).
+  Evaluation ends 2026-12-27.
+- Moved the strategies into shared signal functions (`backtest_futures.py`), so live trading runs exactly the
+  tested logic. The backtest reproduced its earlier results to the cent. Built `futures_bot.py`,
+  `futures-bot.yml` (daily 00:20 UTC) and new `futures_config.toml` settings.
+- First live run (local, 20:46 UTC Saturday): universe HYPE, ZEC, SOL, NEAR, kPEPE, XRP, ENA, PUMP, XMR, BNB, WLD,
+  UNI, LIT, SUI, ZRO, XPL, AAVE, VVV, TRX, LINK. MA crossover opened **SUI short** at 0.89681 (crossover on
+  Oct 30). Breakout found no signal. Momentum waits for Monday's weekly refresh. A second run the same day changed
+  nothing, as intended.

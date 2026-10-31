@@ -178,59 +178,75 @@ class Backtest:
         return self.balance + sum(p["margin"] + unrealized_pnl(p, closes[c]) for c, p in self.positions.items())
 
 
-# ---- strategies (each called at every day's close) -----------------------------
+# ---- strategies ------------------------------------------------------------------
+# Shared with the live bot (futures_bot.py), so paper trading runs exactly the logic tested here.
+# Each looks at one day's close and returns the trades to make, closes first:
+#   [("close", coin, side_held), ("open", coin, "long" | "short"), ...]
+# `positions` maps each open coin to its side; `rebalance` is True on universe-refresh days.
 
-def ma_crossover(bt, day, universe, data, ind, rebalance):
-    s, l = ind["sma20"], ind["sma50"]
-    i = data["c"].index.get_loc(day)
+def build_indicators(closes, highs, lows):
+    return {
+        "sma20": closes.rolling(20).mean(), "sma50": closes.rolling(50).mean(),
+        "hh20": highs.rolling(20).max().shift(1), "ll20": lows.rolling(20).min().shift(1),
+        "hh10": highs.rolling(10).max().shift(1), "ll10": lows.rolling(10).min().shift(1),
+        "ret14": closes / closes.shift(14) - 1,
+    }
+
+
+def ma_crossover(day, universe, closes, ind, positions, rebalance):
+    """Long when SMA20 crosses above SMA50, short when it crosses below (flipping any open position)."""
+    i = closes.index.get_loc(day)
+    actions = []
     for coin in universe:
-        prev_s, prev_l, cur_s, cur_l = s[coin].iloc[i - 1], l[coin].iloc[i - 1], s[coin].iloc[i], l[coin].iloc[i]
+        s, l = ind["sma20"][coin], ind["sma50"][coin]
+        prev_s, prev_l, cur_s, cur_l = s.iloc[i - 1], l.iloc[i - 1], s.iloc[i], l.iloc[i]
         if pd.isna(prev_l) or pd.isna(cur_l):
             continue
-        price = data["c"].loc[day, coin]
-        pos = bt.positions.get(coin)
         if prev_s <= prev_l and cur_s > cur_l:
-            if pos and pos["side"] == "short":
-                bt.close(coin, price, "signal")
-            if coin not in bt.positions:
-                bt.open(coin, "long", price)
+            want = "long"
         elif prev_s >= prev_l and cur_s < cur_l:
-            if pos and pos["side"] == "long":
-                bt.close(coin, price, "signal")
-            if coin not in bt.positions:
-                bt.open(coin, "short", price)
+            want = "short"
+        else:
+            continue
+        held = positions.get(coin)
+        if held and held != want:
+            actions.append(("close", coin, held))
+        if held != want:
+            actions.append(("open", coin, want))
+    return actions
 
 
-def breakout(bt, day, universe, data, ind, rebalance):
+def breakout(day, universe, closes, ind, positions, rebalance):
+    """Long on a close above the 20-day high, short below the 20-day low; exit on the opposite 10-day level."""
+    actions = []
     for coin in universe:
-        price = data["c"].loc[day, coin]
+        price = closes.loc[day, coin]
         hh20, ll20 = ind["hh20"].loc[day, coin], ind["ll20"].loc[day, coin]
         hh10, ll10 = ind["hh10"].loc[day, coin], ind["ll10"].loc[day, coin]
         if pd.isna(hh20) or pd.isna(price):
             continue
-        pos = bt.positions.get(coin)
-        if pos and pos["side"] == "long" and price < ll10:
-            bt.close(coin, price, "signal")
-        elif pos and pos["side"] == "short" and price > hh10:
-            bt.close(coin, price, "signal")
-        if coin not in bt.positions:
+        held = positions.get(coin)
+        if (held == "long" and price < ll10) or (held == "short" and price > hh10):
+            actions.append(("close", coin, held))
+            held = None
+        if held is None:
             if price > hh20:
-                bt.open(coin, "long", price)
+                actions.append(("open", coin, "long"))
             elif price < ll20:
-                bt.open(coin, "short", price)
+                actions.append(("open", coin, "short"))
+    return actions
 
 
-def momentum(bt, day, universe, data, ind, rebalance, picks=5):
+def momentum(day, universe, closes, ind, positions, rebalance, picks=5):
+    """Weekly: long the `picks` coins with the best 14-day return, short the `picks` worst."""
     if not rebalance:
-        return  # only trades weekly; stops still apply in between
+        return []  # only trades weekly; stops still apply in between
     ret = ind["ret14"].loc[day, universe].dropna().sort_values()
-    targets = {c: "long" for c in ret.index[-picks:]} | {c: "short" for c in ret.index[:picks]}
-    for coin in list(bt.positions):
-        if targets.get(coin) != bt.positions[coin]["side"]:
-            bt.close(coin, data["c"].loc[day, coin], "rebalance")
-    for coin, side in targets.items():
-        if coin not in bt.positions:
-            bt.open(coin, side, data["c"].loc[day, coin])
+    picks = min(picks, len(ret) // 2)
+    targets = {c: "long" for c in ret.index[len(ret) - picks:]} | {c: "short" for c in ret.index[:picks]}
+    actions = [("close", c, side) for c, side in positions.items() if targets.get(c) != side]
+    actions += [("open", c, side) for c, side in targets.items() if positions.get(c) != side]
+    return actions
 
 
 STRATEGIES = {"MA crossover 20/50": ma_crossover, "Breakout 20/10": breakout, "Momentum 14d, 5 long/5 short": momentum}
@@ -239,12 +255,7 @@ STRATEGIES = {"MA crossover 20/50": ma_crossover, "Breakout 20/10": breakout, "M
 def run(data, universes, strategy, stop_pct, leverage=LEVERAGE):
     closes = data["c"]
     last_known = closes.ffill()
-    ind = {
-        "sma20": closes.rolling(20).mean(), "sma50": closes.rolling(50).mean(),
-        "hh20": data["h"].rolling(20).max().shift(1), "ll20": data["l"].rolling(20).min().shift(1),
-        "hh10": data["h"].rolling(10).max().shift(1), "ll10": data["l"].rolling(10).min().shift(1),
-        "ret14": closes / closes.shift(14) - 1,
-    }
+    ind = build_indicators(closes, data["h"], data["l"])
     bt = Backtest(data, stop_pct, leverage)
     days = closes.index[closes.index >= min(universes)]
     universe, curve = [], []
@@ -261,7 +272,12 @@ def run(data, universes, strategy, stop_pct, leverage=LEVERAGE):
             for coin in list(bt.positions):
                 if coin not in universe:
                     bt.close(coin, closes.loc[day, coin], "left universe")
-        strategy(bt, day, universe, data, ind, rebalance)
+        held = {coin: pos["side"] for coin, pos in bt.positions.items()}
+        for action, coin, side in strategy(day, universe, closes, ind, held, rebalance):
+            if action == "close" and coin in bt.positions:
+                bt.close(coin, closes.loc[day, coin], "signal")
+            elif action == "open":
+                bt.open(coin, side, closes.loc[day, coin])
         curve.append(bt.equity(last_known.loc[day]))
     curve = pd.Series(curve, index=days)
     trades = pd.DataFrame(bt.trades)

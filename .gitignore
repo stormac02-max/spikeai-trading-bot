@@ -4,6 +4,7 @@
 # Logs from runs on this PC. Runs on GitHub write to logs/ instead.
 /trading_bot.log
 /crypto_bot.log
+/futures_bot.log
 
 __pycache__/
 *.pyc
