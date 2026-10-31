@@ -190,3 +190,6 @@ use the Alpaca tools. The bots don't use the MCP server, so they're unaffected.
 - Cause: the session still passes the MCP keys it started with, which are the old DUM9 keys. That account was
   deleted on 2026-10-14, so those keys now return 401. The saved config (`~/.claude.json`) already has the YUU8
   keys. Fix: start a new Claude session. The bots use `.env` and GitHub secrets, so they were never affected.
+- Follow-up: after the user reconnected the server inside the same session, it still got 401, so reconnecting
+  doesn't pick up the new keys. Verified with a fresh server process started from the saved config: its keys
+  match `.env` exactly and `get_account_info` succeeds. Only a new session fixes the old one.
