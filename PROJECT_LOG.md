@@ -50,7 +50,9 @@ its 50-day from 2026-09-15 through 2026-10-30.
 
 **Claude Code MCP:** the `alpaca` MCP server (`uvx alpaca-mcp-server` v2) is registered at user scope with the
 YUU8 keys. Its read tools work, but `place_stock_order` fails with "request body format is invalid", so orders
-are placed with the REST API or alpaca-py instead.
+are placed with the REST API or alpaca-py instead. A Claude session keeps the MCP keys it started with. Sessions
+started before 2026-10-14 still send the deleted DUM9 keys and get 401 Unauthorized, so open a new session to
+use the Alpaca tools. The bots don't use the MCP server, so they're unaffected.
 
 **Open items**
 - **Coins for the crypto watchlist:** waiting on the user. Claude does not pick them. Alpaca has 36 tradable
@@ -180,3 +182,11 @@ are placed with the REST API or alpaca-py instead.
   is skipped. The stock bot still dry-runs fine.
 - Added the `crypto-bot.yml` workflow (daily 00:15 UTC). Removed the stock workflow's schedule (manual only
   now). Disabled the PC task. The crypto watchlist is left empty for the user to fill in.
+
+### 2026-11-01: Alpaca MCP "disconnected" in the chat session
+- The user reported the Alpaca connection as disconnected. Checks: internet fine; `.env` keys log in
+  (YUU8 ACTIVE); `claude mcp list` (a fresh server process) reports Connected with the YUU8 keys. But in the
+  long-running chat session, which started 2026-10-11, the Alpaca tools returned **401 Unauthorized**.
+- Cause: the session still passes the MCP keys it started with, which are the old DUM9 keys. That account was
+  deleted on 2026-10-14, so those keys now return 401. The saved config (`~/.claude.json`) already has the YUU8
+  keys. Fix: start a new Claude session. The bots use `.env` and GitHub secrets, so they were never affected.
