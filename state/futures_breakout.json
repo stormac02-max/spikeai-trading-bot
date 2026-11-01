@@ -1,14 +1,46 @@
 {
   "created": "2026-10-31 20:46 UTC",
   "starting_balance": 10000,
-  "balance": 10000,
-  "last_sync": 1793476800000,
-  "positions": {},
-  "history": [],
+  "balance": 9499.55,
+  "last_sync": 1793512800000,
+  "positions": {
+    "TRX": {
+      "side": "short",
+      "size": 3216.666580885901,
+      "entry": 0.3108808373059885,
+      "leverage": 2,
+      "margin": 500,
+      "mm_rate": 0.05,
+      "stop": 0.33575130429046757,
+      "opened": 1793513502955,
+      "funding": 0.0,
+      "signal_id": "breakout-TRX-short-2026-10-31"
+    }
+  },
+  "history": [
+    {
+      "time": "2026-11-01 06:11 UTC",
+      "coin": "TRX",
+      "action": "open",
+      "side": "short",
+      "size": 3216.666580885901,
+      "price": 0.3108808373059885,
+      "leverage": 2,
+      "fee": 0.45,
+      "pnl": 0.0,
+      "funding": 0.0,
+      "balance": 9499.55,
+      "signal_id": "breakout-TRX-short-2026-10-31"
+    }
+  ],
   "equity_history": [
     {
       "date": "2026-10-30",
       "equity": 10000
+    },
+    {
+      "date": "2026-10-31",
+      "equity": 9999.78
     }
   ]
 }

@@ -1,6 +1,6 @@
 # SpikeAI paper trading
 
-_Updated **Sun 01 Nov 2026, 05:47 PKT** (Sat 20:47 ET). Refreshed after every daily run. Paper trading only: no real money._
+_Updated **Sun 01 Nov 2026, 11:12 PKT** (Sun 01:12 ET). Refreshed after every daily run. Paper trading only: no real money._
 
 ## Strategy test: MA crossover vs breakout vs momentum
 
@@ -11,8 +11,8 @@ Each simulated account started with $10,000. Futures: 2x, long and short, $500 m
 
 | Strategy | Value | Return | Below peak | Open | Closed (won) | Fees | Funding |
 |---|--:|--:|--:|--:|--:|--:|--:|
-| 🔵 MA crossover 20/50 | **$9,996.72** | −0.03% | −0.03% | 1 | 0 | $0.45 | $0.00 |
-| 🟠 Breakout 20/10 | **$10,000.00** | 0.00% | at peak | 0 | 0 | $0.00 | $0.00 |
+| 🔵 MA crossover 20/50 | **$9,988.39** | −0.12% | −0.12% | 1 | 0 | $0.45 | +$0.11 |
+| 🟠 Breakout 20/10 | **$9,999.20** | −0.01% | −0.01% | 1 | 0 | $0.45 | $0.00 |
 | 🟢 Momentum 14d, 5 long/5 short | **$10,000.00** | 0.00% | at peak | 0 | 0 | $0.00 | $0.00 |
 
 _Futures: no clear leader yet._
@@ -36,8 +36,8 @@ _Solid lines = futures, dashed = spot._
 | Date | MA | Breakout | Momentum | MA (spot) | Breakout (spot) | Momentum (spot) |
 |---|--:|--:|--:|--:|--:|--:|
 | 2026-10-30 | $9,999.54 | $10,000.00 | $10,000.00 | – | – | – |
-| 2026-10-31 | – | – | – | $10,000.00 | $10,000.00 | $10,000.00 |
-| now | $9,996.72 | $10,000.00 | $10,000.00 | $10,000.00 | $10,000.00 | $10,000.00 |
+| 2026-10-31 | $9,988.39 | $9,999.78 | $10,000.00 | $10,000.00 | $10,000.00 | $10,000.00 |
+| now | $9,988.39 | $9,999.20 | $10,000.00 | $10,000.00 | $10,000.00 | $10,000.00 |
 
 </details>
 
@@ -45,7 +45,8 @@ _Solid lines = futures, dashed = spot._
 
 | Strategy | Coin | Side | Entry → now | Profit | To stop | To liquidation / Alpaca |
 |---|---|---|---|--:|--:|--:|
-| 🔵 MA | **SUI** | ▼ Short | 0.89681 → 0.89935 | −$2.83 (−0.6%) | ✅ 7.7% | ✅ 42.5% |
+| 🔵 MA | **SUI** | ▼ Short | 0.89681 → 0.90692 | −$11.27 (−2.3%) | ✅ 6.8% | ✅ 41.3% |
+| 🟠 Breakout | **TRX** | ▼ Short | 0.31088 → 0.31099 | −$0.35 (−0.1%) | ✅ 8.0% | ✅ 42.8% |
 
 _Distance = how far the price can still move against the position. ✅ over 5% · ⚠️ 2–5% · 🔴 under 2%. Spot can't be liquidated; its last column shows whether the trade is copied to Alpaca._
 
@@ -53,6 +54,7 @@ _Distance = how far the price can still move against the position. ✅ over 5% �
 
 | Time (PKT) | Strategy | Coin | What | Price | Result |
 |---|---|---|---|--:|--:|
+| Sun 01 Nov, 11:11 | 🟠 Breakout | **TRX** | Opened short | 0.31088 | fee $0.45 |
 | Sun 01 Nov, 01:46 | 🔵 MA | **SUI** | Opened short | 0.89681 | fee $0.45 |
 
 ### Signal board (daily candle of 2026-10-31)
@@ -100,6 +102,6 @@ Holding: 2 MU (−$109.38)
 Crypto spot bot: no coins on its watchlist yet (daily 00:15 UTC). Stock bot: stopped.
 
 ---
-Generated on the PC · [futures log](logs/futures_bot.log) · [spot log](logs/spot_bot.log) · [project log](PROJECT_LOG.md) · on the PC: `python dashboard.py`
+✅ Last run OK · [futures log](logs/futures_bot.log) · [spot log](logs/spot_bot.log) · [project log](PROJECT_LOG.md) · on the PC: `python dashboard.py`
 
 <sub>This page is written by summary.py; edits by hand are overwritten.</sub>

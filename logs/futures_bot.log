@@ -1,0 +1,8 @@
+2026-11-01 11:11:31,489 INFO ---- Futures run started ----
+2026-11-01 11:11:42,343 INFO Signals use the day ending 2026-11-01 00:00 UTC; 20 coins in the universe
+2026-11-01 11:11:42,761 INFO [MA crossover 20/50] 0 signal(s) | equity 9,988.39 (-0.1%, 0.1% below peak) | cash 9,499.55 | open: SUI short
+2026-11-01 11:11:42,956 INFO TRX: opened short 3216.67 @ 0.310881, 2x, margin 500.00, fee 0.45, stop 0.335751, liquidation 0.444115
+2026-11-01 11:11:42,956 INFO [Breakout 20/10] 1 signal(s) | equity 9,999.78 (-0.0%, 0.0% below peak) | cash 9,499.55 | open: TRX short
+2026-11-01 11:11:42,956 INFO [Momentum 14d, 5 long/5 short] 0 signal(s) | equity 10,000.00 (+0.0%, 0.0% below peak) | cash 10,000.00 | open: none
+2026-11-01 11:11:42,957 INFO Scoreboard: MA crossover 20/50 9,988 | Breakout 20/10 10,000 | Momentum 14d, 5 long/5 short 10,000
+2026-11-01 11:11:42,957 INFO Evaluation runs until 2026-12-27; then the best strategy is kept.
