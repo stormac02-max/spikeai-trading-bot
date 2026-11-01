@@ -11,3 +11,6 @@ __pycache__/
 
 # Cached market data for backtests
 /data/
+
+# Claude Code launch config for previewing the dashboard (local only)
+/.claude/

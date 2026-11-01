@@ -107,6 +107,7 @@ use the Alpaca tools. The bots don't use the MCP server, so they're unaffected.
 | `futures_bot.py` | Runs the futures strategies side by side daily. `--dry-run` saves nothing. |
 | `backtest_futures.py` | Backtester. Its strategy functions (`ma_crossover`, `breakout`, `momentum`, `build_indicators`) are shared with `futures_bot.py`. |
 | `state/` | Simulated futures accounts and the weekly universe (JSON), committed by the workflow. Local real runs change them too; `git pull` first. |
+| `dashboard.py` + `dashboard/index.html` | Local dashboard for the futures test: `python dashboard.py` opens http://127.0.0.1:8765. Read-only apart from its "Pull latest from GitHub" button. |
 | `futures_config.toml` | `symbols` (Hyperliquid names, e.g. `kPEPE`), `leverage` (5), `margin_usd` (500), `starting_balance` (10000), `taker_fee`. |
 | `trading_bot.py` | Stock bot (stopped). `--dry-run` reports without ordering; `--wait-for-open` skips holidays and waits for 9:30 ET; `--config` picks a config file. |
 | `config.toml` | Stock settings: `symbols`, `short_window` (20), `long_window` (50), `trade_qty` (1 share), `lookback_days` (100 trading days). |
@@ -144,6 +145,7 @@ use the Alpaca tools. The bots don't use the MCP server, so they're unaffected.
 - `python crypto_bot.py --dry-run`: what would the crypto bot do right now?
 - `python crypto_bot.py`: run the crypto bot for real (paper).
 - `python trading_bot.py --dry-run`: the same for the stock bot.
+- `python dashboard.py`: open the futures dashboard in the browser.
 
 ---
 
@@ -303,3 +305,20 @@ use the Alpaca tools. The bots don't use the MCP server, so they're unaffected.
   UNI, LIT, SUI, ZRO, XPL, AAVE, VVV, TRX, LINK. MA crossover opened **SUI short** at 0.89681 (crossover on
   Oct 30). Breakout found no signal. Momentum waits for Monday's weekly refresh. A second run the same day changed
   nothing, as intended.
+
+### 2026-11-01: Futures dashboard
+- User asked for an interface to check the simulator's status and how it works. Built a local web dashboard
+  (`dashboard.py`, Python standard library only, plus `dashboard/index.html`, no outside libraries). It runs on
+  this PC only, because the accounts are in a private repo a web page couldn't read without a token.
+- It shows:
+  - **Overview:** a scoreboard (equity, return, drawdown, cash, win rate, fees, funding, stops and
+    liquidations), an equity chart with hover and a table view, and chips for the evaluation countdown,
+    settings and last runs.
+  - **Positions and trades:** open positions at live Hyperliquid prices, with distance-to-stop and
+    distance-to-liquidation status; recent activity in local time.
+  - **Workings:** a signal board showing each coin's MA, breakout and momentum state, this week's coins, and a
+    "how it works" explainer.
+  - **Log and refresh:** the bot log, and a "Pull latest from GitHub" button that runs `git pull --rebase`.
+  Prices refresh every minute. Light and dark modes; the series colors passed the dataviz palette validator.
+- Verified in the built-in browser: renders in both themes, no console errors, the signal board loads in about
+  20 seconds, and pull works. `.claude/launch.json`, used to preview it, is git-ignored.

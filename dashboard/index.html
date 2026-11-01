@@ -1,0 +1,440 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Futures Simulator</title>
+<style>
+  :root {
+    color-scheme: light;
+    --page: #f9f9f7; --surface: #fcfcfb; --ink: #0b0b0b; --ink-2: #52514e; --muted: #898781;
+    --grid: #e1e0d9; --axis: #c3c2b7; --border: rgba(11,11,11,0.10); --wash: rgba(11,11,11,0.04);
+    --s1: #2a78d6; --s2: #eb6834; --s3: #1baf7a;
+    --good: #0ca30c; --good-text: #006300; --warning: #fab219; --critical: #d03b3b; --critical-text: #b42f2f;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:where(:not([data-theme="light"])) {
+      color-scheme: dark;
+      --page: #0d0d0d; --surface: #1a1a19; --ink: #f0efec; --ink-2: #c3c2b7; --muted: #898781;
+      --grid: #2c2c2a; --axis: #383835; --border: rgba(255,255,255,0.10); --wash: rgba(255,255,255,0.05);
+      --s1: #3987e5; --s2: #d95926; --s3: #199e70;
+      --good-text: #0ca30c; --critical-text: #e66767;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --page: #0d0d0d; --surface: #1a1a19; --ink: #f0efec; --ink-2: #c3c2b7; --muted: #898781;
+    --grid: #2c2c2a; --axis: #383835; --border: rgba(255,255,255,0.10); --wash: rgba(255,255,255,0.05);
+    --s1: #3987e5; --s2: #d95926; --s3: #199e70;
+    --good-text: #0ca30c; --critical-text: #e66767;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--page); color: var(--ink); font: 14px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  main { max-width: 1240px; margin: 0 auto; padding: 20px 16px 48px; }
+  header { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
+  h1 { font-size: 22px; margin: 0; letter-spacing: -0.01em; }
+  h2 { font-size: 15px; margin: 0 0 10px; }
+  .sub { color: var(--ink-2); font-size: 13px; }
+  .muted { color: var(--muted); }
+  .actions { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+  button { font: inherit; font-size: 13px; color: var(--ink); background: var(--surface); border: 1px solid var(--border);
+           border-radius: 8px; padding: 6px 12px; cursor: pointer; }
+  button:hover { background: var(--wash); }
+  button:disabled { opacity: 0.55; cursor: progress; }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 16px; margin-bottom: 14px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+  .chip { background: var(--surface); border: 1px solid var(--border); border-radius: 999px; padding: 4px 12px; font-size: 13px; }
+  .chip b { font-weight: 600; }
+  .grid3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin-bottom: 14px; }
+  .score { position: relative; overflow: hidden; margin: 0; }
+  .score::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 4px; background: var(--key); }
+  .score .name { display: flex; align-items: center; gap: 8px; font-weight: 600; }
+  .score .hero { font-size: 30px; font-weight: 650; margin: 6px 0 2px; letter-spacing: -0.02em; }
+  .best { font-size: 11px; font-weight: 600; border: 1px solid var(--border); border-radius: 999px; padding: 1px 8px; color: var(--ink-2); }
+  .kv { display: grid; grid-template-columns: 1fr auto; gap: 3px 12px; margin-top: 10px; font-size: 13px; }
+  .kv span:nth-child(odd) { color: var(--ink-2); }
+  .kv span:nth-child(even) { text-align: right; font-variant-numeric: tabular-nums; }
+  .up { color: var(--good-text); } .down { color: var(--critical-text); }
+  .key { display: inline-block; width: 14px; height: 3px; border-radius: 2px; background: var(--key); vertical-align: middle; }
+  .table-wrap { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { text-align: left; color: var(--ink-2); font-weight: 600; padding: 6px 10px; border-bottom: 1px solid var(--axis); white-space: nowrap; }
+  td { padding: 6px 10px; border-bottom: 1px solid var(--grid); white-space: nowrap; font-variant-numeric: tabular-nums; }
+  td.num, th.num { text-align: right; }
+  .side { font-size: 12px; font-weight: 600; border-radius: 6px; padding: 1px 7px; border: 1px solid var(--border); }
+  .status { font-size: 12px; white-space: nowrap; }
+  .status i { font-style: normal; display: inline-block; width: 16px; height: 16px; line-height: 16px; text-align: center;
+              border-radius: 50%; font-size: 11px; font-weight: 700; margin-right: 4px; color: #fff; }
+  .s-good i { background: var(--good); } .s-warn i { background: var(--warning); color: #0b0b0b; } .s-crit i { background: var(--critical); }
+  .empty { color: var(--muted); padding: 10px 0; }
+  details summary { cursor: pointer; font-weight: 600; }
+  details[open] summary { margin-bottom: 10px; }
+  pre { background: var(--page); border: 1px solid var(--border); border-radius: 8px; padding: 10px; overflow-x: auto; font-size: 12px; line-height: 1.5; max-height: 420px; }
+  ul.how { margin: 0; padding-left: 18px; } ul.how li { margin: 4px 0; color: var(--ink-2); } ul.how b { color: var(--ink); }
+  .legend { display: flex; gap: 16px; flex-wrap: wrap; font-size: 13px; color: var(--ink-2); margin-bottom: 6px; }
+  .legend .key { width: 18px; margin-right: 6px; }
+  #chart { position: relative; }
+  #chart svg { display: block; width: 100%; height: 280px; }
+  .tip { position: absolute; pointer-events: none; background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
+         padding: 8px 10px; font-size: 12px; box-shadow: 0 4px 16px rgba(0,0,0,0.12); display: none; min-width: 170px; }
+  .tip .row { display: flex; align-items: center; gap: 8px; justify-content: space-between; }
+  .tip .row b { font-variant-numeric: tabular-nums; }
+  .tip .row span { color: var(--ink-2); display: flex; align-items: center; gap: 6px; }
+  .note { font-size: 12px; color: var(--muted); margin-top: 6px; }
+  .tag { font-size: 11px; font-weight: 600; border-radius: 6px; padding: 1px 6px; border: 1px solid var(--border); color: var(--ink-2); }
+  .loading { opacity: 0.55; transition: opacity 0.2s; }
+  #toast { position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%); background: var(--ink); color: var(--page);
+           padding: 8px 14px; border-radius: 8px; font-size: 13px; display: none; max-width: 90vw; white-space: pre-wrap; }
+</style>
+</head>
+<body>
+<main id="app">
+  <header>
+    <div>
+      <h1>Futures Simulator</h1>
+      <div class="sub">Paper trading three strategies on Hyperliquid's live market data</div>
+    </div>
+    <div class="actions">
+      <span class="sub" id="updated">Loading…</span>
+      <button id="btn-refresh" title="Re-read the accounts and fetch live prices">Refresh</button>
+      <button id="btn-pull" title="Download the latest accounts committed by the daily GitHub run">Pull latest from GitHub</button>
+      <button id="btn-theme" title="Switch light / dark">Theme</button>
+    </div>
+  </header>
+
+  <div class="chips" id="chips"></div>
+  <div class="grid3" id="scores"></div>
+
+  <section class="card">
+    <h2>Account value over time</h2>
+    <div class="legend" id="legend"></div>
+    <div id="chart"></div>
+    <div class="note">One point per daily run, plus "now" at live prices. The line builds up as the test runs.</div>
+    <details style="margin-top:10px"><summary>Show as a table</summary><div class="table-wrap" id="curve-table"></div></details>
+  </section>
+
+  <section class="card">
+    <h2>Open positions <span class="muted" id="pos-count"></span></h2>
+    <div class="table-wrap" id="positions"></div>
+    <div class="note">Distances show how far the price can still move against a position before its stop-loss or liquidation. Prices refresh every minute.</div>
+  </section>
+
+  <section class="card">
+    <h2>Recent activity</h2>
+    <div class="table-wrap" id="activity"></div>
+  </section>
+
+  <section class="card">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap">
+      <h2 style="margin:0">Signal board: what each strategy sees</h2>
+      <button id="btn-signals">Load signal board</button>
+    </div>
+    <div class="note" id="signals-note">Fetches 70 days of prices for this week's coins (about 15 seconds), then caches for 15 minutes.</div>
+    <div class="table-wrap" id="signals" style="margin-top:10px"></div>
+  </section>
+
+  <section class="card">
+    <h2>This week's coins</h2>
+    <div id="universe"></div>
+  </section>
+
+  <section class="card">
+    <details open>
+      <summary>How the simulator works</summary>
+      <ul class="how" id="how"></ul>
+    </details>
+  </section>
+
+  <section class="card">
+    <details>
+      <summary>Latest bot run log</summary>
+      <pre id="log">No runs logged yet.</pre>
+    </details>
+  </section>
+</main>
+<div id="toast"></div>
+
+<script>
+"use strict";
+const COLORS = { ma_crossover: "var(--s1)", breakout: "var(--s2)", momentum: "var(--s3)" };
+let status = null;
+
+// ---- small helpers (all data goes in via textContent) ----
+function el(tag, attrs = {}, ...children) {
+  const node = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs)) {
+    if (k === "class") node.className = v;
+    else if (k === "style") node.setAttribute("style", v);
+    else node.setAttribute(k, v);
+  }
+  for (const c of children) if (c !== null && c !== undefined) node.append(c.nodeType ? c : document.createTextNode(String(c)));
+  return node;
+}
+const usd = (x, d = 2) => x == null ? "–" : (x < 0 ? "−$" : "$") + Math.abs(x).toLocaleString(undefined, { minimumFractionDigits: d, maximumFractionDigits: d });
+const signed = (x, d = 2) => x == null ? "–" : (x > 0 ? "+" : x < 0 ? "−" : "") + "$" + Math.abs(x).toLocaleString(undefined, { minimumFractionDigits: d, maximumFractionDigits: d });
+const pct = (x, d = 1) => x == null ? "–" : (x > 0 ? "+" : x < 0 ? "−" : "") + Math.abs(x).toFixed(d) + "%";
+function price(x) {
+  if (x == null) return "–";
+  if (Math.abs(x) >= 1) return x.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 4 });
+  const decimals = Math.min(10, 4 - Math.floor(Math.log10(Math.abs(x))));
+  return x.toFixed(decimals).replace(/0+$/, "");
+}
+const qty = x => x == null ? "–" : x.toLocaleString(undefined, { maximumSignificantDigits: 6 });
+// "2026-10-31 20:46 UTC" -> this PC's local time (PKT here), with the UTC original on hover.
+function localTime(utc) {
+  if (!utc) return "–";
+  const d = new Date(utc.replace(" UTC", "Z").replace(" ", "T"));
+  if (isNaN(d)) return utc;
+  return el("span", { title: utc }, d.toLocaleString(undefined, { month: "short", day: "numeric", hour: "2-digit", minute: "2-digit", timeZoneName: "short" }));
+}
+const tone = x => x > 0 ? "up" : x < 0 ? "down" : "";
+function keyDot(key) { return el("span", { class: "key", style: `--key:${COLORS[key]}` }); }
+function toast(msg, ms = 4000) { const t = document.getElementById("toast"); t.textContent = msg; t.style.display = "block"; clearTimeout(toast.t); toast.t = setTimeout(() => t.style.display = "none", ms); }
+function statusCell(distance, label) {
+  if (distance == null) return el("span", { class: "muted" }, "–");
+  const [cls, icon, word] = distance >= 5 ? ["s-good", "✓", "safe"] : distance >= 2 ? ["s-warn", "!", "near"] : ["s-crit", "!", "close"];
+  return el("span", { class: `status ${cls}`, title: `${label}: price can move ${distance.toFixed(1)}% against the position first` },
+            el("i", {}, icon), `${distance.toFixed(1)}% · ${word}`);
+}
+function table(headers, rows, numeric = []) {
+  const thead = el("thead", {}, el("tr", {}, ...headers.map((h, i) => el("th", { class: numeric.includes(i) ? "num" : "" }, h))));
+  const tbody = el("tbody", {}, ...rows.map(r => el("tr", {}, ...r.map((c, i) => el("td", { class: numeric.includes(i) ? "num" : "" }, c)))));
+  return el("table", {}, thead, tbody);
+}
+
+// ---- rendering ----
+function render(s) {
+  status = s;
+  document.getElementById("updated").replaceChildren("Updated ", localTime(s.generated));
+  const accts = s.accounts.filter(a => a.exists);
+  const st = s.settings;
+
+  // chips
+  const chips = document.getElementById("chips"); chips.replaceChildren();
+  if (s.evaluation_until) chips.append(el("span", { class: "chip" }, "Evaluation: ", el("b", {}, `${Math.max(0, s.days_left)} days left`), ` (until ${s.evaluation_until})`));
+  chips.append(el("span", { class: "chip" }, "Settings: ", el("b", {}, `${st.leverage}x · ${(st.stop_pct * 100).toFixed(0)}% stop · ${usd(st.margin_usd, 0)} margin · ${usd(st.starting_balance, 0)} per account`)));
+  if (s.universe) chips.append(el("span", { class: "chip" }, "Coins: ", el("b", {}, `top ${st.universe_size}`), `, refreshed ${s.universe.refreshed}`));
+  for (const [where, when] of Object.entries(s.last_runs || {})) chips.append(el("span", { class: "chip" }, `Last run (${where}): `, el("b", {}, when)));
+  if (s.accounts_committed) chips.append(el("span", { class: "chip" }, "Accounts in Git updated: ", el("b", {}, s.accounts_committed)));
+
+  // scoreboard
+  const scores = document.getElementById("scores"); scores.replaceChildren();
+  // "Leading" only for a real lead by an account that has actually traded.
+  const ranked = [...accts].sort((a, b) => b.equity - a.equity);
+  const bestKey = ranked.length > 1 && ranked[0].history.length && ranked[0].equity - ranked[1].equity > 1 ? ranked[0].key : null;
+  for (const a of s.accounts) {
+    const card = el("div", { class: "card score", style: `--key:${COLORS[a.key]}` });
+    const name = el("div", { class: "name" }, keyDot(a.key), a.name);
+    if (a.key === bestKey) name.append(el("span", { class: "best" }, "Leading"));
+    card.append(name);
+    if (!a.exists) { card.append(el("div", { class: "empty" }, "No account yet: it is created on the first run.")); scores.append(card); continue; }
+    card.append(el("div", { class: "hero" }, usd(a.equity)));
+    card.append(el("div", { class: tone(a.return_pct) }, `${pct(a.return_pct, 2)} since start`));
+    const winRate = a.closed_trades ? `${a.wins}/${a.closed_trades} (${(a.wins / a.closed_trades * 100).toFixed(0)}%)` : "no closed trades";
+    card.append(el("div", { class: "kv" },
+      el("span", {}, "Below peak"), el("span", {}, a.drawdown_pct > 0.005 ? `−${a.drawdown_pct.toFixed(a.drawdown_pct < 1 ? 2 : 1)}%` : "at peak"),
+      el("span", {}, "Cash (free balance)"), el("span", {}, usd(a.balance)),
+      el("span", {}, "Open positions"), el("span", {}, String(a.positions.length)),
+      el("span", {}, "Winning closed trades"), el("span", {}, winRate),
+      el("span", {}, "Realized profit"), el("span", { class: tone(a.realized) }, signed(a.realized)),
+      el("span", {}, "Fees paid"), el("span", {}, usd(a.fees)),
+      el("span", {}, "Funding (+ received / − paid)"), el("span", { class: tone(a.funding) }, signed(a.funding)),
+      el("span", {}, "Stopped out / liquidated"), el("span", {}, `${a.stops} / ${a.liquidations}`)));
+    scores.append(card);
+  }
+
+  renderChart(accts);
+  renderPositions(accts);
+  renderActivity(accts);
+
+  // universe
+  const uni = document.getElementById("universe"); uni.replaceChildren();
+  if (s.universe) {
+    const held = new Set(accts.flatMap(a => a.positions.map(p => p.coin)));
+    const wrap = el("div", { class: "chips", style: "margin:0" });
+    s.universe.coins.forEach((c, i) => wrap.append(el("span", { class: "chip" }, el("b", {}, `${i + 1}.`), " ", c, held.has(c) ? " ●" : "")));
+    uni.append(wrap, el("div", { class: "note" }, `Ranked by trading volume over the 7 days before ${s.universe.refreshed}, excluding ${st.universe_exclude.join(" and ")}. ● = a position is open. Refreshed every Monday 00:00 UTC (5:00 AM PKT).`));
+  } else uni.append(el("div", { class: "empty" }, "No universe yet: it is chosen on the first run."));
+
+  // how it works
+  const how = document.getElementById("how"); how.replaceChildren();
+  const items = [
+    ["Data", "real prices, order books and funding rates from Hyperliquid's public API. No exchange account or keys, and no real money."],
+    ["Coins", `every Monday the ${st.universe_size} most-traded futures over the past week, excluding ${st.universe_exclude.join("/")}, with at least 51 days of history.`],
+    ["Three accounts", `MA crossover (long when the 20-day average crosses above the 50-day, short when below), Breakout (long above the 20-day high, short below the 20-day low, exit at the opposite 10-day level) and Momentum (each Monday, long the 5 strongest 14-day performers and short the 5 weakest). Each starts with ${usd(st.starting_balance, 0)}.`],
+    ["Orders", `each trade puts up ${usd(st.margin_usd, 0)} margin at ${st.leverage}x (lower if a coin's exchange maximum is lower). Fills use the price you'd actually get from the live order book, plus a ${(st.taker_fee * 100).toFixed(3)}% fee.`],
+    ["Funding", "charged or paid every hour from Hyperliquid's real rates. Longs pay shorts when the rate is positive."],
+    ["Stop-loss", `a position closes if the price moves ${(st.stop_pct * 100).toFixed(0)}% against it. Between daily runs, the simulator replays every hour from hourly candles, so a stop at 3 AM is applied at 3 AM.`],
+    ["Liquidation", "if the margin falls to the maintenance level (half the initial margin at the coin's max leverage, as on Hyperliquid), the position is lost. The stop is set to trigger first."],
+    ["Schedule", "GitHub runs the bot daily at 00:20 UTC (5:20 AM PKT), just after the daily candle closes, and saves the accounts. Use \"Pull latest from GitHub\" to see the newest run here."],
+  ];
+  for (const [b, t] of items) how.append(el("li", {}, el("b", {}, b + ": "), t));
+
+  // log
+  document.getElementById("log").textContent = (s.log_tail && s.log_tail.length) ? s.log_tail.join("\n") : "No runs logged yet.";
+}
+
+function renderPositions(accts) {
+  const rows = [];
+  for (const a of accts) for (const p of a.positions) rows.push([
+    el("span", {}, keyDot(a.key), " ", a.name), el("b", {}, p.coin),
+    el("span", { class: "side" }, p.side === "long" ? "▲ Long" : "▼ Short"),
+    qty(p.size), price(p.entry), price(p.mark), usd(p.value), usd(p.margin) + ` · ${p.leverage}x`,
+    el("span", { class: tone(p.pnl) }, `${signed(p.pnl)} (${pct(p.pnl_pct)})`),
+    el("span", {}, price(p.stop), " ", statusCell(p.to_stop_pct, "Stop-loss")),
+    el("span", {}, price(p.liquidation), " ", statusCell(p.to_liq_pct, "Liquidation")),
+    el("span", { class: tone(p.funding) }, signed(p.funding)), localTime(p.opened),
+  ]);
+  document.getElementById("pos-count").textContent = rows.length ? `(${rows.length})` : "";
+  const box = document.getElementById("positions"); box.replaceChildren();
+  box.append(rows.length ? table(["Strategy", "Coin", "Side", "Size", "Entry", "Now", "Value", "Margin", "Profit (on margin)", "Stop-loss", "Liquidation", "Funding", "Opened"], rows, [3, 4, 5, 6, 7, 8, 11])
+                         : el("div", { class: "empty" }, "No open positions."));
+}
+
+function renderActivity(accts) {
+  const items = [];
+  for (const a of accts) for (const h of a.history) items.push({ a, h });
+  items.sort((x, y) => (x.h.time < y.h.time ? 1 : -1));
+  const rows = items.slice(0, 40).map(({ a, h }) => {
+    const net = h.action === "open" ? null : h.pnl - h.fee + (h.funding || 0);
+    const action = h.action === "open" ? "Opened" : h.action === "liquidation" ? "Liquidated" : h.reason === "stop-loss" ? "Stopped out" : "Closed";
+    return [localTime(h.time), el("span", {}, keyDot(a.key), " ", a.name), el("b", {}, h.coin), action,
+            el("span", { class: "side" }, h.side === "long" ? "▲ Long" : "▼ Short"), price(h.price),
+            net == null ? el("span", { class: "muted" }, `fee ${usd(h.fee)}`) : el("span", { class: tone(net) }, signed(net)),
+            h.reason && h.reason !== "stop-loss" ? h.reason : ""];
+  });
+  const box = document.getElementById("activity"); box.replaceChildren();
+  box.append(rows.length ? table(["Time", "Strategy", "Coin", "Action", "Side", "Price", "Result (after fees)", "Why"], rows, [5, 6])
+                         : el("div", { class: "empty" }, "No trades yet."));
+}
+
+// ---- equity chart: SVG lines, crosshair tooltip, direct labels ----
+function renderChart(accts) {
+  const box = document.getElementById("chart"); box.replaceChildren();
+  const legend = document.getElementById("legend"); legend.replaceChildren();
+  for (const a of accts) legend.append(el("span", {}, el("span", { class: "key", style: `--key:${COLORS[a.key]}` }), a.name));
+  const dates = [...new Set(accts.flatMap(a => a.curve.map(p => p.date)))].sort((x, y) => (x === "now") - (y === "now") || (x < y ? -1 : 1));
+  if (!accts.length || !dates.length) { box.append(el("div", { class: "empty" }, "No data yet.")); return; }
+  const series = accts.map(a => ({ a, values: dates.map(d => (a.curve.find(p => p.date === d) || {}).equity ?? null) }));
+  const all = series.flatMap(s => s.values).filter(v => v != null).concat([status.settings.starting_balance]);
+  let lo = Math.min(...all), hi = Math.max(...all);
+  const pad = Math.max((hi - lo) * 0.15, hi * 0.005); lo -= pad; hi += pad;
+
+  const W = box.clientWidth || 900, H = 280, m = { l: 64, r: 120, t: 14, b: 28 };
+  const ns = "http://www.w3.org/2000/svg";
+  const svg = document.createElementNS(ns, "svg"); svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+  const x = i => dates.length === 1 ? m.l + (W - m.l - m.r) / 2 : m.l + i * (W - m.l - m.r) / (dates.length - 1);
+  const y = v => m.t + (hi - v) / (hi - lo) * (H - m.t - m.b);
+  const mk = (tag, attrs, text) => { const n = document.createElementNS(ns, tag); for (const [k, v] of Object.entries(attrs)) n.setAttribute(k, v); if (text != null) n.textContent = text; svg.append(n); return n; };
+
+  for (let k = 0; k <= 4; k++) {  // recessive grid + y labels
+    const v = lo + (hi - lo) * k / 4, yy = y(v);
+    mk("line", { x1: m.l, x2: W - m.r, y1: yy, y2: yy, stroke: "var(--grid)", "stroke-width": 1 });
+    mk("text", { x: m.l - 8, y: yy + 4, "text-anchor": "end", "font-size": 11, fill: "var(--muted)" }, "$" + Math.round(v).toLocaleString());
+  }
+  const base = y(status.settings.starting_balance);  // starting balance reference
+  mk("line", { x1: m.l, x2: W - m.r, y1: base, y2: base, stroke: "var(--axis)", "stroke-width": 1, "stroke-dasharray": "4 4" });
+  mk("text", { x: m.l + 4, y: base - 5, "font-size": 11, fill: "var(--muted)" }, "start");
+  const step = Math.max(1, Math.ceil(dates.length / 8));
+  dates.forEach((d, i) => { if (i % step === 0 || i === dates.length - 1) mk("text", { x: x(i), y: H - 8, "text-anchor": "middle", "font-size": 11, fill: "var(--muted)" }, d); });
+
+  const labelYs = [];
+  for (const s of series) {
+    const pts = s.values.map((v, i) => v == null ? null : [x(i), y(v)]).filter(Boolean);
+    if (pts.length > 1) mk("path", { d: "M" + pts.map(p => p.join(",")).join("L"), fill: "none", stroke: COLORS[s.a.key], "stroke-width": 2, "stroke-linejoin": "round", "stroke-linecap": "round" });
+    for (const p of pts) mk("circle", { cx: p[0], cy: p[1], r: 4, fill: COLORS[s.a.key], stroke: "var(--surface)", "stroke-width": 2 });
+    const last = pts[pts.length - 1];
+    if (last) labelYs.push({ y: last[1], s });
+  }
+  labelYs.sort((p, q) => p.y - q.y);  // direct labels at line ends, nudged apart
+  for (let k = 1; k < labelYs.length; k++) if (labelYs[k].y - labelYs[k - 1].y < 14) labelYs[k].y = labelYs[k - 1].y + 14;
+  for (const { y: ly, s } of labelYs) mk("text", { x: W - m.r + 10, y: ly + 4, "font-size": 12, fill: "var(--ink-2)" }, s.a.name.split(" ")[0]);
+
+  // crosshair + one tooltip listing every series
+  const hair = mk("line", { y1: m.t, y2: H - m.b, stroke: "var(--axis)", "stroke-width": 1, visibility: "hidden" });
+  const hit = mk("rect", { x: m.l - 10, y: 0, width: W - m.l - m.r + 20, height: H, fill: "transparent" });
+  const tip = el("div", { class: "tip" });
+  box.append(svg, tip);
+  hit.addEventListener("pointermove", ev => {
+    const rect = svg.getBoundingClientRect(), px = (ev.clientX - rect.left) * W / rect.width;
+    let i = 0, best = Infinity; dates.forEach((_, k) => { const dd = Math.abs(x(k) - px); if (dd < best) { best = dd; i = k; } });
+    hair.setAttribute("x1", x(i)); hair.setAttribute("x2", x(i)); hair.setAttribute("visibility", "visible");
+    tip.replaceChildren(el("div", { class: "muted", style: "margin-bottom:4px" }, dates[i] === "now" ? "Now (live prices)" : `After the run for ${dates[i]}`));
+    for (const s of series) tip.append(el("div", { class: "row" }, el("span", {}, el("span", { class: "key", style: `--key:${COLORS[s.a.key]}` }), s.a.name), el("b", {}, usd(s.values[i]))));
+    tip.style.display = "block";
+    const left = x(i) * rect.width / W + 12;
+    tip.style.left = Math.min(left, rect.width - tip.offsetWidth - 4) + "px"; tip.style.top = "8px";
+  });
+  hit.addEventListener("pointerleave", () => { hair.setAttribute("visibility", "hidden"); tip.style.display = "none"; });
+
+  // table view of the same data
+  const tbl = document.getElementById("curve-table"); tbl.replaceChildren();
+  tbl.append(table(["Date", ...series.map(s => s.a.name)], dates.map((d, i) => [d, ...series.map(s => usd(s.values[i]))]), series.map((_, k) => k + 1)));
+}
+
+// ---- signal board ----
+function renderSignals(data) {
+  const box = document.getElementById("signals"); box.replaceChildren();
+  if (!data.rows.length) { box.append(el("div", { class: "empty" }, "No universe yet.")); return; }
+  document.getElementById("signals-note").textContent =
+    `As of the daily candle ending ${data.day} 24:00 UTC. A position opens only when a signal fires at a daily run; this shows where each coin stands.`;
+  const rows = data.rows.map(r => {
+    const ma = el("span", {}, r.sma20 == null ? "not enough data" : `20d ${r.sma20 > r.sma50 ? "above" : "below"} 50d (${pct(r.ma_gap_pct)})`);
+    if (r.crossed) ma.append(" ", el("span", { class: "tag" }, r.crossed === "up" ? "▲ crossed up: buy signal" : "▼ crossed down: short signal"));
+    const bo = r.breakout === "above" ? el("span", { class: "tag" }, "▲ above 20d high: long signal")
+             : r.breakout === "below" ? el("span", { class: "tag" }, "▼ below 20d low: short signal")
+             : el("span", {}, `inside: ${pct(r.to_high_pct)} to high · ${pct(-r.to_low_pct)} to low`);
+    const mo = el("span", {}, r.ret14_pct == null ? "–" : `${pct(r.ret14_pct)} · rank ${r.rank}`);
+    if (r.momentum) mo.append(" ", el("span", { class: "tag" }, r.momentum === "long" ? "top 5: long next Monday" : "bottom 5: short next Monday"));
+    return [el("b", {}, r.coin), price(r.close), ma, bo, mo];
+  });
+  box.append(table(["Coin", "Last close", "MA crossover (20d vs 50d average)", "Breakout (vs 20-day high/low)", "Momentum (14-day return)"], rows, [1]));
+}
+
+// ---- data loading ----
+async function load(quiet) {
+  const app = document.getElementById("app");
+  if (!quiet) app.classList.add("loading");
+  try {
+    const r = await fetch("/api/status", { cache: "no-store" });
+    const s = await r.json();
+    if (s.error) throw new Error(s.error);
+    render(s);
+  } catch (e) { toast("Couldn't load status: " + e.message); }
+  finally { app.classList.remove("loading"); }
+}
+
+document.getElementById("btn-refresh").addEventListener("click", () => load());
+document.getElementById("btn-pull").addEventListener("click", async ev => {
+  const b = ev.currentTarget; b.disabled = true; b.textContent = "Pulling…";
+  try {
+    const r = await (await fetch("/api/pull", { method: "POST" })).json();
+    toast(r.ok ? "Up to date with GitHub.\n" + r.output.split("\n").slice(-2).join("\n") : "Pull failed:\n" + (r.output || r.error), 7000);
+    await load();
+  } catch (e) { toast("Pull failed: " + e.message); }
+  finally { b.disabled = false; b.textContent = "Pull latest from GitHub"; }
+});
+document.getElementById("btn-signals").addEventListener("click", async ev => {
+  const b = ev.currentTarget; b.disabled = true; b.textContent = "Loading…";
+  try {
+    const d = await (await fetch("/api/signals", { cache: "no-store" })).json();
+    if (d.error) throw new Error(d.error);
+    renderSignals(d); b.textContent = "Reload signal board";
+  } catch (e) { toast("Couldn't load signals: " + e.message); b.textContent = "Load signal board"; }
+  finally { b.disabled = false; }
+});
+document.getElementById("btn-theme").addEventListener("click", () => {
+  const root = document.documentElement;
+  const dark = root.dataset.theme ? root.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+  root.dataset.theme = dark ? "light" : "dark";
+  try { localStorage.setItem("theme", root.dataset.theme); } catch (e) {}
+  if (status) render(status);
+});
+try { const t = localStorage.getItem("theme"); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+window.addEventListener("resize", () => { if (status) renderChart(status.accounts.filter(a => a.exists)); });
+
+load();
+setInterval(() => load(true), 60000);  // live prices every minute
+</script>
+</body>
+</html>
