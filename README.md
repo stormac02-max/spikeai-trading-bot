@@ -1,17 +1,17 @@
 # SpikeAI paper trading
 
-_Updated **Sun 01 Nov 2026, 05:46 PKT** (Sat 20:46 ET). Refreshed after every daily run. Paper trading only: no real money._
+_Updated **Sun 01 Nov 2026, 05:47 PKT** (Sat 20:47 ET). Refreshed after every daily run. Paper trading only: no real money._
 
 ## Strategy test: MA crossover vs breakout vs momentum
 
 **56 days left** in the evaluation (until 2026-12-27), then the best strategy is kept.  
-Each simulated account started with $10,000. Futures: 2x, long and short, $500 margin per trade. Spot: 1x, buy-only, $500 per buy, copied to Alpaca for coins it lists. Both use a 8% stop.
+Each simulated account started with $10,000. Futures: 2x, long and short, $500 margin per trade. Spot: 1x, buy-only, $500 per buy, copied to Alpaca for coins it lists. Both use an 8% stop.
 
 ### Futures
 
 | Strategy | Value | Return | Below peak | Open | Closed (won) | Fees | Funding |
 |---|--:|--:|--:|--:|--:|--:|--:|
-| 🔵 MA crossover 20/50 | **$9,996.68** | −0.03% | −0.03% | 1 | 0 | $0.45 | $0.00 |
+| 🔵 MA crossover 20/50 | **$9,996.72** | −0.03% | −0.03% | 1 | 0 | $0.45 | $0.00 |
 | 🟠 Breakout 20/10 | **$10,000.00** | 0.00% | at peak | 0 | 0 | $0.00 | $0.00 |
 | 🟢 Momentum 14d, 5 long/5 short | **$10,000.00** | 0.00% | at peak | 0 | 0 | $0.00 | $0.00 |
 
@@ -37,7 +37,7 @@ _Solid lines = futures, dashed = spot._
 |---|--:|--:|--:|--:|--:|--:|
 | 2026-10-30 | $9,999.54 | $10,000.00 | $10,000.00 | – | – | – |
 | 2026-10-31 | – | – | – | $10,000.00 | $10,000.00 | $10,000.00 |
-| now | $9,996.68 | $10,000.00 | $10,000.00 | $10,000.00 | $10,000.00 | $10,000.00 |
+| now | $9,996.72 | $10,000.00 | $10,000.00 | $10,000.00 | $10,000.00 | $10,000.00 |
 
 </details>
 
@@ -45,7 +45,7 @@ _Solid lines = futures, dashed = spot._
 
 | Strategy | Coin | Side | Entry → now | Profit | To stop | To liquidation / Alpaca |
 |---|---|---|---|--:|--:|--:|
-| 🔵 MA | **SUI** | ▼ Short | 0.89681 → 0.89938 | −$2.87 (−0.6%) | ✅ 7.7% | ✅ 42.4% |
+| 🔵 MA | **SUI** | ▼ Short | 0.89681 → 0.89935 | −$2.83 (−0.6%) | ✅ 7.7% | ✅ 42.5% |
 
 _Distance = how far the price can still move against the position. ✅ over 5% · ⚠️ 2–5% · 🔴 under 2%. Spot can't be liquidated; its last column shows whether the trade is copied to Alpaca._
 

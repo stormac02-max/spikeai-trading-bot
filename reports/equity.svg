@@ -16,8 +16,8 @@
 <text x="64.0" y="250" text-anchor="middle">2026-10-30</text>
 <text x="337.0" y="250" text-anchor="middle">2026-10-31</text>
 <text x="610.0" y="250" text-anchor="middle">now</text>
-<path class="ma_crossover" d="M64.0,120.5L610.0,126.4" style="fill:none" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
-<circle class="ma_crossover" cx="64.0" cy="120.5" r="4" stroke="none"/>
+<path class="ma_crossover" d="M64.0,120.6L610.0,126.4" style="fill:none" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<circle class="ma_crossover" cx="64.0" cy="120.6" r="4" stroke="none"/>
 <circle class="ma_crossover" cx="610.0" cy="126.4" r="4" stroke="none"/>
 <path class="breakout" d="M64.0,119.6L610.0,119.6" style="fill:none" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
 <circle class="breakout" cx="64.0" cy="119.6" r="4" stroke="none"/>

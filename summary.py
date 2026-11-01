@@ -145,7 +145,7 @@ def simulator_section(s, signals):
         out.append(f"**{max(0, s['days_left'])} days left** in the evaluation (until {s['evaluation_until']}), then the best strategy is kept.  ")
     out.append(f"Each simulated account started with {money(st['starting_balance'], decimals=0)}. Futures: {st['leverage']}x, "
                f"long and short, {money(st['margin_usd'], decimals=0)} margin per trade. Spot: 1x, buy-only, "
-               f"{money(sp['trade_usd'], decimals=0)} per buy, copied to Alpaca for coins it lists. Both use an {st["stop_pct"] * 100:.0f}% stop.")
+               f"{money(sp['trade_usd'], decimals=0)} per buy, copied to Alpaca for coins it lists. Both use an {st['stop_pct'] * 100:.0f}% stop.")
 
     out += ["", "### Futures", "", "| Strategy | Value | Return | Below peak | Open | Closed (won) | Fees | Funding |",
             "|---|--:|--:|--:|--:|--:|--:|--:|"]
