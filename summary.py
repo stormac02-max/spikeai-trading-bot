@@ -98,16 +98,20 @@ def equity_svg(accounts, start):
             parts.append(f'<text x="{x(i):.1f}" y="{H - 10}" text-anchor="middle">{d}</text>')
 
     ends = []
-    for a in accounts:
+    for a in accounts:  # futures solid with filled dots, spot dashed with hollow dots
+        spot = a.get("market") == "spot"
         pts = [(x(dates.index(p["date"])), y(p["equity"])) for p in a["curve"]]
         pts.sort()
         if len(pts) > 1:
             path = "M" + "L".join(f"{px:.1f},{py:.1f}" for px, py in pts)
-            parts.append(f'<path class="{a["key"]}" d="{path}" fill="none" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>')
+            dash = ' stroke-dasharray="6 4"' if spot else ""
+            parts.append(f'<path class="{a["key"]}" d="{path}" style="fill:none" stroke-width="2" '
+                         f'stroke-linejoin="round" stroke-linecap="round"{dash}/>')
         for px, py in pts:
-            parts.append(f'<circle class="{a["key"]}" cx="{px:.1f}" cy="{py:.1f}" r="4" stroke="none"/>')
+            dot = 'r="3" style="fill:none" stroke-width="2"' if spot else 'r="4" stroke="none"'
+            parts.append(f'<circle class="{a["key"]}" cx="{px:.1f}" cy="{py:.1f}" {dot}/>')
         if pts:
-            ends.append([pts[-1][1], a["name"].split(" ")[0]])
+            ends.append([pts[-1][1], a["name"].split(" ")[0] + (" (spot)" if spot else "")])
     ends.sort()
     for k in range(1, len(ends)):  # nudge direct labels apart
         ends[k][0] = max(ends[k][0], ends[k - 1][0] + 14)
@@ -119,57 +123,93 @@ def equity_svg(accounts, start):
 
 # ---- page sections -----------------------------------------------------------------
 
-def futures_section(s, signals):
-    st, accounts = s["settings"], [a for a in s["accounts"] if a["exists"]]
-    out = ["## Futures test: MA crossover vs breakout vs momentum", ""]
+def leader_line(accounts, label):
+    ranked = sorted(accounts, key=lambda a: a["equity"], reverse=True)
+    if len(ranked) > 1 and ranked[0]["history"] and ranked[0]["equity"] - ranked[1]["equity"] > 1:
+        return (f"**{label} leader:** {DOT[ranked[0]['key']]} {ranked[0]['name']}, "
+                f"{money(ranked[0]['equity'] - ranked[1]['equity'])} ahead of {ranked[1]['name']}.")
+    return f"_{label}: no clear leader yet._"
+
+
+def short(a):
+    return a["name"].split(" ")[0] + (" (spot)" if a.get("market") == "spot" else "")
+
+
+def simulator_section(s, signals):
+    st, sp = s["settings"], s["spot_settings"]
+    futures = [a for a in s["accounts"] if a["exists"]]
+    spot = [a for a in s.get("spot_accounts", []) if a["exists"]]
+    everything = futures + spot
+    out = ["## Strategy test: MA crossover vs breakout vs momentum", ""]
     if s["days_left"] is not None:
         out.append(f"**{max(0, s['days_left'])} days left** in the evaluation (until {s['evaluation_until']}), then the best strategy is kept.  ")
-    out.append(f"Each simulated account started with {money(st['starting_balance'], decimals=0)}: "
-               f"{st['leverage']}x leverage, {st['stop_pct'] * 100:.0f}% stop-loss, {money(st['margin_usd'], decimals=0)} margin per trade, long and short.")
-    out += ["", "| Strategy | Value | Return | Below peak | Open | Closed (won) | Fees | Funding |",
+    out.append(f"Each simulated account started with {money(st['starting_balance'], decimals=0)}. Futures: {st['leverage']}x, "
+               f"long and short, {money(st['margin_usd'], decimals=0)} margin per trade. Spot: 1x, buy-only, "
+               f"{money(sp['trade_usd'], decimals=0)} per buy, copied to Alpaca for coins it lists. Both use an {st["stop_pct"] * 100:.0f}% stop.")
+
+    out += ["", "### Futures", "", "| Strategy | Value | Return | Below peak | Open | Closed (won) | Fees | Funding |",
             "|---|--:|--:|--:|--:|--:|--:|--:|"]
-    for a in accounts:
+    for a in futures:
         won = f"{a['closed_trades']} ({a['wins']})" if a["closed_trades"] else "0"
         below = f"−{a['drawdown_pct']:.2f}%" if a["drawdown_pct"] > 0.005 else "at peak"
         out.append(f"| {DOT[a['key']]} {a['name']} | **{money(a['equity'])}** | {pct(a['return_pct'], 2)} | {below} | "
                    f"{len(a['positions'])} | {won} | {money(a['fees'])} | {money(a['funding'], signed=True)} |")
-    ranked = sorted(accounts, key=lambda a: a["equity"], reverse=True)
-    if len(ranked) > 1 and ranked[0]["history"] and ranked[0]["equity"] - ranked[1]["equity"] > 1:
-        out += ["", f"**Leading:** {DOT[ranked[0]['key']]} {ranked[0]['name']}, "
-                    f"{money(ranked[0]['equity'] - ranked[1]['equity'])} ahead of {ranked[1]['name']}."]
-    else:
-        out += ["", "_No clear leader yet._"]
+    out += ["", leader_line(futures, "Futures")]
+    if spot:
+        out += ["", "### Spot", "", "| Strategy | Value | Return | Below peak | Held | Closed (won) | Fees | On Alpaca |",
+                "|---|--:|--:|--:|--:|--:|--:|--:|"]
+        for a in spot:
+            won = f"{a['closed_trades']} ({a['wins']})" if a["closed_trades"] else "0"
+            below = f"−{a['drawdown_pct']:.2f}%" if a["drawdown_pct"] > 0.005 else "at peak"
+            copied = sum(1 for p in a["positions"] if (p.get("alpaca") or {}).get("status") == "open")
+            out.append(f"| {DOT[a['key']]} {a['name']} | **{money(a['equity'])}** | {pct(a['return_pct'], 2)} | {below} | "
+                       f"{len(a['positions'])} | {won} | {money(a['fees'])} | {copied} |")
+        out += ["", leader_line(spot, "Spot")]
 
-    out += ["", "![Account value over time](reports/equity.svg)", "",
+    out += ["", "![Account value over time: solid = futures, dashed = spot](reports/equity.svg)", "",
+            "_Solid lines = futures, dashed = spot._", "",
             "<details><summary>Account values as a table</summary>", "",
-            "| Date | " + " | ".join(a["name"] for a in accounts) + " |", "|---|" + "--:|" * len(accounts)]
-    dates = sorted({p["date"] for a in accounts for p in a["curve"]}, key=lambda d: (d == "now", d))
+            "| Date | " + " | ".join(short(a) for a in everything) + " |", "|---|" + "--:|" * len(everything)]
+    dates = sorted({p["date"] for a in everything for p in a["curve"]}, key=lambda d: (d == "now", d))
     for d in dates:
-        row = [money(next((p["equity"] for p in a["curve"] if p["date"] == d), None)) for a in accounts]
+        row = [money(next((p["equity"] for p in a["curve"] if p["date"] == d), None)) for a in everything]
         out.append(f"| {d} | " + " | ".join(row) + " |")
     out += ["", "</details>", ""]
 
     out += ["### Open positions", ""]
-    positions = [(a, p) for a in accounts for p in a["positions"]]
+    positions = [(a, p) for a in everything for p in a["positions"]]
     if positions:
-        out += ["| Strategy | Coin | Side | Entry → now | Profit | To stop | To liquidation |", "|---|---|---|---|--:|--:|--:|"]
+        out += ["| Strategy | Coin | Side | Entry → now | Profit | To stop | To liquidation / Alpaca |", "|---|---|---|---|--:|--:|--:|"]
         for a, p in positions:
             side = "▲ Long" if p["side"] == "long" else "▼ Short"
-            out.append(f"| {DOT[a['key']]} {a['name'].split(' ')[0]} | **{p['coin']}** | {side} | {price(p['entry'])} → {price(p['mark'])} | "
-                       f"{money(p['pnl'], signed=True)} ({pct(p['pnl_pct'])}) | {distance(p['to_stop_pct'])} | {distance(p['to_liq_pct'])} |")
-        out += ["", "_Distance = how far the price can still move against the position. ✅ over 5% · ⚠️ 2–5% · 🔴 under 2%._"]
+            if a.get("market") == "spot":
+                lot = p.get("alpaca") or {}
+                last = {"open": "✅ copied", "stopped on Alpaca": "⚠️ diverged", "error": "🔴 copy failed"}.get(lot.get("status"), "not on Alpaca")
+            else:
+                last = distance(p["to_liq_pct"])
+            out.append(f"| {DOT[a['key']]} {short(a)} | **{p['coin']}** | {side} | {price(p['entry'])} → {price(p['mark'])} | "
+                       f"{money(p['pnl'], signed=True)} ({pct(p['pnl_pct'])}) | {distance(p['to_stop_pct'])} | {last} |")
+        out += ["", "_Distance = how far the price can still move against the position. ✅ over 5% · ⚠️ 2–5% · 🔴 under 2%. "
+                    "Spot can't be liquidated; its last column shows whether the trade is copied to Alpaca._"]
     else:
         out.append("_No open positions._")
 
     out += ["", "### Recent trades", ""]
-    trades = sorted(((a, h) for a in accounts for h in a["history"]), key=lambda t: t[1]["time"], reverse=True)[:15]
+    trades = sorted(((a, h) for a in everything for h in a["history"]), key=lambda t: t[1]["time"], reverse=True)[:15]
     if trades:
         out += ["| Time (PKT) | Strategy | Coin | What | Price | Result |", "|---|---|---|---|--:|--:|"]
         for a, h in trades:
-            what = {"open": "Opened", "liquidation": "Liquidated"}.get(h["action"], "Stopped out" if h.get("reason") == "stop-loss" else "Closed")
-            what += " " + ("long" if h["side"] == "long" else "short")
-            result = f"fee {money(h['fee'])}" if h["action"] == "open" else money(h["pnl"] - h["fee"] + h.get("funding", 0.0), signed=True)
-            out.append(f"| {local(h['time'])} | {DOT[a['key']]} {a['name'].split(' ')[0]} | **{h['coin']}** | {what} | {price(h['price'])} | {result} |")
+            spot_trade = a.get("market") == "spot"
+            if h["action"] in ("open", "buy"):
+                what = "Bought" if spot_trade else "Opened " + ("long" if h["side"] == "long" else "short")
+                result = f"fee {money(h['fee'])}"
+            else:
+                what = "Liquidated" if h["action"] == "liquidation" else "Stopped out" if h.get("reason") == "stop-loss" else "Sold" if spot_trade else "Closed"
+                net = h["pnl"] if spot_trade else h["pnl"] - h["fee"] + h.get("funding", 0.0)
+                result = money(net, signed=True)
+            if (h.get("alpaca") or {}).get("status"):
+                what += f" (Alpaca: {h['alpaca']['status']})"
+            out.append(f"| {local(h['time'])} | {DOT[a['key']]} {short(a)} | **{h['coin']}** | {what} | {price(h['price'])} | {result} |")
     else:
         out.append("_No trades yet._")
 
@@ -191,7 +231,8 @@ def futures_section(s, signals):
             if r["momentum"]:
                 mo += " 🔔 " + ("top 5: long" if r["momentum"] == "long" else "bottom 5: short")
             out.append(f"| **{r['coin']}** | {ma} | {bo} | {mo} |")
-        out += ["", "_Momentum trades its top/bottom 5 at the Monday rebalance; MA and breakout act at each daily run._"]
+        out += ["", "_Momentum trades its top/bottom 5 at the Monday rebalance; MA and breakout act at each daily run. "
+                    "Spot uses the same signals but only buys: a short signal just sells what it holds._"]
 
     if s["universe"]:
         out += ["", f"### This week's coins (chosen {s['universe']['refreshed']})", "",
@@ -201,20 +242,21 @@ def futures_section(s, signals):
     return out
 
 
-def alpaca_section():
-    out = ["## Alpaca paper account (spot)", ""]
-    try:
-        from trading_bot import make_client
-        client = make_client()
-        account, positions = client.get_account(), client.get_all_positions()
-        out.append(f"Value **{money(float(account.equity))}** · cash {money(float(account.cash))} · account ending {account.account_number[-4:]}  ")
-        if positions:
-            held = [f"{float(p.qty):g} {p.symbol} ({money(float(p.unrealized_pl), signed=True)})" for p in positions]
-            out.append("Holding: " + ", ".join(held))
-        else:
-            out.append("No positions.")
-    except Exception as error:
-        out.append(f"_Couldn't reach the Alpaca account this run ({type(error).__name__})._")
+def alpaca_section(s):
+    out = ["## Alpaca paper account", ""]
+    al = s.get("alpaca") or {}
+    if "error" in al:
+        out.append(f"_Couldn't reach the Alpaca account this run ({al['error'].split(':')[0]})._")
+    else:
+        out.append(f"Value **{money(al['equity'])}** · cash {money(al['cash'])} · account ending {al['number']}  ")
+        held = [f"{p['qty']:g} {p['symbol']} ({money(p['pnl'], signed=True)})" for p in al.get("positions", [])]
+        out.append("Holding: " + (", ".join(held) if held else "nothing"))
+    copies = f"**{al.get('copied_open', 0)}** simulated spot trade(s) copied and open"
+    if al.get("diverged"):
+        copies += f" · ⚠️ {al['diverged']} diverged (Alpaca's stop fired, the simulation's didn't)"
+    if al.get("errors"):
+        copies += f" · 🔴 {al['errors']} copy error(s): see the spot log"
+    out += ["", copies + ". Copies use the same number of coins as the simulation, with a real stop order on Alpaca."]
     try:
         with open(BASE_DIR / "crypto_config.toml", "rb") as f:
             coins = tomllib.load(f)["symbols"]
@@ -239,13 +281,14 @@ def main():
              f"_Updated **{pd.Timestamp(now).tz_convert(PKT).strftime('%a %d %b %Y, %H:%M')} PKT** "
              f"({pd.Timestamp(now).tz_convert('America/New_York').strftime('%a %H:%M')} ET). "
              "Refreshed after every daily run. Paper trading only: no real money._", ""]
-    lines += futures_section(s, signals) + [""] + alpaca_section()
-    lines += ["", "---", f"{run_line} · [futures log](logs/futures_bot.log) · [crypto log](logs/crypto_bot.log) · "
+    lines += simulator_section(s, signals) + [""] + alpaca_section(s)
+    lines += ["", "---", f"{run_line} · [futures log](logs/futures_bot.log) · [spot log](logs/spot_bot.log) · "
                          "[project log](PROJECT_LOG.md) · on the PC: `python dashboard.py`", "",
               "<sub>This page is written by summary.py; edits by hand are overwritten.</sub>", ""]
     README.write_text("\n".join(lines), encoding="utf-8")
     CHART.parent.mkdir(exist_ok=True)
-    CHART.write_text(equity_svg([a for a in s["accounts"] if a["exists"]], s["settings"]["starting_balance"]), encoding="utf-8")
+    everything = [a for a in s["accounts"] + s.get("spot_accounts", []) if a["exists"]]
+    CHART.write_text(equity_svg(everything, s["settings"]["starting_balance"]), encoding="utf-8")
     print(f"Wrote {README.name} and {CHART.relative_to(BASE_DIR)}")
     return 0
 

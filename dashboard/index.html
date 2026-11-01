@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Futures Simulator</title>
+<title>Trading Simulator</title>
 <style>
   :root {
     color-scheme: light;
@@ -71,6 +71,8 @@
   details[open] summary { margin-bottom: 10px; }
   pre { background: var(--page); border: 1px solid var(--border); border-radius: 8px; padding: 10px; overflow-x: auto; font-size: 12px; line-height: 1.5; max-height: 420px; }
   ul.how { margin: 0; padding-left: 18px; } ul.how li { margin: 4px 0; color: var(--ink-2); } ul.how b { color: var(--ink); }
+  .row-title { font-size: 13px; font-weight: 600; color: var(--ink-2); margin: 4px 0 8px; }
+  .dashkey { display: inline-block; width: 18px; height: 0; border-top: 2px dashed var(--ink-2); vertical-align: middle; margin-right: 6px; }
   .legend { display: flex; gap: 16px; flex-wrap: wrap; font-size: 13px; color: var(--ink-2); margin-bottom: 6px; }
   .legend .key { width: 18px; margin-right: 6px; }
   #chart { position: relative; }
@@ -91,8 +93,8 @@
 <main id="app">
   <header>
     <div>
-      <h1>Futures Simulator</h1>
-      <div class="sub">Paper trading three strategies on Hyperliquid's live market data</div>
+      <h1>Trading Simulator</h1>
+      <div class="sub">Three strategies paper traded on futures (Hyperliquid data) and spot (Kraken data, copied to Alpaca)</div>
     </div>
     <div class="actions">
       <span class="sub" id="updated">Loading…</span>
@@ -103,13 +105,16 @@
   </header>
 
   <div class="chips" id="chips"></div>
+  <h2 class="row-title">Futures: 2x, long and short</h2>
   <div class="grid3" id="scores"></div>
+  <h2 class="row-title">Spot: 1x, buy-only, copied to Alpaca where listed</h2>
+  <div class="grid3" id="spot-scores"></div>
 
   <section class="card">
     <h2>Account value over time</h2>
     <div class="legend" id="legend"></div>
     <div id="chart"></div>
-    <div class="note">One point per daily run, plus "now" at live prices. The line builds up as the test runs.</div>
+    <div class="note">Solid lines are futures, dashed lines are spot. One point per daily run, plus "now" at live prices. The lines build up as the test runs.</div>
     <details style="margin-top:10px"><summary>Show as a table</summary><div class="table-wrap" id="curve-table"></div></details>
   </section>
 
@@ -217,42 +222,30 @@ function render(s) {
   for (const [where, when] of Object.entries(s.last_runs || {})) chips.append(el("span", { class: "chip" }, `Last run (${where}): `, el("b", {}, when)));
   if (s.accounts_committed) chips.append(el("span", { class: "chip" }, "Accounts in Git updated: ", el("b", {}, s.accounts_committed)));
 
-  // scoreboard
-  const scores = document.getElementById("scores"); scores.replaceChildren();
-  // "Leading" only for a real lead by an account that has actually traded.
-  const ranked = [...accts].sort((a, b) => b.equity - a.equity);
-  const bestKey = ranked.length > 1 && ranked[0].history.length && ranked[0].equity - ranked[1].equity > 1 ? ranked[0].key : null;
-  for (const a of s.accounts) {
-    const card = el("div", { class: "card score", style: `--key:${COLORS[a.key]}` });
-    const name = el("div", { class: "name" }, keyDot(a.key), a.name);
-    if (a.key === bestKey) name.append(el("span", { class: "best" }, "Leading"));
-    card.append(name);
-    if (!a.exists) { card.append(el("div", { class: "empty" }, "No account yet: it is created on the first run.")); scores.append(card); continue; }
-    card.append(el("div", { class: "hero" }, usd(a.equity)));
-    card.append(el("div", { class: tone(a.return_pct) }, `${pct(a.return_pct, 2)} since start`));
-    const winRate = a.closed_trades ? `${a.wins}/${a.closed_trades} (${(a.wins / a.closed_trades * 100).toFixed(0)}%)` : "no closed trades";
-    card.append(el("div", { class: "kv" },
-      el("span", {}, "Below peak"), el("span", {}, a.drawdown_pct > 0.005 ? `−${a.drawdown_pct.toFixed(a.drawdown_pct < 1 ? 2 : 1)}%` : "at peak"),
-      el("span", {}, "Cash (free balance)"), el("span", {}, usd(a.balance)),
-      el("span", {}, "Open positions"), el("span", {}, String(a.positions.length)),
-      el("span", {}, "Winning closed trades"), el("span", {}, winRate),
-      el("span", {}, "Realized profit"), el("span", { class: tone(a.realized) }, signed(a.realized)),
-      el("span", {}, "Fees paid"), el("span", {}, usd(a.fees)),
-      el("span", {}, "Funding (+ received / − paid)"), el("span", { class: tone(a.funding) }, signed(a.funding)),
-      el("span", {}, "Stopped out / liquidated"), el("span", {}, `${a.stops} / ${a.liquidations}`)));
-    scores.append(card);
+  const spot = (s.spot_accounts || []).filter(a => a.exists);
+  const al = s.alpaca;
+  if (al) {
+    const chip = el("span", { class: "chip" }, "Alpaca: ");
+    if (al.error) chip.append(el("b", {}, "unreachable"), ` (${al.error.split(":")[0]})`);
+    else chip.append(el("b", {}, `${usd(al.equity)}`), ` value · ${usd(al.cash)} cash · `, el("b", {}, `${al.copied_open} copied lot${al.copied_open === 1 ? "" : "s"}`));
+    if (al.diverged) chip.append(` · ${al.diverged} diverged`);
+    if (al.errors) chip.append(` · ${al.errors} copy error${al.errors === 1 ? "" : "s"}`);
+    chips.append(chip);
   }
 
-  renderChart(accts);
-  renderPositions(accts);
-  renderActivity(accts);
+  renderScores("scores", s.accounts, false);
+  renderScores("spot-scores", s.spot_accounts || [], true);
+  const all = accts.concat(spot);
+  renderChart(all);
+  renderPositions(all);
+  renderActivity(all);
 
   // universe
   const uni = document.getElementById("universe"); uni.replaceChildren();
   if (s.universe) {
-    const held = new Set(accts.flatMap(a => a.positions.map(p => p.coin)));
+    const held = new Set(all.flatMap(a => a.positions.map(p => p.coin)));
     const wrap = el("div", { class: "chips", style: "margin:0" });
-    s.universe.coins.forEach((c, i) => wrap.append(el("span", { class: "chip" }, el("b", {}, `${i + 1}.`), " ", c, held.has(c) ? " ●" : "")));
+    s.universe.coins.forEach((c, i) => wrap.append(el("span", { class: "chip" }, el("b", {}, `${i + 1}.`), " ", c, held.has(c) || held.has(c.replace(/^k(?=[A-Z])/, "")) ? " ●" : "")));
     uni.append(wrap, el("div", { class: "note" }, `Ranked by trading volume over the 7 days before ${s.universe.refreshed}, excluding ${st.universe_exclude.join(" and ")}. ● = a position is open. Refreshed every Monday 00:00 UTC (5:00 AM PKT).`));
   } else uni.append(el("div", { class: "empty" }, "No universe yet: it is chosen on the first run."));
 
@@ -266,7 +259,9 @@ function render(s) {
     ["Funding", "charged or paid every hour from Hyperliquid's real rates. Longs pay shorts when the rate is positive."],
     ["Stop-loss", `a position closes if the price moves ${(st.stop_pct * 100).toFixed(0)}% against it. Between daily runs, the simulator replays every hour from hourly candles, so a stop at 3 AM is applied at 3 AM.`],
     ["Liquidation", "if the margin falls to the maintenance level (half the initial margin at the coin's max leverage, as on Hyperliquid), the position is lost. The stop is set to trigger first."],
-    ["Schedule", "GitHub runs the bot daily at 00:20 UTC (5:20 AM PKT), just after the daily candle closes, and saves the accounts. Use \"Pull latest from GitHub\" to see the newest run here."],
+    ["Spot accounts", `the same coins and the same signals, but buy-only and without leverage: a short signal only sells. ${usd(s.spot_settings.trade_usd, 0)} per buy, the same ${(s.spot_settings.stop_pct * 100).toFixed(0)}% stop, ${(s.spot_settings.fee * 100).toFixed(2)}% fee (Alpaca's). Fills use Kraken's live order books; stops are replayed hour by hour from Kraken's candles.`],
+    ["Alpaca copy", "spot trades in coins Alpaca lists are copied to your Alpaca paper account: the same number of coins, plus a real stop order there. If prices differ enough that a stop fires on one side only, the trade is marked \"diverged\"."],
+    ["Schedule", "GitHub runs the bots daily at 00:20 UTC (5:20 AM PKT), just after the daily candle closes, and saves the accounts. Use \"Pull latest from GitHub\" to see the newest run here."],
   ];
   for (const [b, t] of items) how.append(el("li", {}, el("b", {}, b + ": "), t));
 
@@ -274,20 +269,63 @@ function render(s) {
   document.getElementById("log").textContent = (s.log_tail && s.log_tail.length) ? s.log_tail.join("\n") : "No runs logged yet.";
 }
 
+function renderScores(id, accounts, isSpot) {
+  const box = document.getElementById(id); box.replaceChildren();
+  const live = accounts.filter(a => a.exists);
+  // "Leading" only for a real lead by an account that has actually traded.
+  const ranked = [...live].sort((a, b) => b.equity - a.equity);
+  const bestKey = ranked.length > 1 && ranked[0].history.length && ranked[0].equity - ranked[1].equity > 1 ? ranked[0].key : null;
+  for (const a of accounts) {
+    const card = el("div", { class: "card score", style: `--key:${COLORS[a.key]}` });
+    const name = el("div", { class: "name" }, keyDot(a.key), a.name);
+    if (a.key === bestKey) name.append(el("span", { class: "best" }, "Leading"));
+    card.append(name);
+    if (!a.exists) { card.append(el("div", { class: "empty" }, "No account yet: it is created on the first run.")); box.append(card); continue; }
+    card.append(el("div", { class: "hero" }, usd(a.equity)));
+    card.append(el("div", { class: tone(a.return_pct) }, `${pct(a.return_pct, 2)} since start`));
+    const winRate = a.closed_trades ? `${a.wins}/${a.closed_trades} (${(a.wins / a.closed_trades * 100).toFixed(0)}%)` : "no closed trades";
+    const rows = [
+      ["Below peak", a.drawdown_pct > 0.005 ? `−${a.drawdown_pct.toFixed(a.drawdown_pct < 1 ? 2 : 1)}%` : "at peak"],
+      ["Cash (free balance)", usd(a.balance)],
+      [isSpot ? "Coins held" : "Open positions", String(a.positions.length)],
+      ["Winning closed trades", winRate],
+      ["Realized profit", el("span", { class: tone(a.realized) }, signed(a.realized))],
+      ["Fees paid", usd(a.fees)],
+    ];
+    if (isSpot) rows.push(["Copied to Alpaca (open)", String(a.positions.filter(p => p.alpaca && p.alpaca.status === "open").length)],
+                          ["Stopped out", String(a.stops)]);
+    else rows.push(["Funding (+ received / − paid)", el("span", { class: tone(a.funding) }, signed(a.funding))],
+                   ["Stopped out / liquidated", `${a.stops} / ${a.liquidations}`]);
+    card.append(el("div", { class: "kv" }, ...rows.flatMap(([k, v]) => [el("span", {}, k), el("span", {}, v)])));
+    box.append(card);
+  }
+}
+
+function alpacaCell(p) {
+  if (!p.alpaca) return el("span", { class: "muted" }, p.side && p.leverage === 1 ? "not on Alpaca" : "–");
+  const a = p.alpaca;
+  if (a.status === "error") return el("span", { class: "status s-crit", title: a.error || "" }, el("i", {}, "!"), "copy failed");
+  if (a.status === "stopped on Alpaca") return el("span", { class: "status s-warn", title: "Alpaca's stop filled; the simulation still holds" }, el("i", {}, "!"), "diverged");
+  if (a.status === "open") return el("span", { class: "status s-good", title: `Alpaca holds ${a.qty} @ ${a.entry}, stop ${a.stop}` }, el("i", {}, "✓"), `copied · ${qty(a.qty)}`);
+  return el("span", { class: "muted" }, a.status);
+}
+
 function renderPositions(accts) {
   const rows = [];
   for (const a of accts) for (const p of a.positions) rows.push([
-    el("span", {}, keyDot(a.key), " ", a.name), el("b", {}, p.coin),
+    el("span", {}, keyDot(a.key), " ", a.name), a.market === "spot" ? "Spot" : "Futures", el("b", {}, p.coin),
     el("span", { class: "side" }, p.side === "long" ? "▲ Long" : "▼ Short"),
-    qty(p.size), price(p.entry), price(p.mark), usd(p.value), usd(p.margin) + ` · ${p.leverage}x`,
+    qty(p.size), price(p.entry), price(p.mark), usd(p.value),
+    a.market === "spot" ? usd(p.margin) + " cost" : usd(p.margin) + ` · ${p.leverage}x`,
     el("span", { class: tone(p.pnl) }, `${signed(p.pnl)} (${pct(p.pnl_pct)})`),
     el("span", {}, price(p.stop), " ", statusCell(p.to_stop_pct, "Stop-loss")),
-    el("span", {}, price(p.liquidation), " ", statusCell(p.to_liq_pct, "Liquidation")),
-    el("span", { class: tone(p.funding) }, signed(p.funding)), localTime(p.opened),
+    a.market === "spot" ? el("span", { class: "muted" }, "none (spot)") : el("span", {}, price(p.liquidation), " ", statusCell(p.to_liq_pct, "Liquidation")),
+    a.market === "spot" ? alpacaCell(p) : el("span", { class: tone(p.funding) }, `funding ${signed(p.funding)}`),
+    localTime(p.opened),
   ]);
   document.getElementById("pos-count").textContent = rows.length ? `(${rows.length})` : "";
   const box = document.getElementById("positions"); box.replaceChildren();
-  box.append(rows.length ? table(["Strategy", "Coin", "Side", "Size", "Entry", "Now", "Value", "Margin", "Profit (on margin)", "Stop-loss", "Liquidation", "Funding", "Opened"], rows, [3, 4, 5, 6, 7, 8, 11])
+  box.append(rows.length ? table(["Strategy", "Market", "Coin", "Side", "Size", "Entry", "Now", "Value", "Margin / cost", "Profit", "Stop-loss", "Liquidation", "Alpaca copy / funding", "Opened"], rows, [4, 5, 6, 7, 8, 9])
                          : el("div", { class: "empty" }, "No open positions."));
 }
 
@@ -296,15 +334,20 @@ function renderActivity(accts) {
   for (const a of accts) for (const h of a.history) items.push({ a, h });
   items.sort((x, y) => (x.h.time < y.h.time ? 1 : -1));
   const rows = items.slice(0, 40).map(({ a, h }) => {
-    const net = h.action === "open" ? null : h.pnl - h.fee + (h.funding || 0);
-    const action = h.action === "open" ? "Opened" : h.action === "liquidation" ? "Liquidated" : h.reason === "stop-loss" ? "Stopped out" : "Closed";
-    return [localTime(h.time), el("span", {}, keyDot(a.key), " ", a.name), el("b", {}, h.coin), action,
+    const opening = h.action === "open" || h.action === "buy";
+    // Spot sells already record profit after both fees; futures closes add funding and the closing fee.
+    const net = opening ? null : a.market === "spot" ? h.pnl : h.pnl - h.fee + (h.funding || 0);
+    const action = h.action === "buy" ? "Bought" : h.action === "open" ? "Opened" : h.action === "liquidation" ? "Liquidated"
+                 : h.reason === "stop-loss" ? "Stopped out" : h.action === "sell" ? "Sold" : "Closed";
+    const why = [h.reason && h.reason !== "stop-loss" ? h.reason : ""];
+    if (h.alpaca) why.push(`Alpaca: ${h.alpaca.status}`);
+    return [localTime(h.time), el("span", {}, keyDot(a.key), " ", a.name), a.market === "spot" ? "Spot" : "Futures", el("b", {}, h.coin), action,
             el("span", { class: "side" }, h.side === "long" ? "▲ Long" : "▼ Short"), price(h.price),
             net == null ? el("span", { class: "muted" }, `fee ${usd(h.fee)}`) : el("span", { class: tone(net) }, signed(net)),
-            h.reason && h.reason !== "stop-loss" ? h.reason : ""];
+            why.filter(Boolean).join(" · ")];
   });
   const box = document.getElementById("activity"); box.replaceChildren();
-  box.append(rows.length ? table(["Time", "Strategy", "Coin", "Action", "Side", "Price", "Result (after fees)", "Why"], rows, [5, 6])
+  box.append(rows.length ? table(["Time", "Strategy", "Market", "Coin", "Action", "Side", "Price", "Result (after fees)", "Why"], rows, [6, 7])
                          : el("div", { class: "empty" }, "No trades yet."));
 }
 
@@ -312,7 +355,9 @@ function renderActivity(accts) {
 function renderChart(accts) {
   const box = document.getElementById("chart"); box.replaceChildren();
   const legend = document.getElementById("legend"); legend.replaceChildren();
-  for (const a of accts) legend.append(el("span", {}, el("span", { class: "key", style: `--key:${COLORS[a.key]}` }), a.name));
+  const label = a => a.market === "spot" ? `${a.name.split(" ")[0]} (spot)` : a.name.split(" ")[0];
+  for (const a of accts.filter(a => a.market !== "spot")) legend.append(el("span", {}, el("span", { class: "key", style: `--key:${COLORS[a.key]}` }), a.name));
+  if (accts.some(a => a.market === "spot")) legend.append(el("span", {}, el("span", { class: "dashkey" }), "spot (same colour, dashed)"));
   const dates = [...new Set(accts.flatMap(a => a.curve.map(p => p.date)))].sort((x, y) => (x === "now") - (y === "now") || (x < y ? -1 : 1));
   if (!accts.length || !dates.length) { box.append(el("div", { class: "empty" }, "No data yet.")); return; }
   const series = accts.map(a => ({ a, values: dates.map(d => (a.curve.find(p => p.date === d) || {}).equity ?? null) }));
@@ -341,14 +386,15 @@ function renderChart(accts) {
   const labelYs = [];
   for (const s of series) {
     const pts = s.values.map((v, i) => v == null ? null : [x(i), y(v)]).filter(Boolean);
-    if (pts.length > 1) mk("path", { d: "M" + pts.map(p => p.join(",")).join("L"), fill: "none", stroke: COLORS[s.a.key], "stroke-width": 2, "stroke-linejoin": "round", "stroke-linecap": "round" });
-    for (const p of pts) mk("circle", { cx: p[0], cy: p[1], r: 4, fill: COLORS[s.a.key], stroke: "var(--surface)", "stroke-width": 2 });
+    const dashed = s.a.market === "spot" ? { "stroke-dasharray": "6 4" } : {};
+    if (pts.length > 1) mk("path", { d: "M" + pts.map(p => p.join(",")).join("L"), fill: "none", stroke: COLORS[s.a.key], "stroke-width": 2, "stroke-linejoin": "round", "stroke-linecap": "round", ...dashed });
+    for (const p of pts) mk("circle", { cx: p[0], cy: p[1], r: s.a.market === "spot" ? 3 : 4, fill: s.a.market === "spot" ? "var(--surface)" : COLORS[s.a.key], stroke: s.a.market === "spot" ? COLORS[s.a.key] : "var(--surface)", "stroke-width": 2 });
     const last = pts[pts.length - 1];
     if (last) labelYs.push({ y: last[1], s });
   }
   labelYs.sort((p, q) => p.y - q.y);  // direct labels at line ends, nudged apart
   for (let k = 1; k < labelYs.length; k++) if (labelYs[k].y - labelYs[k - 1].y < 14) labelYs[k].y = labelYs[k - 1].y + 14;
-  for (const { y: ly, s } of labelYs) mk("text", { x: W - m.r + 10, y: ly + 4, "font-size": 12, fill: "var(--ink-2)" }, s.a.name.split(" ")[0]);
+  for (const { y: ly, s } of labelYs) mk("text", { x: W - m.r + 10, y: ly + 4, "font-size": 12, fill: "var(--ink-2)" }, label(s.a));
 
   // crosshair + one tooltip listing every series
   const hair = mk("line", { y1: m.t, y2: H - m.b, stroke: "var(--axis)", "stroke-width": 1, visibility: "hidden" });
@@ -360,7 +406,7 @@ function renderChart(accts) {
     let i = 0, best = Infinity; dates.forEach((_, k) => { const dd = Math.abs(x(k) - px); if (dd < best) { best = dd; i = k; } });
     hair.setAttribute("x1", x(i)); hair.setAttribute("x2", x(i)); hair.setAttribute("visibility", "visible");
     tip.replaceChildren(el("div", { class: "muted", style: "margin-bottom:4px" }, dates[i] === "now" ? "Now (live prices)" : `After the run for ${dates[i]}`));
-    for (const s of series) tip.append(el("div", { class: "row" }, el("span", {}, el("span", { class: "key", style: `--key:${COLORS[s.a.key]}` }), s.a.name), el("b", {}, usd(s.values[i]))));
+    for (const s of series) tip.append(el("div", { class: "row" }, el("span", {}, el("span", { class: "key", style: `--key:${COLORS[s.a.key]}` }), label(s.a)), el("b", {}, usd(s.values[i]))));
     tip.style.display = "block";
     const left = x(i) * rect.width / W + 12;
     tip.style.left = Math.min(left, rect.width - tip.offsetWidth - 4) + "px"; tip.style.top = "8px";
@@ -369,7 +415,7 @@ function renderChart(accts) {
 
   // table view of the same data
   const tbl = document.getElementById("curve-table"); tbl.replaceChildren();
-  tbl.append(table(["Date", ...series.map(s => s.a.name)], dates.map((d, i) => [d, ...series.map(s => usd(s.values[i]))]), series.map((_, k) => k + 1)));
+  tbl.append(table(["Date", ...series.map(s => s.a.name + (s.a.market === "spot" ? " (spot)" : ""))], dates.map((d, i) => [d, ...series.map(s => usd(s.values[i]))]), series.map((_, k) => k + 1)));
 }
 
 // ---- signal board ----

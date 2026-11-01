@@ -38,6 +38,19 @@ discuss with the user. Simulation: our own paper accounts on Hyperliquid's publi
 fee, isolated margin, hourly funding, hourly-replayed stops and liquidations). Momentum rebalances only on weekly
 (Monday) refreshes.
 
+**Spot simulator, live since 2026-11-01** (`spot_bot.py` + `spot_config.toml`, running on `paper_spot.py`): the same
+three strategies, the same weekly coins and the **same signals as futures**, but buy-only at 1x (a short signal only
+sells), so spot vs futures isolates the effect of leverage and shorting. $500 per buy, 8% stop, $10,000 per account
+(`state/spot_<name>.json`). Fills use **Kraken's** live order books (Kraken lists all 20 coins and is a US exchange
+that GitHub can reach); stops are replayed hourly from Kraken candles; fee 0.25%, like Alpaca's. Hyperliquid `k`
+coins map to spot names (kPEPE → PEPE).
+
+**Alpaca copy** (`alpaca_mirror.py`): each simulated spot buy in a coin Alpaca lists (this week: HYPE, SOL, PEPE, XRP,
+UNI, AAVE, LINK) is copied to the Alpaca paper account for **the same number of coins**, plus a real GTC stop-limit sell
+there (limit 2% under the stop). A simulated sell cancels that stop and sells the lot. If Alpaca's stop filled first,
+the lot is marked "stopped on Alpaca" (diverged). Orders are tagged `sim-<signal id>[-stop|-sell]`. Finding:
+Alpaca fills dollar-amount (notional) crypto buys about 2% short of the amount, which is why copies order by quantity.
+
 **Stock bot** (`trading_bot.py` + `config.toml`): **stopped 2026-10-31.** 20/50-day crossover on yfinance
 daily closes, watchlist `["AAPL"]`, 1 share per trade, long-only. It never traded: AAPL's 20-day stayed above
 its 50-day from 2026-09-15 through 2026-10-30.
@@ -54,7 +67,8 @@ its 50-day from 2026-09-15 through 2026-10-30.
     `logs/trading_bot.log`.
   - `futures-bot.yml` (**active**): every day at 00:20 UTC (5:20 AM PKT). Commits `state/` (the simulated
     accounts), `logs/futures_bot.log` (PKT times) and the phone summary (`README.md`, `reports/equity.svg`, via
-    `summary.py`, which also needs the Alpaca secrets). Manual run: Actions → "Futures strategies (simulated)".
+    `summary.py`). Since 2026-11-01 it also runs `spot_bot.py` (with the Alpaca secrets) and commits `logs/spot_bot.log`.
+    Workflow name: "Simulator (futures + spot)". Manual run: Actions → that name.
   - All workflows share the concurrency group `trading-bot`, so their commits never collide.
 - **Windows Task Scheduler**: task `SpikeAI MA Crossover Bot` (stocks) is **disabled** (2026-10-31), not deleted.
   There is no PC task for crypto.
@@ -78,6 +92,9 @@ use the Alpaca tools. The bots don't use the MCP server, so they're unaffected.
   DEX tokens will need a similar simulated spot account later.
 - **Futures coins (decided 2026-11-01):** each Monday 00:00 UTC, the 20 most-traded Hyperliquid perps by 7-day volume,
   excluding BTC/ETH (`universe_size`, `universe_exclude` in `futures_config.toml`).
+- **Old crypto spot bot overlaps:** `crypto_bot.py` (empty watchlist, daily on GitHub) trades the same Alpaca account. If
+  coins are ever added, its sells could touch copied lots, although lots under a stop order aren't available to sell.
+  Spot mode replaces it, so suggest retiring it (remove its schedule).
 - **Futures evaluation on 2026-12-27:** compare the three accounts, keep the best strategy, and discuss with the
   user. Backtest context: MA crossover 2x/8% +1.7%, momentum −5.1%, breakout −44%, while holding the top 20 lost 38%.
 - **Check the first GitHub futures runs:** Hyperliquid's API worked from Pakistan, but GitHub runners are in the US.
@@ -104,6 +121,9 @@ use the Alpaca tools. The bots don't use the MCP server, so they're unaffected.
 |---|---|
 | `crypto_bot.py` | Crypto bot (active). `--dry-run` reports without ordering; `--config` picks a config file. Reuses `detect_crossover`, `make_client` and `setup_logging` from `trading_bot.py`. |
 | `crypto_config.toml` | `symbols` (Alpaca pairs like `"BTC/USD"`), `short_window` (20), `long_window` (50), `trade_usd` (500), `lookback_days` (100 days). |
+| `paper_spot.py` | Simulated spot account on Kraken data: `kraken_pairs`, `get_prices`, `get_hourly`, `fill`, `SpotAccount.buy/sell/sync/equity`, `spot_name`. |
+| `spot_bot.py` + `spot_config.toml` | Runs the spot strategies daily after the futures bot, using its universe and signals, and copies trades to Alpaca. `--dry-run` saves and sends nothing. |
+| `alpaca_mirror.py` | Copies spot lots to Alpaca: `buy` (same quantity plus a stop-limit), `sell` (cancel the stop, then sell), `refresh` (did Alpaca's stop fill?). |
 | `paper_futures.py` | Simulated futures account on Hyperliquid data: `get_markets`, `fill`, `FuturesAccount.open/close/sync/equity`. |
 | `futures_bot.py` | Runs the futures strategies side by side daily. `--dry-run` saves nothing. |
 | `backtest_futures.py` | Backtester. Its strategy functions (`ma_crossover`, `breakout`, `momentum`, `build_indicators`) are shared with `futures_bot.py`. |
@@ -335,3 +355,22 @@ use the Alpaca tools. The bots don't use the MCP server, so they're unaffected.
 - `futures-bot.yml` now runs it after the bot (skipped on dry runs) and commits it with the accounts.
 - First version generated locally and pushed. Its signal board already showed TRX closing below its 20-day low,
   so the breakout account should open a TRX short on GitHub's next run.
+
+### 2026-11-01: Spot mode added and copied to Alpaca
+- User chose option 2 (a spot mode in the simulator) "but also sync it with Alpaca". Clarified: copy trades to
+  Alpaca, all three strategies, and the same 8% stop on spot.
+- Coverage check for this week's 20 coins: Kraken 20/20, MEXC 20/20, OKX 19, Gate 19, Coinbase 17, Alpaca 7.
+  Chose Kraken because it's a US exchange that GitHub's US runners can reach.
+- Built `paper_spot.py`, `alpaca_mirror.py`, `spot_bot.py` and `spot_config.toml`. The futures bot now records the
+  refresh kind (initial/weekly) in the universe file. The workflow runs spot after futures. The dashboard (now
+  titled "Trading Simulator") shows a spot row, dashed spot lines, market and Alpaca-copy columns and an Alpaca chip.
+  The phone page has Futures and Spot tables, a combined chart, positions and trades, and Alpaca copy status.
+- Tests: synthetic spot maths (fee, stop, gap, signal sell) and the mirror against a fake Alpaca (order sequence;
+  a stop already filled on Alpaca isn't sold twice) all passed. Live Alpaca round trips with tiny SOL amounts:
+  1) a $15 notional buy only filled about 98% ($14.71), which led to switching to quantity orders;
+  2) the quantity order matched the simulation to 1e-9 SOL, and the stop-limit, cancel and sell all worked.
+  Both closed with 0 SOL left; total cost $0.18 (tagged `sim-test-…` and `sim-test2-…` in Alpaca).
+- First real spot run created the three accounts. No spot signals that day (TRX's breakout signal is a short,
+  which spot skips), so nothing was copied to Alpaca yet.
+- While restarting the dashboard preview, Claude stopped a `python dashboard.py` process on port 8765 that was
+  probably the user's own dashboard. It's read-only, so nothing was lost. `dashboard.py` now honours a `PORT` env var.

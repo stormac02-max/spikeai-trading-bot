@@ -94,7 +94,8 @@ def load_universe(markets, config, dry_run):
     log.info("Universe refreshed (%s, %d coins): %s", refresh, len(coins), ", ".join(coins))
     if not dry_run:
         UNIVERSE_FILE.parent.mkdir(parents=True, exist_ok=True)
-        UNIVERSE_FILE.write_text(json.dumps({"refreshed": str(today.date()), "coins": coins}, indent=2), encoding="utf-8")
+        UNIVERSE_FILE.write_text(json.dumps({"refreshed": str(today.date()), "kind": refresh, "coins": coins}, indent=2),
+                                 encoding="utf-8")
     return coins, refresh
 
 

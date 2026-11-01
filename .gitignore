@@ -5,6 +5,7 @@
 /trading_bot.log
 /crypto_bot.log
 /futures_bot.log
+/spot_bot.log
 
 __pycache__/
 *.pyc

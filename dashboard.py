@@ -23,10 +23,12 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from backtest_futures import build_indicators
 from futures_bot import STRATEGIES, UNIVERSE_FILE, daily_frames
 from paper_futures import BASE_DIR, get_markets, liquidation_price, unrealized_pnl
+from paper_spot import get_prices
 
 PAGE = BASE_DIR / "dashboard" / "index.html"
 LOGS = {"GitHub": BASE_DIR / "logs" / "futures_bot.log", "This PC": BASE_DIR / "futures_bot.log"}
-RUN_START = re.compile(r"^(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}),\d+ INFO ---- Futures run started")
+SPOT_LOGS = {"GitHub": BASE_DIR / "logs" / "spot_bot.log", "This PC": BASE_DIR / "spot_bot.log"}
+RUN_START = re.compile(r"^(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}),\d+ INFO ---- (Futures|Spot) run started")
 
 _cache, _lock = {}, threading.Lock()
 
@@ -46,8 +48,8 @@ def read_json(path):
     return json.loads(path.read_text(encoding="utf-8")) if path.exists() else None
 
 
-def read_config():
-    with open(BASE_DIR / "futures_config.toml", "rb") as f:
+def read_config(name="futures_config.toml"):
+    with open(BASE_DIR / name, "rb") as f:
         return tomllib.load(f)
 
 
@@ -87,7 +89,7 @@ def account_view(key, state, marks, config):
     curve.append({"date": "now", "equity": round(equity, 2)})
     peak = max([start] + [p["equity"] for p in curve])
     return {
-        "key": key, "name": STRATEGIES[key][0], "exists": True,
+        "key": key, "name": STRATEGIES[key][0], "exists": True, "market": "futures",
         "created": state.get("created"), "balance": state["balance"], "equity": equity,
         "return_pct": (equity / start - 1) * 100, "drawdown_pct": (1 - equity / peak) * 100,
         "positions": positions, "closed_trades": len(closed),
@@ -100,18 +102,80 @@ def account_view(key, state, marks, config):
     }
 
 
+def spot_view(key, state, prices, config):
+    """The spot twin of account_view, in the same shape so the page can show both side by side."""
+    start = config["starting_balance"]
+    if state is None:
+        return {"key": key, "name": STRATEGIES[key][0], "exists": False, "market": "spot"}
+    positions, held_value = [], 0.0
+    for coin, pos in state["positions"].items():
+        mark = prices.get(coin)
+        value = pos["qty"] * (mark or pos["entry"])
+        held_value += value
+        pnl = value * (1 - config["fee"]) - pos["cost"]  # what selling now would make, after the fee
+        lot = pos.get("alpaca") or {}
+        positions.append({
+            "coin": coin, "side": "long", "size": pos["qty"], "entry": pos["entry"], "mark": mark, "value": value,
+            "margin": pos["cost"], "leverage": 1, "pnl": pnl, "pnl_pct": pnl / pos["cost"] * 100,
+            "stop": pos.get("stop"),
+            "to_stop_pct": (mark - pos["stop"]) / mark * 100 if mark and pos.get("stop") else None,
+            "liquidation": None, "to_liq_pct": None, "funding": 0.0,
+            "opened": datetime.fromtimestamp(pos["opened"] / 1000, tz=timezone.utc).strftime("%Y-%m-%d %H:%M UTC"),
+            "alpaca": {"status": lot.get("status"), "qty": lot.get("qty"), "entry": lot.get("entry"),
+                       "stop": lot.get("stop"), "diverged": lot.get("diverged", False), "error": lot.get("error")} if lot else None,
+        })
+    equity = state["balance"] + held_value
+    history = state.get("history", [])
+    sells = [h for h in history if h["action"] == "sell"]
+    curve = [{"date": h["date"], "equity": h["equity"]} for h in state.get("equity_history", [])]
+    curve.append({"date": "now", "equity": round(equity, 2)})
+    peak = max([start] + [p["equity"] for p in curve])
+    return {
+        "key": key, "name": STRATEGIES[key][0], "exists": True, "market": "spot",
+        "created": state.get("created"), "balance": state["balance"], "equity": equity,
+        "return_pct": (equity / start - 1) * 100, "drawdown_pct": (1 - equity / peak) * 100,
+        "positions": positions, "closed_trades": len(sells),
+        "wins": sum(1 for h in sells if h["pnl"] > 0), "realized": sum(h["pnl"] for h in sells),
+        "fees": sum(h["fee"] for h in history), "funding": 0.0,
+        "stops": sum(1 for h in sells if h.get("reason") == "stop-loss"), "liquidations": 0,
+        "history": history[-60:], "curve": curve,
+    }
+
+
+def alpaca_summary(spot_accounts):
+    """The Alpaca paper account and how many simulated spot lots are copied there."""
+    lots = [(a["name"], p) for a in spot_accounts if a["exists"] for p in a["positions"] if p.get("alpaca")]
+    summary = {
+        "copied_open": sum(1 for _, p in lots if p["alpaca"]["status"] == "open"),
+        "diverged": sum(1 for _, p in lots if p["alpaca"]["diverged"] or p["alpaca"]["status"] == "stopped on Alpaca"),
+        "errors": sum(1 for _, p in lots if p["alpaca"]["status"] == "error"),
+    }
+    try:
+        from trading_bot import make_client
+        client = make_client()
+        account = client.get_account()
+        summary.update(equity=float(account.equity), cash=float(account.cash), number=account.account_number[-4:],
+                       positions=[{"symbol": p.symbol, "qty": float(p.qty), "pnl": float(p.unrealized_pl)}
+                                  for p in client.get_all_positions()])
+    except Exception as error:
+        summary["error"] = f"{type(error).__name__}: {error}"
+    return summary
+
+
 def last_runs():
     runs, newest = {}, (None, None)
-    for where, path in LOGS.items():
-        if not path.exists():
-            continue
-        lines = path.read_text(encoding="utf-8", errors="replace").splitlines()
-        starts = [i for i, line in enumerate(lines) if RUN_START.match(line)]
-        if starts:
-            stamp = RUN_START.match(lines[starts[-1]]).group(1)
-            runs[where] = stamp + " PKT"
-            if newest[0] is None or stamp > newest[0]:
-                newest = (stamp, lines[starts[-1]:][-60:])
+    for logs in (LOGS, SPOT_LOGS):
+        for where, path in logs.items():
+            if not path.exists():
+                continue
+            lines = path.read_text(encoding="utf-8", errors="replace").splitlines()
+            starts = [i for i, line in enumerate(lines) if RUN_START.match(line)]
+            if starts:
+                match = RUN_START.match(lines[starts[-1]])
+                stamp, kind = match.group(1), match.group(2)
+                runs[f"{kind}, {where}"] = stamp + " PKT"
+                if newest[0] is None or stamp > newest[0]:
+                    newest = (stamp, lines[starts[-1]:][-60:])
     return runs, newest[1] or []
 
 
@@ -129,10 +193,18 @@ def status():
     marks = cached("marks", 20, lambda: {c: m["mark"] for c, m in get_markets().items()})
     accounts = [account_view(key, read_json(BASE_DIR / f"state/futures_{key}.json"), marks, config)
                 for key in config["strategies"]]
+    spot_config = read_config("spot_config.toml")
+    spot_states = {key: read_json(BASE_DIR / f"state/spot_{key}.json") for key in spot_config["strategies"]}
+    held = sorted({c for s in spot_states.values() if s for c in s["positions"]})
+    prices = cached("spot:" + ",".join(held), 20, lambda: get_prices(held)) if held else {}
+    spot_accounts = [spot_view(key, state, prices, spot_config) for key, state in spot_states.items()]
     runs, log_tail = last_runs()
     until = config.get("evaluation_until")
     return {
         "generated": datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC"),
+        "spot_accounts": spot_accounts,
+        "spot_settings": {k: spot_config[k] for k in ("trade_usd", "stop_pct", "starting_balance", "fee", "alpaca_mirror")},
+        "alpaca": cached("alpaca", 60, lambda: alpaca_summary(spot_accounts)),
         "settings": {k: config[k] for k in ("leverage", "stop_pct", "margin_usd", "starting_balance",
                                             "taker_fee", "universe_size", "universe_exclude")},
         "evaluation_until": str(until) if until else None,
@@ -229,7 +301,7 @@ class Handler(BaseHTTPRequestHandler):
 
 def main():
     parser = argparse.ArgumentParser(description="Local dashboard for the simulated futures accounts.")
-    parser.add_argument("--port", type=int, default=8765)
+    parser.add_argument("--port", type=int, default=int(os.getenv("PORT", 8765)))
     parser.add_argument("--no-browser", action="store_true", help="don't open the browser automatically")
     args = parser.parse_args()
     server = ThreadingHTTPServer(("127.0.0.1", args.port), Handler)
