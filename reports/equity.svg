@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 260" width="720" height="260" role="img" aria-label="Account value over time for each strategy">
+<style>text{font:11px system-ui,-apple-system,'Segoe UI',sans-serif;fill:#898781}.bg{fill:#fcfcfb}.grid{stroke:#e1e0d9}.base{stroke:#c3c2b7}.lbl{fill:#52514e;font-size:12px}.ma_crossover{stroke:#2a78d6;fill:#2a78d6}.breakout{stroke:#eb6834;fill:#eb6834}.momentum{stroke:#1baf7a;fill:#1baf7a}@media (prefers-color-scheme: dark){.bg{fill:#1a1a19}.grid{stroke:#2c2c2a}.base{stroke:#383835}.lbl{fill:#c3c2b7}.ma_crossover{stroke:#3987e5;fill:#3987e5}.breakout{stroke:#d95926;fill:#d95926}.momentum{stroke:#199e70;fill:#199e70}}</style>
+<rect class="bg" width="720" height="260" rx="10"/>
+<line class="grid" x1="64" x2="610" y1="230.0" y2="230.0"/>
+<text x="56" y="234.0" text-anchor="end">$9,946</text>
+<line class="grid" x1="64" x2="610" y1="176.5" y2="176.5"/>
+<text x="56" y="180.5" text-anchor="end">$9,972</text>
+<line class="grid" x1="64" x2="610" y1="123.0" y2="123.0"/>
+<text x="56" y="127.0" text-anchor="end">$9,998</text>
+<line class="grid" x1="64" x2="610" y1="69.5" y2="69.5"/>
+<text x="56" y="73.5" text-anchor="end">$10,024</text>
+<line class="grid" x1="64" x2="610" y1="16.0" y2="16.0"/>
+<text x="56" y="20.0" text-anchor="end">$10,050</text>
+<line class="base" x1="64" x2="610" y1="118.5" y2="118.5" stroke-dasharray="4 4"/>
+<text x="68" y="113.5">start</text>
+<text x="64.0" y="250" text-anchor="middle">2026-10-30</text>
+<text x="610.0" y="250" text-anchor="middle">now</text>
+<path class="ma_crossover" d="M64.0,119.4L610.0,127.5" fill="none" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<circle class="ma_crossover" cx="64.0" cy="119.4" r="4" stroke="none"/>
+<circle class="ma_crossover" cx="610.0" cy="127.5" r="4" stroke="none"/>
+<path class="breakout" d="M64.0,118.5L610.0,118.5" fill="none" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<circle class="breakout" cx="64.0" cy="118.5" r="4" stroke="none"/>
+<circle class="breakout" cx="610.0" cy="118.5" r="4" stroke="none"/>
+<path class="momentum" d="M64.0,118.5L610.0,118.5" fill="none" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<circle class="momentum" cx="64.0" cy="118.5" r="4" stroke="none"/>
+<circle class="momentum" cx="610.0" cy="118.5" r="4" stroke="none"/>
+<text class="lbl" x="620" y="122.5">Breakout</text>
+<text class="lbl" x="620" y="136.5">Momentum</text>
+<text class="lbl" x="620" y="150.5">MA</text>
+</svg>

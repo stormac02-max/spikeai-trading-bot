@@ -53,7 +53,8 @@ its 50-day from 2026-09-15 through 2026-10-30.
     the file. GitHub ran it every weekday 2026-10-14 to 10-30, starting 1:27–3:21 PM ET. Log is
     `logs/trading_bot.log`.
   - `futures-bot.yml` (**active**): every day at 00:20 UTC (5:20 AM PKT). Commits `state/` (the simulated
-    accounts) and `logs/futures_bot.log` (PKT times). Manual run: Actions → "Futures strategies (simulated)".
+    accounts), `logs/futures_bot.log` (PKT times) and the phone summary (`README.md`, `reports/equity.svg`, via
+    `summary.py`, which also needs the Alpaca secrets). Manual run: Actions → "Futures strategies (simulated)".
   - All workflows share the concurrency group `trading-bot`, so their commits never collide.
 - **Windows Task Scheduler**: task `SpikeAI MA Crossover Bot` (stocks) is **disabled** (2026-10-31), not deleted.
   There is no PC task for crypto.
@@ -107,6 +108,7 @@ use the Alpaca tools. The bots don't use the MCP server, so they're unaffected.
 | `futures_bot.py` | Runs the futures strategies side by side daily. `--dry-run` saves nothing. |
 | `backtest_futures.py` | Backtester. Its strategy functions (`ma_crossover`, `breakout`, `momentum`, `build_indicators`) are shared with `futures_bot.py`. |
 | `state/` | Simulated futures accounts and the weekly universe (JSON), committed by the workflow. Local real runs change them too; `git pull` first. |
+| `summary.py` → `README.md` + `reports/equity.svg` | Phone summary: the repo's front page, rewritten after every futures run (scoreboard, chart, positions, trades, signal board, coins, Alpaca account). Don't hand-edit README.md. |
 | `dashboard.py` + `dashboard/index.html` | Local dashboard for the futures test: `python dashboard.py` opens http://127.0.0.1:8765. Read-only apart from its "Pull latest from GitHub" button. |
 | `futures_config.toml` | `symbols` (Hyperliquid names, e.g. `kPEPE`), `leverage` (5), `margin_usd` (500), `starting_balance` (10000), `taker_fee`. |
 | `trading_bot.py` | Stock bot (stopped). `--dry-run` reports without ordering; `--wait-for-open` skips holidays and waits for 9:30 ET; `--config` picks a config file. |
@@ -322,3 +324,14 @@ use the Alpaca tools. The bots don't use the MCP server, so they're unaffected.
   Prices refresh every minute. Light and dark modes; the series colors passed the dataviz palette validator.
 - Verified in the built-in browser: renders in both themes, no console errors, the signal board loads in about
   20 seconds, and pull works. `.claude/launch.json`, used to preview it, is git-ignored.
+
+### 2026-11-01: Daily phone summary page
+- User wanted to check from a phone. `summary.py` writes the repo's front page, `README.md`, which GitHub shows
+  first in the app and the browser, plus a chart image `reports/equity.svg` (light and dark aware). It reuses
+  `dashboard.status()` and `signal_board()`. Contents: update time (PKT/ET), the evaluation countdown, a
+  scoreboard with the leader, the chart with a table view, open positions with ✅/⚠️/🔴 stop and liquidation
+  distances, the last 15 trades in PKT, the signal board (🔔 = trade condition met), this week's coins, the
+  Alpaca spot account (value, cash, MU) plus crypto/stock bot status, and the last run's status.
+- `futures-bot.yml` now runs it after the bot (skipped on dry runs) and commits it with the accounts.
+- First version generated locally and pushed. Its signal board already showed TRX closing below its 20-day low,
+  so the breakout account should open a TRX short on GitHub's next run.
