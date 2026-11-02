@@ -2,13 +2,18 @@
   "created": "2026-11-01 00:43 UTC",
   "starting_balance": 10000,
   "balance": 10000,
-  "last_sync": 1793512800000,
+  "last_sync": 1793599200000,
   "positions": {},
   "history": [],
   "equity_history": [
     {
       "date": "2026-10-31",
       "equity": 10000
+    },
+    {
+      "date": "2026-11-01",
+      "equity": 10000
     }
-  ]
+  ],
+  "last_rebalance": "2026-11-01"
 }

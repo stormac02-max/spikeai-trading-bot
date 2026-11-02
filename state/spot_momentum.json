@@ -1,14 +1,143 @@
 {
   "created": "2026-11-01 00:43 UTC",
   "starting_balance": 10000,
-  "balance": 10000,
-  "last_sync": 1793512800000,
-  "positions": {},
-  "history": [],
+  "balance": 7500,
+  "last_sync": 1793599200000,
+  "positions": {
+    "VVV": {
+      "qty": 21.93903807626336,
+      "gross": 21.994023134098605,
+      "entry": 22.733448853421507,
+      "cost": 500,
+      "stop": 20.91477294514779,
+      "opened": 1793599966293,
+      "alpaca": null,
+      "signal_id": "momentum-VVV-long-2026-11-01"
+    },
+    "LIT": {
+      "qty": 5053.63422576923,
+      "gross": 5066.299975708502,
+      "entry": 0.09869135313687717,
+      "cost": 500,
+      "stop": 0.090796044885927,
+      "opened": 1793599966571,
+      "alpaca": null,
+      "signal_id": "momentum-LIT-long-2026-11-01"
+    },
+    "ZEC": {
+      "qty": 0.3926763402171431,
+      "gross": 0.3936604914457575,
+      "entry": 1270.13,
+      "cost": 500,
+      "stop": 1168.5196,
+      "opened": 1793599966833,
+      "alpaca": null,
+      "signal_id": "momentum-ZEC-long-2026-11-01"
+    },
+    "HYPE": {
+      "qty": 5.705868893719255,
+      "gross": 5.720169317011784,
+      "entry": 87.41,
+      "cost": 500,
+      "stop": 80.4172,
+      "opened": 1793599967059,
+      "alpaca": {
+        "symbol": "HYPE/USD",
+        "status": "error",
+        "error": "Alpaca buy 3afd80c8-7e0f-469a-b2a3-6e14827c5be2 ended as new"
+      },
+      "signal_id": "momentum-HYPE-long-2026-11-01"
+    },
+    "PEPE": {
+      "qty": 102971779.71332005,
+      "gross": 103229854.34919302,
+      "entry": 4.843560064597811e-06,
+      "cost": 500,
+      "stop": 4.456075259429987e-06,
+      "opened": 1793599998514,
+      "alpaca": {
+        "symbol": "PEPE/USD",
+        "qty": 102971779.71332003,
+        "entry": 4.852e-06,
+        "buy_order": "72255fd5-ca6b-4c54-afce-d058003ecc95",
+        "stop_order": "1ff15e2d-228b-4ee2-9919-adc29b8c3ff6",
+        "stop": 4.463e-06,
+        "status": "open"
+      },
+      "signal_id": "momentum-PEPE-long-2026-11-01"
+    }
+  },
+  "history": [
+    {
+      "time": "2026-11-02 06:12 UTC",
+      "coin": "VVV",
+      "action": "buy",
+      "side": "long",
+      "qty": 21.93903807626336,
+      "price": 22.733448853421507,
+      "fee": 1.25,
+      "pnl": 0.0,
+      "balance": 9500,
+      "signal_id": "momentum-VVV-long-2026-11-01"
+    },
+    {
+      "time": "2026-11-02 06:12 UTC",
+      "coin": "LIT",
+      "action": "buy",
+      "side": "long",
+      "qty": 5053.63422576923,
+      "price": 0.09869135313687717,
+      "fee": 1.25,
+      "pnl": 0.0,
+      "balance": 9000,
+      "signal_id": "momentum-LIT-long-2026-11-01"
+    },
+    {
+      "time": "2026-11-02 06:12 UTC",
+      "coin": "ZEC",
+      "action": "buy",
+      "side": "long",
+      "qty": 0.3926763402171431,
+      "price": 1270.13,
+      "fee": 1.25,
+      "pnl": 0.0,
+      "balance": 8500,
+      "signal_id": "momentum-ZEC-long-2026-11-01"
+    },
+    {
+      "time": "2026-11-02 06:12 UTC",
+      "coin": "HYPE",
+      "action": "buy",
+      "side": "long",
+      "qty": 5.705868893719255,
+      "price": 87.41,
+      "fee": 1.25,
+      "pnl": 0.0,
+      "balance": 8000,
+      "signal_id": "momentum-HYPE-long-2026-11-01"
+    },
+    {
+      "time": "2026-11-02 06:13 UTC",
+      "coin": "PEPE",
+      "action": "buy",
+      "side": "long",
+      "qty": 102971779.71332005,
+      "price": 4.843560064597811e-06,
+      "fee": 1.25,
+      "pnl": 0.0,
+      "balance": 7500,
+      "signal_id": "momentum-PEPE-long-2026-11-01"
+    }
+  ],
   "equity_history": [
     {
       "date": "2026-10-31",
       "equity": 10000
+    },
+    {
+      "date": "2026-11-01",
+      "equity": 9992.51
     }
-  ]
+  ],
+  "last_rebalance": "2026-11-01"
 }

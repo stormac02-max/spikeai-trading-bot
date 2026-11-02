@@ -6,3 +6,22 @@
 2026-11-01 11:11:42,956 INFO [Momentum 14d, 5 long/5 short] 0 signal(s) | equity 10,000.00 (+0.0%, 0.0% below peak) | cash 10,000.00 | open: none
 2026-11-01 11:11:42,957 INFO Scoreboard: MA crossover 20/50 9,988 | Breakout 20/10 10,000 | Momentum 14d, 5 long/5 short 10,000
 2026-11-01 11:11:42,957 INFO Evaluation runs until 2026-12-27; then the best strategy is kept.
+2026-11-02 11:11:41,929 INFO ---- Futures run started ----
+2026-11-02 11:12:23,333 INFO Universe refreshed (weekly, 20 coins): HYPE, ZEC, SOL, NEAR, kPEPE, ENA, XRP, BNB, PUMP, XMR, LIT, UNI, WLD, XPL, ZRO, SUI, TRX, AAVE, LINK, VVV
+2026-11-02 11:12:32,864 INFO Signals use the day ending 2026-11-02 00:00 UTC; 20 coins in the universe
+2026-11-02 11:12:33,323 INFO WLD: opened short 2593.83 @ 0.38553, 2x, margin 500.00, fee 0.45, stop 0.416372, liquidation 0.550757
+2026-11-02 11:12:33,323 INFO [MA crossover 20/50] 1 signal(s) | equity 10,001.28 (+0.0%, -0.0% below peak) | cash 8,999.10 | open: SUI short, WLD short
+2026-11-02 11:12:33,672 INFO [Breakout 20/10] 0 signal(s) | equity 9,989.21 (-0.1%, 0.1% below peak) | cash 9,499.55 | open: TRX short
+2026-11-02 11:12:33,821 INFO VVV: opened long 43.9043 @ 22.7768, 2x, margin 500.00, fee 0.45, stop 20.9547, liquidation 13.6661
+2026-11-02 11:12:33,975 INFO LIT: opened long 314.574 @ 3.1789, 2x, margin 500.00, fee 0.45, stop 2.92459, liquidation 1.76606
+2026-11-02 11:12:34,122 INFO ZEC: opened long 0.786102 @ 1272.1, 2x, margin 500.00, fee 0.45, stop 1170.33, liquidation 669.526
+2026-11-02 11:12:34,267 INFO HYPE: opened long 11.4317 @ 87.476, 2x, margin 500.00, fee 0.45, stop 80.4779, liquidation 46.04
+2026-11-02 11:12:34,470 INFO kPEPE: opened long 206398 @ 0.004845, 2x, margin 500.00, fee 0.45, stop 0.0044574, liquidation 0.00255
+2026-11-02 11:12:34,616 INFO WLD: opened short 2593.83 @ 0.38553, 2x, margin 500.00, fee 0.45, stop 0.416372, liquidation 0.550757
+2026-11-02 11:12:34,766 INFO NEAR: opened short 237.982 @ 4.20199, 2x, margin 500.00, fee 0.45, stop 4.53815, liquidation 6.00285
+2026-11-02 11:12:34,906 INFO AAVE: opened short 7.49457 @ 133.43, 2x, margin 500.00, fee 0.45, stop 144.104, liquidation 190.614
+2026-11-02 11:12:35,045 INFO SUI: opened short 1119.04 @ 0.89362, 2x, margin 500.00, fee 0.45, stop 0.96511, liquidation 1.2766
+2026-11-02 11:12:35,187 INFO SOL: opened short 10.5645 @ 94.657, 2x, margin 500.00, fee 0.45, stop 102.23, liquidation 138.522
+2026-11-02 11:12:35,188 INFO [Momentum 14d, 5 long/5 short] 10 signal(s) | equity 9,994.61 (-0.1%, 0.1% below peak) | cash 4,995.50 | open: VVV long, LIT long, ZEC long, HYPE long, kPEPE long, WLD short, NEAR short, AAVE short, SUI short, SOL short
+2026-11-02 11:12:35,188 INFO Scoreboard: MA crossover 20/50 10,001 | Breakout 20/10 9,989 | Momentum 14d, 5 long/5 short 9,995
+2026-11-02 11:12:35,188 INFO Evaluation runs until 2026-12-27; then the best strategy is kept.
