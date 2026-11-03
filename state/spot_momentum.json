@@ -1,8 +1,8 @@
 {
   "created": "2026-11-01 00:43 UTC",
   "starting_balance": 10000,
-  "balance": 7500,
-  "last_sync": 1793599200000,
+  "balance": 7957.702875,
+  "last_sync": 1793685600000,
   "positions": {
     "VVV": {
       "qty": 21.93903807626336,
@@ -23,16 +23,6 @@
       "opened": 1793599966571,
       "alpaca": null,
       "signal_id": "momentum-LIT-long-2026-11-01"
-    },
-    "ZEC": {
-      "qty": 0.3926763402171431,
-      "gross": 0.3936604914457575,
-      "entry": 1270.13,
-      "cost": 500,
-      "stop": 1168.5196,
-      "opened": 1793599966833,
-      "alpaca": null,
-      "signal_id": "momentum-ZEC-long-2026-11-01"
     },
     "HYPE": {
       "qty": 5.705868893719255,
@@ -127,6 +117,18 @@
       "pnl": 0.0,
       "balance": 7500,
       "signal_id": "momentum-PEPE-long-2026-11-01"
+    },
+    {
+      "time": "2026-11-02 17:00 UTC",
+      "coin": "ZEC",
+      "action": "sell",
+      "side": "long",
+      "qty": 0.3926763402171431,
+      "price": 1168.5196,
+      "fee": 1.147125,
+      "pnl": -42.297125,
+      "balance": 7957.702875,
+      "reason": "stop-loss"
     }
   ],
   "equity_history": [
@@ -137,6 +139,10 @@
     {
       "date": "2026-11-01",
       "equity": 9992.51
+    },
+    {
+      "date": "2026-11-02",
+      "equity": 9853.76
     }
   ],
   "last_rebalance": "2026-11-01"

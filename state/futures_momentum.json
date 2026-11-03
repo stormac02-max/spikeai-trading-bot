@@ -1,19 +1,19 @@
 {
   "created": "2026-10-31 20:46 UTC",
   "starting_balance": 10000,
-  "balance": 4995.499999999999,
-  "last_sync": 1793599200000,
+  "balance": 5414.962801155569,
+  "last_sync": 1793685600000,
   "positions": {
     "VVV": {
       "side": "long",
       "size": 43.90426320179097,
       "entry": 22.77683138432004,
       "leverage": 2,
-      "margin": 500,
+      "margin": 499.72572897017176,
       "mm_rate": 0.16666666666666666,
       "stop": 20.954684873574436,
       "opened": 1793599953821,
-      "funding": 0.0,
+      "funding": -0.27427102982816826,
       "signal_id": "momentum-VVV-long-2026-11-01"
     },
     "LIT": {
@@ -21,35 +21,23 @@
       "size": 314.5739529618916,
       "entry": 3.1789027368109615,
       "leverage": 2,
-      "margin": 500,
+      "margin": 499.8399793114179,
       "mm_rate": 0.1,
       "stop": 2.9245905178660845,
       "opened": 1793599953975,
-      "funding": 0.0,
+      "funding": -0.16002068858209614,
       "signal_id": "momentum-LIT-long-2026-11-01"
-    },
-    "ZEC": {
-      "side": "long",
-      "size": 0.7861017215627703,
-      "entry": 1272.1,
-      "leverage": 2,
-      "margin": 500,
-      "mm_rate": 0.05,
-      "stop": 1170.3319999999999,
-      "opened": 1793599954121,
-      "funding": 0.0,
-      "signal_id": "momentum-ZEC-long-2026-11-01"
     },
     "HYPE": {
       "side": "long",
       "size": 11.431706982486626,
       "entry": 87.476,
       "leverage": 2,
-      "margin": 500,
+      "margin": 499.71172962174336,
       "mm_rate": 0.05,
       "stop": 80.47792,
       "opened": 1793599954267,
-      "funding": 0.0,
+      "funding": -0.2882703782568934,
       "signal_id": "momentum-HYPE-long-2026-11-01"
     },
     "kPEPE": {
@@ -57,11 +45,11 @@
       "size": 206398.34881320948,
       "entry": 0.004845,
       "leverage": 2,
-      "margin": 500,
+      "margin": 499.8789379927554,
       "mm_rate": 0.05,
       "stop": 0.0044574,
       "opened": 1793599954470,
-      "funding": 0.0,
+      "funding": -0.12106200724458205,
       "signal_id": "momentum-kPEPE-long-2026-11-01"
     },
     "WLD": {
@@ -69,11 +57,11 @@
       "size": 2593.831867818328,
       "entry": 0.38553,
       "leverage": 2,
-      "margin": 500,
+      "margin": 500.2473066063732,
       "mm_rate": 0.05,
       "stop": 0.41637240000000003,
       "opened": 1793599954616,
-      "funding": 0.0,
+      "funding": 0.24730660637304494,
       "signal_id": "momentum-WLD-short-2026-11-01"
     },
     "NEAR": {
@@ -81,11 +69,11 @@
       "size": 237.98236750041647,
       "entry": 4.201991981604477,
       "leverage": 2,
-      "margin": 500,
+      "margin": 500.0487497404437,
       "mm_rate": 0.05,
       "stop": 4.538151340132836,
       "opened": 1793599954766,
-      "funding": 0.0,
+      "funding": 0.04874974044376501,
       "signal_id": "momentum-NEAR-short-2026-11-01"
     },
     "AAVE": {
@@ -93,11 +81,11 @@
       "size": 7.494566439331484,
       "entry": 133.43,
       "leverage": 2,
-      "margin": 500,
+      "margin": 499.93328498621736,
       "mm_rate": 0.05,
       "stop": 144.10440000000003,
       "opened": 1793599954905,
-      "funding": 0.0,
+      "funding": -0.06671501378250766,
       "signal_id": "momentum-AAVE-short-2026-11-01"
     },
     "SUI": {
@@ -105,11 +93,11 @@
       "size": 1119.0438889013228,
       "entry": 0.89362,
       "leverage": 2,
-      "margin": 500,
+      "margin": 500.27401546327513,
       "mm_rate": 0.05,
       "stop": 0.9651096,
       "opened": 1793599955044,
-      "funding": 0.0,
+      "funding": 0.27401546327521764,
       "signal_id": "momentum-SUI-short-2026-11-01"
     },
     "SOL": {
@@ -117,11 +105,11 @@
       "size": 10.564459046874505,
       "entry": 94.657,
       "leverage": 2,
-      "margin": 500,
+      "margin": 500.25502678497526,
       "mm_rate": 0.025,
       "stop": 102.22956,
       "opened": 1793599955187,
-      "funding": 0.0,
+      "funding": 0.2550267849752264,
       "signal_id": "momentum-SOL-short-2026-11-01"
     }
   },
@@ -265,6 +253,20 @@
       "funding": 0.0,
       "balance": 4995.5,
       "signal_id": "momentum-SOL-short-2026-11-01"
+    },
+    {
+      "time": "2026-11-02 17:00 UTC",
+      "coin": "ZEC",
+      "action": "close",
+      "side": "long",
+      "size": 0.7861017215627703,
+      "price": 1170.3319999999999,
+      "leverage": 2,
+      "fee": 0.414,
+      "pnl": -80.0,
+      "funding": -0.123199,
+      "balance": 5414.962801,
+      "reason": "stop-loss"
     }
   ],
   "equity_history": [
@@ -279,6 +281,10 @@
     {
       "date": "2026-11-01",
       "equity": 9994.61
+    },
+    {
+      "date": "2026-11-02",
+      "equity": 10026.63
     }
   ]
 }
