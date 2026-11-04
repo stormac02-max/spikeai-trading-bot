@@ -2,18 +2,18 @@
   "created": "2026-10-31 20:46 UTC",
   "starting_balance": 10000,
   "balance": 7998.199999999998,
-  "last_sync": 1793685600000,
+  "last_sync": 1793772000000,
   "positions": {
     "TRX": {
       "side": "short",
       "size": 3216.666580885901,
       "entry": 0.3108808373059885,
       "leverage": 2,
-      "margin": 500.2814561430812,
+      "margin": 500.5546752902697,
       "mm_rate": 0.05,
       "stop": 0.33575130429046757,
       "opened": 1793513502955,
-      "funding": 0.28145614308120787,
+      "funding": 0.5546752902697433,
       "signal_id": "breakout-TRX-short-2026-10-31"
     },
     "SOL": {
@@ -21,11 +21,11 @@
       "size": 10.959624742448819,
       "entry": 91.244,
       "leverage": 2,
-      "margin": 500,
+      "margin": 500.22328805403305,
       "mm_rate": 0.025,
       "stop": 98.54352,
       "opened": 1793688734937,
-      "funding": 0.0,
+      "funding": 0.2232880540331419,
       "signal_id": "breakout-SOL-short-2026-11-02"
     },
     "NEAR": {
@@ -33,11 +33,11 @@
       "size": 266.11316335764093,
       "entry": 3.7577998299019013,
       "leverage": 2,
-      "margin": 500,
+      "margin": 500.3101210091412,
       "mm_rate": 0.05,
       "stop": 4.058423816294054,
       "opened": 1793688735129,
-      "funding": 0.0,
+      "funding": 0.31012100914125135,
       "signal_id": "breakout-NEAR-short-2026-11-02"
     },
     "XPL": {
@@ -45,11 +45,11 @@
       "size": 15920.567463855807,
       "entry": 0.06281183144195601,
       "leverage": 2,
-      "margin": 500,
+      "margin": 500.2903959267109,
       "mm_rate": 0.05,
       "stop": 0.0678367779573125,
       "opened": 1793688735311,
-      "funding": 0.0,
+      "funding": 0.2903959267109691,
       "signal_id": "breakout-XPL-short-2026-11-02"
     }
   },
@@ -127,6 +127,10 @@
     {
       "date": "2026-11-02",
       "equity": 9967.06
+    },
+    {
+      "date": "2026-11-03",
+      "equity": 9881.85
     }
   ]
 }

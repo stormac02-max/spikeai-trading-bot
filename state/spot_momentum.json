@@ -1,29 +1,9 @@
 {
   "created": "2026-11-01 00:43 UTC",
   "starting_balance": 10000,
-  "balance": 7957.702875,
-  "last_sync": 1793685600000,
+  "balance": 8873.108625,
+  "last_sync": 1793772000000,
   "positions": {
-    "VVV": {
-      "qty": 21.93903807626336,
-      "gross": 21.994023134098605,
-      "entry": 22.733448853421507,
-      "cost": 500,
-      "stop": 20.91477294514779,
-      "opened": 1793599966293,
-      "alpaca": null,
-      "signal_id": "momentum-VVV-long-2026-11-01"
-    },
-    "LIT": {
-      "qty": 5053.63422576923,
-      "gross": 5066.299975708502,
-      "entry": 0.09869135313687717,
-      "cost": 500,
-      "stop": 0.090796044885927,
-      "opened": 1793599966571,
-      "alpaca": null,
-      "signal_id": "momentum-LIT-long-2026-11-01"
-    },
     "HYPE": {
       "qty": 5.705868893719255,
       "gross": 5.720169317011784,
@@ -129,6 +109,30 @@
       "pnl": -42.297125,
       "balance": 7957.702875,
       "reason": "stop-loss"
+    },
+    {
+      "time": "2026-11-03 08:00 UTC",
+      "coin": "VVV",
+      "action": "sell",
+      "side": "long",
+      "qty": 21.93903807626336,
+      "price": 20.91477294514779,
+      "fee": 1.147125,
+      "pnl": -42.297125,
+      "balance": 8415.40575,
+      "reason": "stop-loss"
+    },
+    {
+      "time": "2026-11-03 12:00 UTC",
+      "coin": "LIT",
+      "action": "sell",
+      "side": "long",
+      "qty": 5053.63422576923,
+      "price": 0.090796044885927,
+      "fee": 1.147125,
+      "pnl": -42.297125,
+      "balance": 8873.108625,
+      "reason": "stop-loss"
     }
   ],
   "equity_history": [
@@ -143,6 +147,10 @@
     {
       "date": "2026-11-02",
       "equity": 9853.76
+    },
+    {
+      "date": "2026-11-03",
+      "equity": 9867.56
     }
   ],
   "last_rebalance": "2026-11-01"

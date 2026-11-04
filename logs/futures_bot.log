@@ -36,3 +36,11 @@
 2026-11-03 11:52:19,588 INFO [Momentum 14d, 5 long/5 short] 0 signal(s) | equity 10,026.63 (+0.3%, -0.0% below peak) | cash 5,414.96 | open: VVV long, LIT long, HYPE long, kPEPE long, WLD short, NEAR short, AAVE short, SUI short, SOL short
 2026-11-03 11:52:19,589 INFO Scoreboard: MA crossover 20/50 10,097 | Breakout 20/10 9,967 | Momentum 14d, 5 long/5 short 10,027
 2026-11-03 11:52:19,589 INFO Evaluation runs until 2026-12-27; then the best strategy is kept.
+2026-11-04 11:29:09,216 INFO ---- Futures run started ----
+2026-11-04 11:29:21,173 INFO Signals use the day ending 2026-11-04 00:00 UTC; 20 coins in the universe
+2026-11-04 11:29:22,225 INFO [MA crossover 20/50] 0 signal(s) | equity 10,000.52 (+0.0%, 1.0% below peak) | cash 8,999.10 | open: SUI short, WLD short
+2026-11-04 11:29:24,369 INFO [Breakout 20/10] 0 signal(s) | equity 9,881.85 (-1.2%, 1.2% below peak) | cash 7,998.20 | open: TRX short, SOL short, NEAR short, XPL short
+2026-11-04 11:29:24,949 INFO VVV: closed long @ 20.9547 (stop-loss), profit -80.41 after 0.41 fee, funding -0.30
+2026-11-04 11:29:29,381 INFO [Momentum 14d, 5 long/5 short] 0 signal(s) | equity 9,970.65 (-0.3%, 0.6% below peak) | cash 5,834.25 | open: LIT long, HYPE long, kPEPE long, WLD short, NEAR short, AAVE short, SUI short, SOL short
+2026-11-04 11:29:29,382 INFO Scoreboard: MA crossover 20/50 10,001 | Breakout 20/10 9,882 | Momentum 14d, 5 long/5 short 9,971
+2026-11-04 11:29:29,382 INFO Evaluation runs until 2026-12-27; then the best strategy is kept.
