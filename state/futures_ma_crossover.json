@@ -1,19 +1,19 @@
 {
   "created": "2026-10-31 20:46 UTC",
   "starting_balance": 10000,
-  "balance": 8999.099999999999,
-  "last_sync": 1793772000000,
+  "balance": 8498.649999999998,
+  "last_sync": 1793858400000,
   "positions": {
     "SUI": {
       "side": "short",
       "size": 1115.0633913537986,
       "entry": 0.89681,
       "leverage": 2,
-      "margin": 500.9959708001606,
+      "margin": 501.30470843689517,
       "mm_rate": 0.05,
       "stop": 0.9685548,
       "opened": 1793479572393,
-      "funding": 0.9959708001605693,
+      "funding": 1.3047084368952178,
       "signal_id": "ma_crossover-SUI-short-2026-10-30"
     },
     "WLD": {
@@ -21,12 +21,24 @@
       "size": 2593.831867818328,
       "entry": 0.38553,
       "leverage": 2,
-      "margin": 500.4297998143466,
+      "margin": 500.19603162493723,
       "mm_rate": 0.05,
       "stop": 0.41637240000000003,
       "opened": 1793599953323,
-      "funding": 0.4297998143464842,
+      "funding": 0.19603162493709975,
       "signal_id": "ma_crossover-WLD-short-2026-11-01"
+    },
+    "NEAR": {
+      "side": "short",
+      "size": 247.1637954472429,
+      "entry": 4.0459,
+      "leverage": 2,
+      "margin": 500,
+      "mm_rate": 0.05,
+      "stop": 4.369572,
+      "opened": 1793861549134,
+      "funding": 0.0,
+      "signal_id": "ma_crossover-NEAR-short-2026-11-04"
     }
   },
   "history": [
@@ -57,6 +69,20 @@
       "funding": 0.0,
       "balance": 8999.1,
       "signal_id": "ma_crossover-WLD-short-2026-11-01"
+    },
+    {
+      "time": "2026-11-05 06:52 UTC",
+      "coin": "NEAR",
+      "action": "open",
+      "side": "short",
+      "size": 247.1637954472429,
+      "price": 4.0459,
+      "leverage": 2,
+      "fee": 0.45,
+      "pnl": 0.0,
+      "funding": 0.0,
+      "balance": 8498.65,
+      "signal_id": "ma_crossover-NEAR-short-2026-11-04"
     }
   ],
   "equity_history": [
@@ -79,6 +105,10 @@
     {
       "date": "2026-11-03",
       "equity": 10000.52
+    },
+    {
+      "date": "2026-11-04",
+      "equity": 9986.04
     }
   ]
 }

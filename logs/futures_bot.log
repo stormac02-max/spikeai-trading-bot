@@ -44,3 +44,12 @@
 2026-11-04 11:29:29,381 INFO [Momentum 14d, 5 long/5 short] 0 signal(s) | equity 9,970.65 (-0.3%, 0.6% below peak) | cash 5,834.25 | open: LIT long, HYPE long, kPEPE long, WLD short, NEAR short, AAVE short, SUI short, SOL short
 2026-11-04 11:29:29,382 INFO Scoreboard: MA crossover 20/50 10,001 | Breakout 20/10 9,882 | Momentum 14d, 5 long/5 short 9,971
 2026-11-04 11:29:29,382 INFO Evaluation runs until 2026-12-27; then the best strategy is kept.
+2026-11-05 11:52:18,122 INFO ---- Futures run started ----
+2026-11-05 11:52:27,367 INFO Signals use the day ending 2026-11-05 00:00 UTC; 20 coins in the universe
+2026-11-05 11:52:29,134 INFO NEAR: opened short 247.164 @ 4.0459, 2x, margin 500.00, fee 0.45, stop 4.36957, liquidation 5.77986
+2026-11-05 11:52:29,134 INFO [MA crossover 20/50] 1 signal(s) | equity 9,986.04 (-0.1%, 1.1% below peak) | cash 8,498.65 | open: SUI short, WLD short, NEAR short
+2026-11-05 11:52:30,130 INFO NEAR: closed short @ 4.05842 (stop-loss), profit -80.49 after 0.49 fee, funding 0.34
+2026-11-05 11:52:30,420 INFO [Breakout 20/10] 0 signal(s) | equity 9,792.20 (-2.1%, 2.1% below peak) | cash 8,418.05 | open: TRX short, SOL short, XPL short
+2026-11-05 11:52:33,237 INFO [Momentum 14d, 5 long/5 short] 0 signal(s) | equity 9,920.22 (-0.8%, 1.1% below peak) | cash 5,834.25 | open: LIT long, HYPE long, kPEPE long, WLD short, NEAR short, AAVE short, SUI short, SOL short
+2026-11-05 11:52:33,238 INFO Scoreboard: MA crossover 20/50 9,986 | Breakout 20/10 9,792 | Momentum 14d, 5 long/5 short 9,920
+2026-11-05 11:52:33,238 INFO Evaluation runs until 2026-12-27; then the best strategy is kept.
