@@ -1,43 +1,31 @@
 {
   "created": "2026-10-31 20:46 UTC",
   "starting_balance": 10000,
-  "balance": 5834.251284464785,
-  "last_sync": 1793858400000,
+  "balance": 6252.822682406857,
+  "last_sync": 1793944800000,
   "positions": {
     "LIT": {
       "side": "long",
       "size": 314.5739529618916,
       "entry": 3.1789027368109615,
       "leverage": 2,
-      "margin": 499.35260230303106,
+      "margin": 499.2280426063016,
       "mm_rate": 0.1,
       "stop": 2.9245905178660845,
       "opened": 1793599953975,
-      "funding": -0.6473976969690417,
+      "funding": -0.7719573936986198,
       "signal_id": "momentum-LIT-long-2026-11-01"
-    },
-    "HYPE": {
-      "side": "long",
-      "size": 11.431706982486626,
-      "entry": 87.476,
-      "leverage": 2,
-      "margin": 499.08004047259385,
-      "mm_rate": 0.05,
-      "stop": 80.47792,
-      "opened": 1793599954267,
-      "funding": -0.9199595274063747,
-      "signal_id": "momentum-HYPE-long-2026-11-01"
     },
     "kPEPE": {
       "side": "long",
       "size": 206398.34881320948,
       "entry": 0.004845,
       "leverage": 2,
-      "margin": 499.4870908164294,
+      "margin": 499.28448815448917,
       "mm_rate": 0.05,
       "stop": 0.0044574,
       "opened": 1793599954470,
-      "funding": -0.5129091835706913,
+      "funding": -0.7155118455108355,
       "signal_id": "momentum-kPEPE-long-2026-11-01"
     },
     "WLD": {
@@ -45,11 +33,11 @@
       "size": 2593.831867818328,
       "entry": 0.38553,
       "leverage": 2,
-      "margin": 500.19603162493723,
+      "margin": 498.8419869544837,
       "mm_rate": 0.05,
       "stop": 0.41637240000000003,
       "opened": 1793599954616,
-      "funding": 0.19603162493709975,
+      "funding": -1.1580130455165616,
       "signal_id": "momentum-WLD-short-2026-11-01"
     },
     "NEAR": {
@@ -57,11 +45,11 @@
       "size": 237.98236750041647,
       "entry": 4.201991981604477,
       "leverage": 2,
-      "margin": 500.626371362766,
+      "margin": 500.8295082478926,
       "mm_rate": 0.05,
       "stop": 4.538151340132836,
       "opened": 1793599954766,
-      "funding": 0.6263713627661425,
+      "funding": 0.8295082478927227,
       "signal_id": "momentum-NEAR-short-2026-11-01"
     },
     "AAVE": {
@@ -69,11 +57,11 @@
       "size": 7.494566439331484,
       "entry": 133.43,
       "leverage": 2,
-      "margin": 500.4992939602038,
+      "margin": 500.7241081352994,
       "mm_rate": 0.05,
       "stop": 144.10440000000003,
       "opened": 1793599954905,
-      "funding": 0.4992939602038522,
+      "funding": 0.7241081352994082,
       "signal_id": "momentum-AAVE-short-2026-11-01"
     },
     "SUI": {
@@ -81,11 +69,11 @@
       "size": 1119.0438889013228,
       "entry": 0.89362,
       "leverage": 2,
-      "margin": 500.8813123288332,
+      "margin": 501.0397369015164,
       "mm_rate": 0.05,
       "stop": 0.9651096,
       "opened": 1793599955044,
-      "funding": 0.8813123288332848,
+      "funding": 1.0397369015163045,
       "signal_id": "momentum-SUI-short-2026-11-01"
     },
     "SOL": {
@@ -93,11 +81,11 @@
       "size": 10.564459046874505,
       "entry": 94.657,
       "leverage": 2,
-      "margin": 500.77725324709223,
+      "margin": 500.92047886497147,
       "mm_rate": 0.025,
       "stop": 102.22956,
       "opened": 1793599955187,
-      "funding": 0.7772532470921327,
+      "funding": 0.9204788649714233,
       "signal_id": "momentum-SOL-short-2026-11-01"
     }
   },
@@ -269,6 +257,20 @@
       "funding": -0.297517,
       "balance": 5834.251284,
       "reason": "stop-loss"
+    },
+    {
+      "time": "2026-11-05 14:00 UTC",
+      "coin": "HYPE",
+      "action": "close",
+      "side": "long",
+      "size": 11.431706982486626,
+      "price": 80.47792,
+      "leverage": 2,
+      "fee": 0.414,
+      "pnl": -80.0,
+      "funding": -1.014602,
+      "balance": 6252.822682,
+      "reason": "stop-loss"
     }
   ],
   "equity_history": [
@@ -295,6 +297,10 @@
     {
       "date": "2026-11-04",
       "equity": 9920.22
+    },
+    {
+      "date": "2026-11-05",
+      "equity": 10194.43
     }
   ]
 }

@@ -2,18 +2,18 @@
   "created": "2026-10-31 20:46 UTC",
   "starting_balance": 10000,
   "balance": 8498.649999999998,
-  "last_sync": 1793858400000,
+  "last_sync": 1793944800000,
   "positions": {
     "SUI": {
       "side": "short",
       "size": 1115.0633913537986,
       "entry": 0.89681,
       "leverage": 2,
-      "margin": 501.30470843689517,
+      "margin": 501.46256948510046,
       "mm_rate": 0.05,
       "stop": 0.9685548,
       "opened": 1793479572393,
-      "funding": 1.3047084368952178,
+      "funding": 1.462569485100523,
       "signal_id": "ma_crossover-SUI-short-2026-10-30"
     },
     "WLD": {
@@ -21,11 +21,11 @@
       "size": 2593.831867818328,
       "entry": 0.38553,
       "leverage": 2,
-      "margin": 500.19603162493723,
+      "margin": 498.8419869544837,
       "mm_rate": 0.05,
       "stop": 0.41637240000000003,
       "opened": 1793599953323,
-      "funding": 0.19603162493709975,
+      "funding": -1.1580130455165616,
       "signal_id": "ma_crossover-WLD-short-2026-11-01"
     },
     "NEAR": {
@@ -33,11 +33,11 @@
       "size": 247.1637954472429,
       "entry": 4.0459,
       "leverage": 2,
-      "margin": 500,
+      "margin": 500.19851351058355,
       "mm_rate": 0.05,
       "stop": 4.369572,
       "opened": 1793861549134,
-      "funding": 0.0,
+      "funding": 0.1985135105835537,
       "signal_id": "ma_crossover-NEAR-short-2026-11-04"
     }
   },
@@ -109,6 +109,10 @@
     {
       "date": "2026-11-04",
       "equity": 9986.04
+    },
+    {
+      "date": "2026-11-05",
+      "equity": 10238.48
     }
   ]
 }
