@@ -51,3 +51,9 @@
 2026-11-07 11:03:00,313 INFO [Breakout 20/10, spot] 0 signal(s) | equity 10,000.00 (+0.0%) | cash 10,000.00 | holding: none | on Alpaca: 0
 2026-11-07 11:03:01,015 INFO [Momentum 14d, 5 long/5 short, spot] 0 signal(s) | equity 9,837.64 (-1.6%) | cash 9,330.81 | holding: PEPE | on Alpaca: 1
 2026-11-07 11:03:01,017 INFO Spot scoreboard: MA crossover 20/50 10,000 | Breakout 20/10 10,000 | Momentum 14d, 5 long/5 short 9,838
+2026-11-08 11:07:03,251 INFO ---- Spot run started ----
+2026-11-08 11:07:03,619 INFO Alpaca lists 7 of this week's coins: HYPE, SOL, PEPE, XRP, UNI, AAVE, LINK
+2026-11-08 11:07:13,924 INFO [MA crossover 20/50, spot] 0 signal(s) | equity 10,000.00 (+0.0%) | cash 10,000.00 | holding: none | on Alpaca: 0
+2026-11-08 11:07:13,927 INFO [Breakout 20/10, spot] 0 signal(s) | equity 10,000.00 (+0.0%) | cash 10,000.00 | holding: none | on Alpaca: 0
+2026-11-08 11:07:14,563 INFO [Momentum 14d, 5 long/5 short, spot] 0 signal(s) | equity 9,834.86 (-1.7%) | cash 9,330.81 | holding: PEPE | on Alpaca: 1
+2026-11-08 11:07:14,564 INFO Spot scoreboard: MA crossover 20/50 10,000 | Breakout 20/10 10,000 | Momentum 14d, 5 long/5 short 9,835

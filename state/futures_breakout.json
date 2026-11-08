@@ -1,19 +1,19 @@
 {
   "created": "2026-10-31 20:46 UTC",
   "starting_balance": 10000,
-  "balance": 6416.250636192095,
-  "last_sync": 1794031200000,
+  "balance": 5915.800636192095,
+  "last_sync": 1794117600000,
   "positions": {
     "TRX": {
       "side": "short",
       "size": 3216.666580885901,
       "entry": 0.3108808373059885,
       "leverage": 2,
-      "margin": 500.4556450295438,
+      "margin": 500.66788784924546,
       "mm_rate": 0.05,
       "stop": 0.33575130429046757,
       "opened": 1793513502955,
-      "funding": 0.4556450295441592,
+      "funding": 0.6678878492457034,
       "signal_id": "breakout-TRX-short-2026-10-31"
     },
     "SOL": {
@@ -21,11 +21,11 @@
       "size": 10.959624742448819,
       "entry": 91.244,
       "leverage": 2,
-      "margin": 500.7451366589212,
+      "margin": 500.77704456899085,
       "mm_rate": 0.025,
       "stop": 98.54352,
       "opened": 1793688734937,
-      "funding": 0.7451366589211345,
+      "funding": 0.7770445689908378,
       "signal_id": "breakout-SOL-short-2026-11-02"
     },
     "XPL": {
@@ -33,11 +33,11 @@
       "size": 15920.567463855807,
       "entry": 0.06281183144195601,
       "leverage": 2,
-      "margin": 501.0790886560573,
+      "margin": 501.29915522889974,
       "mm_rate": 0.05,
       "stop": 0.0678367779573125,
       "opened": 1793688735311,
-      "funding": 1.0790886560573325,
+      "funding": 1.2991552288999595,
       "signal_id": "breakout-XPL-short-2026-11-02"
     },
     "NEAR": {
@@ -45,11 +45,11 @@
       "size": 271.57677475422304,
       "entry": 3.6822,
       "leverage": 2,
-      "margin": 500.2916052224214,
+      "margin": 500.3738775313672,
       "mm_rate": 0.05,
       "stop": 3.976776,
       "opened": 1793947989982,
-      "funding": 0.2916052224213786,
+      "funding": 0.3738775313671175,
       "signal_id": "breakout-NEAR-short-2026-11-05"
     },
     "ENA": {
@@ -57,11 +57,11 @@
       "size": 6075.371103955283,
       "entry": 0.16459899862725497,
       "leverage": 2,
-      "margin": 500.2883735648202,
+      "margin": 500.5509140707432,
       "mm_rate": 0.05,
       "stop": 0.17776691851743537,
       "opened": 1793947990128,
-      "funding": 0.2883735648203414,
+      "funding": 0.5509140707432277,
       "signal_id": "breakout-ENA-short-2026-11-05"
     },
     "WLD": {
@@ -69,11 +69,11 @@
       "size": 2903.48243663076,
       "entry": 0.3444140000241963,
       "leverage": 2,
-      "margin": 499.5649875149574,
+      "margin": 498.8472607254174,
       "mm_rate": 0.05,
       "stop": 0.371967120026132,
       "opened": 1793947990273,
-      "funding": -0.43501248504263573,
+      "funding": -1.1527392745826475,
       "signal_id": "breakout-WLD-short-2026-11-05"
     },
     "XRP": {
@@ -81,12 +81,24 @@
       "size": 860.6592649969878,
       "entry": 1.1619,
       "leverage": 2,
-      "margin": 500,
+      "margin": 500.1778677615716,
       "mm_rate": 0.025,
       "stop": 1.254852,
       "opened": 1794031365757,
-      "funding": 0.0,
+      "funding": 0.1778677615715638,
       "signal_id": "breakout-XRP-short-2026-11-06"
+    },
+    "PUMP": {
+      "side": "short",
+      "size": 272182.9069134458,
+      "entry": 0.003674,
+      "leverage": 2,
+      "margin": 500,
+      "mm_rate": 0.05,
+      "stop": 0.003967920000000001,
+      "opened": 1794118019360,
+      "funding": 0.0,
+      "signal_id": "breakout-PUMP-short-2026-11-07"
     }
   },
   "history": [
@@ -215,6 +227,20 @@
       "funding": 0.0,
       "balance": 6416.250636,
       "signal_id": "breakout-XRP-short-2026-11-06"
+    },
+    {
+      "time": "2026-11-08 06:06 UTC",
+      "coin": "PUMP",
+      "action": "open",
+      "side": "short",
+      "size": 272182.9069134458,
+      "price": 0.003674,
+      "leverage": 2,
+      "fee": 0.45,
+      "pnl": 0.0,
+      "funding": 0.0,
+      "balance": 5915.800636,
+      "signal_id": "breakout-PUMP-short-2026-11-07"
     }
   ],
   "equity_history": [
@@ -249,6 +275,10 @@
     {
       "date": "2026-11-06",
       "equity": 9970.3
+    },
+    {
+      "date": "2026-11-07",
+      "equity": 10108.4
     }
   ]
 }
