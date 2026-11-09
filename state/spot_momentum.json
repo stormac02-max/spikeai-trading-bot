@@ -1,8 +1,8 @@
 {
   "created": "2026-11-01 00:43 UTC",
   "starting_balance": 10000,
-  "balance": 9330.811500000002,
-  "last_sync": 1794117600000,
+  "balance": 7330.811500000002,
+  "last_sync": 1794204000000,
   "positions": {
     "PEPE": {
       "qty": 102971779.71332005,
@@ -21,6 +21,58 @@
         "status": "open"
       },
       "signal_id": "momentum-PEPE-long-2026-11-01"
+    },
+    "HYPE": {
+      "qty": 6.72715722147289,
+      "gross": 6.744017264634476,
+      "entry": 74.13978647741494,
+      "cost": 500,
+      "stop": 68.20860355922176,
+      "opened": 1794206378868,
+      "alpaca": {
+        "symbol": "HYPE/USD",
+        "status": "error",
+        "error": "Alpaca buy c72d8506-8628-4a5d-9505-ca49a8f72d4d ended as new"
+      },
+      "signal_id": "momentum-HYPE-long-2026-11-08"
+    },
+    "UNI": {
+      "qty": 73.60746601702357,
+      "gross": 73.79194588172788,
+      "entry": 6.775807224292324,
+      "cost": 500,
+      "stop": 6.233742646348938,
+      "opened": 1794206409407,
+      "alpaca": {
+        "symbol": "UNI/USD",
+        "qty": 73.607466016,
+        "entry": 6.787,
+        "buy_order": "485f4ab8-961a-49bb-8b4e-3db85797a831",
+        "stop_order": "537fa866-7e9e-4a92-96c2-42cfafa62b18",
+        "stop": 6.24404,
+        "status": "open"
+      },
+      "signal_id": "momentum-UNI-long-2026-11-08"
+    },
+    "ZEC": {
+      "qty": 0.4080155107249791,
+      "gross": 0.409038105989954,
+      "entry": 1222.38,
+      "cost": 500,
+      "stop": 1124.5896000000002,
+      "opened": 1794206409832,
+      "alpaca": null,
+      "signal_id": "momentum-ZEC-long-2026-11-08"
+    },
+    "XMR": {
+      "qty": 0.8404162306013784,
+      "gross": 0.8425225369437377,
+      "entry": 593.4559350943382,
+      "cost": 500,
+      "stop": 545.9794602867912,
+      "opened": 1794206410038,
+      "alpaca": null,
+      "signal_id": "momentum-XMR-long-2026-11-08"
     }
   },
   "history": [
@@ -131,6 +183,54 @@
       "pnl": -42.297125,
       "balance": 9330.8115,
       "reason": "stop-loss"
+    },
+    {
+      "time": "2026-11-09 06:39 UTC",
+      "coin": "HYPE",
+      "action": "buy",
+      "side": "long",
+      "qty": 6.72715722147289,
+      "price": 74.13978647741494,
+      "fee": 1.25,
+      "pnl": 0.0,
+      "balance": 8830.8115,
+      "signal_id": "momentum-HYPE-long-2026-11-08"
+    },
+    {
+      "time": "2026-11-09 06:40 UTC",
+      "coin": "UNI",
+      "action": "buy",
+      "side": "long",
+      "qty": 73.60746601702357,
+      "price": 6.775807224292324,
+      "fee": 1.25,
+      "pnl": 0.0,
+      "balance": 8330.8115,
+      "signal_id": "momentum-UNI-long-2026-11-08"
+    },
+    {
+      "time": "2026-11-09 06:40 UTC",
+      "coin": "ZEC",
+      "action": "buy",
+      "side": "long",
+      "qty": 0.4080155107249791,
+      "price": 1222.38,
+      "fee": 1.25,
+      "pnl": 0.0,
+      "balance": 7830.8115,
+      "signal_id": "momentum-ZEC-long-2026-11-08"
+    },
+    {
+      "time": "2026-11-09 06:40 UTC",
+      "coin": "XMR",
+      "action": "buy",
+      "side": "long",
+      "qty": 0.8404162306013784,
+      "price": 593.4559350943382,
+      "fee": 1.25,
+      "pnl": 0.0,
+      "balance": 7330.8115,
+      "signal_id": "momentum-XMR-long-2026-11-08"
     }
   ],
   "equity_history": [
@@ -165,7 +265,11 @@
     {
       "date": "2026-11-07",
       "equity": 9834.86
+    },
+    {
+      "date": "2026-11-08",
+      "equity": 9844.28
     }
   ],
-  "last_rebalance": "2026-11-01"
+  "last_rebalance": "2026-11-08"
 }

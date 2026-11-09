@@ -81,3 +81,24 @@
 2026-11-08 11:07:02,477 INFO [Momentum 14d, 5 long/5 short] 0 signal(s) | equity 10,188.26 (+1.9%, 0.1% below peak) | cash 6,252.82 | open: LIT long, kPEPE long, WLD short, NEAR short, AAVE short, SUI short, SOL short
 2026-11-08 11:07:02,478 INFO Scoreboard: MA crossover 20/50 10,277 | Breakout 20/10 10,108 | Momentum 14d, 5 long/5 short 10,188
 2026-11-08 11:07:02,478 INFO Evaluation runs until 2026-12-27; then the best strategy is kept.
+2026-11-09 11:38:22,650 INFO ---- Futures run started ----
+2026-11-09 11:39:05,911 INFO Universe refreshed (weekly, 20 coins): HYPE, ZEC, SOL, NEAR, XRP, XMR, PUMP, LIT, kPEPE, WLD, ENA, UNI, TRUMP, XPL, BNB, SUI, AAVE, ZRO, LINK, VVV
+2026-11-09 11:39:16,560 INFO Signals use the day ending 2026-11-09 00:00 UTC; 20 coins in the universe
+2026-11-09 11:39:18,194 INFO [MA crossover 20/50] 0 signal(s) | equity 10,442.05 (+4.4%, 0.0% below peak) | cash 7,998.20 | open: SUI short, WLD short, NEAR short, ZRO short
+2026-11-09 11:39:21,628 INFO TRX: closed short @ 0.316589 (left universe), profit -18.82 after 0.46 fee, funding 0.57
+2026-11-09 11:39:21,814 INFO SUI: opened short 1219.69 @ 0.819883, 2x, margin 500.00, fee 0.45, stop 0.885474, liquidation 1.17126
+2026-11-09 11:39:21,814 INFO [Breakout 20/10] 1 signal(s) | equity 10,440.36 (+4.4%, 0.0% below peak) | cash 5,897.11 | open: SOL short, XPL short, NEAR short, ENA short, WLD short, XRP short, PUMP short, SUI short
+2026-11-09 11:39:24,885 INFO LIT: closed long @ 3.07312 (signal), profit -33.71 after 0.44 fee, funding 0.04
+2026-11-09 11:39:25,067 INFO AAVE: closed short @ 129.344 (signal), profit 30.19 after 0.44 fee, funding 1.27
+2026-11-09 11:39:25,259 INFO SUI: closed short @ 0.81992 (signal), profit 82.06 after 0.41 fee, funding 1.20
+2026-11-09 11:39:25,437 INFO SOL: closed short @ 86.137 (signal), profit 89.60 after 0.41 fee, funding 1.16
+2026-11-09 11:39:25,623 INFO HYPE: opened long 13.5091 @ 74.024, 2x, margin 500.00, fee 0.45, stop 68.1021, liquidation 38.96
+2026-11-09 11:39:25,811 INFO UNI: opened long 147.446 @ 6.78214, 2x, margin 500.00, fee 0.45, stop 6.23957, liquidation 3.56955
+2026-11-09 11:39:26,016 INFO ZEC: opened long 0.818639 @ 1221.54, 2x, margin 500.00, fee 0.45, stop 1123.82, liquidation 642.915
+2026-11-09 11:39:26,228 INFO XMR: opened long 1.68401 @ 593.82, 2x, margin 500.00, fee 0.45, stop 546.314, liquidation 329.9
+2026-11-09 11:39:26,444 INFO TRUMP: opened short 873.08 @ 1.14537, 2x, margin 500.00, fee 0.45, stop 1.237, liquidation 1.63624
+2026-11-09 11:39:26,639 INFO XPL: opened short 19416.5 @ 0.0515027, 2x, margin 500.00, fee 0.45, stop 0.0556229, liquidation 0.0735753
+2026-11-09 11:39:26,825 INFO ENA: opened short 6688.43 @ 0.149512, 2x, margin 500.00, fee 0.45, stop 0.161473, liquidation 0.213588
+2026-11-09 11:39:26,826 INFO [Momentum 14d, 5 long/5 short] 11 signal(s) | equity 10,294.79 (+2.9%, -0.0% below peak) | cash 4,921.48 | open: kPEPE long, WLD short, NEAR short, HYPE long, UNI long, ZEC long, XMR long, TRUMP short, XPL short, ENA short
+2026-11-09 11:39:26,827 INFO Scoreboard: MA crossover 20/50 10,442 | Breakout 20/10 10,440 | Momentum 14d, 5 long/5 short 10,295
+2026-11-09 11:39:26,827 INFO Evaluation runs until 2026-12-27; then the best strategy is kept.

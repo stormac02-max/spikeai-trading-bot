@@ -1,31 +1,19 @@
 {
   "created": "2026-10-31 20:46 UTC",
   "starting_balance": 10000,
-  "balance": 5915.800636192095,
-  "last_sync": 1794117600000,
+  "balance": 5897.105072577145,
+  "last_sync": 1794204000000,
   "positions": {
-    "TRX": {
-      "side": "short",
-      "size": 3216.666580885901,
-      "entry": 0.3108808373059885,
-      "leverage": 2,
-      "margin": 500.66788784924546,
-      "mm_rate": 0.05,
-      "stop": 0.33575130429046757,
-      "opened": 1793513502955,
-      "funding": 0.6678878492457034,
-      "signal_id": "breakout-TRX-short-2026-10-31"
-    },
     "SOL": {
       "side": "short",
       "size": 10.959624742448819,
       "entry": 91.244,
       "leverage": 2,
-      "margin": 500.77704456899085,
+      "margin": 500.9363590783384,
       "mm_rate": 0.025,
       "stop": 98.54352,
       "opened": 1793688734937,
-      "funding": 0.7770445689908378,
+      "funding": 0.9363590783383016,
       "signal_id": "breakout-SOL-short-2026-11-02"
     },
     "XPL": {
@@ -33,11 +21,11 @@
       "size": 15920.567463855807,
       "entry": 0.06281183144195601,
       "leverage": 2,
-      "margin": 501.29915522889974,
+      "margin": 501.22635022746266,
       "mm_rate": 0.05,
       "stop": 0.0678367779573125,
       "opened": 1793688735311,
-      "funding": 1.2991552288999595,
+      "funding": 1.2263502274628355,
       "signal_id": "breakout-XPL-short-2026-11-02"
     },
     "NEAR": {
@@ -45,11 +33,11 @@
       "size": 271.57677475422304,
       "entry": 3.6822,
       "leverage": 2,
-      "margin": 500.3738775313672,
+      "margin": 500.3549267704688,
       "mm_rate": 0.05,
       "stop": 3.976776,
       "opened": 1793947989982,
-      "funding": 0.3738775313671175,
+      "funding": 0.3549267704687415,
       "signal_id": "breakout-NEAR-short-2026-11-05"
     },
     "ENA": {
@@ -57,11 +45,11 @@
       "size": 6075.371103955283,
       "entry": 0.16459899862725497,
       "leverage": 2,
-      "margin": 500.5509140707432,
+      "margin": 500.683814095333,
       "mm_rate": 0.05,
       "stop": 0.17776691851743537,
       "opened": 1793947990128,
-      "funding": 0.5509140707432277,
+      "funding": 0.6838140953329144,
       "signal_id": "breakout-ENA-short-2026-11-05"
     },
     "WLD": {
@@ -69,11 +57,11 @@
       "size": 2903.48243663076,
       "entry": 0.3444140000241963,
       "leverage": 2,
-      "margin": 498.8472607254174,
+      "margin": 498.29061910562393,
       "mm_rate": 0.05,
       "stop": 0.371967120026132,
       "opened": 1793947990273,
-      "funding": -1.1527392745826475,
+      "funding": -1.7093808943760684,
       "signal_id": "breakout-WLD-short-2026-11-05"
     },
     "XRP": {
@@ -81,11 +69,11 @@
       "size": 860.6592649969878,
       "entry": 1.1619,
       "leverage": 2,
-      "margin": 500.1778677615716,
+      "margin": 500.358678797091,
       "mm_rate": 0.025,
       "stop": 1.254852,
       "opened": 1794031365757,
-      "funding": 0.1778677615715638,
+      "funding": 0.35867879709097167,
       "signal_id": "breakout-XRP-short-2026-11-06"
     },
     "PUMP": {
@@ -93,12 +81,24 @@
       "size": 272182.9069134458,
       "entry": 0.003674,
       "leverage": 2,
-      "margin": 500,
+      "margin": 500.14855563723467,
       "mm_rate": 0.05,
       "stop": 0.003967920000000001,
       "opened": 1794118019360,
-      "funding": 0.0,
+      "funding": 0.14855563723462165,
       "signal_id": "breakout-PUMP-short-2026-11-07"
+    },
+    "SUI": {
+      "side": "short",
+      "size": 1219.6856585270655,
+      "entry": 0.8198833797944584,
+      "leverage": 2,
+      "margin": 500,
+      "mm_rate": 0.05,
+      "stop": 0.8854740501780151,
+      "opened": 1794206361814,
+      "funding": 0.0,
+      "signal_id": "breakout-SUI-short-2026-11-08"
     }
   },
   "history": [
@@ -241,6 +241,34 @@
       "funding": 0.0,
       "balance": 5915.800636,
       "signal_id": "breakout-PUMP-short-2026-11-07"
+    },
+    {
+      "time": "2026-11-09 06:39 UTC",
+      "coin": "TRX",
+      "action": "close",
+      "side": "short",
+      "size": 3216.666580885901,
+      "price": 0.3165888259061711,
+      "leverage": 2,
+      "fee": 0.458262,
+      "pnl": -18.360696,
+      "funding": 0.573395,
+      "balance": 6397.555073,
+      "reason": "left universe"
+    },
+    {
+      "time": "2026-11-09 06:39 UTC",
+      "coin": "SUI",
+      "action": "open",
+      "side": "short",
+      "size": 1219.6856585270655,
+      "price": 0.8198833797944584,
+      "leverage": 2,
+      "fee": 0.45,
+      "pnl": 0.0,
+      "funding": 0.0,
+      "balance": 5897.105073,
+      "signal_id": "breakout-SUI-short-2026-11-08"
     }
   ],
   "equity_history": [
@@ -279,6 +307,10 @@
     {
       "date": "2026-11-07",
       "equity": 10108.4
+    },
+    {
+      "date": "2026-11-08",
+      "equity": 10440.36
     }
   ]
 }
