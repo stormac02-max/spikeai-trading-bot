@@ -69,3 +69,9 @@
 2026-11-09 11:40:10,038 INFO XMR: bought 0.84041623 @ 593.456 for $500.00 (fee $1.25), stop 545.979
 2026-11-09 11:40:10,242 INFO [Momentum 14d, 5 long/5 short, spot] 4 signal(s) | equity 9,844.28 (-1.6%) | cash 7,330.81 | holding: PEPE, HYPE, UNI, ZEC, XMR | on Alpaca: 2
 2026-11-09 11:40:10,242 INFO Spot scoreboard: MA crossover 20/50 10,000 | Breakout 20/10 10,000 | Momentum 14d, 5 long/5 short 9,844
+2026-11-10 12:23:44,213 INFO ---- Spot run started ----
+2026-11-10 12:23:44,617 INFO Alpaca lists 8 of this week's coins: HYPE, SOL, XRP, PEPE, UNI, TRUMP, AAVE, LINK
+2026-11-10 12:23:55,507 INFO [MA crossover 20/50, spot] 0 signal(s) | equity 10,000.00 (+0.0%) | cash 10,000.00 | holding: none | on Alpaca: 0
+2026-11-10 12:23:55,509 INFO [Breakout 20/10, spot] 0 signal(s) | equity 10,000.00 (+0.0%) | cash 10,000.00 | holding: none | on Alpaca: 0
+2026-11-10 12:23:58,703 INFO [Momentum 14d, 5 long/5 short, spot] 0 signal(s) | equity 9,837.31 (-1.6%) | cash 7,330.81 | holding: PEPE, HYPE, UNI, ZEC, XMR | on Alpaca: 2
+2026-11-10 12:23:58,704 INFO Spot scoreboard: MA crossover 20/50 10,000 | Breakout 20/10 10,000 | Momentum 14d, 5 long/5 short 9,837

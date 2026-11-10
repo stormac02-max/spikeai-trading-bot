@@ -102,3 +102,10 @@
 2026-11-09 11:39:26,826 INFO [Momentum 14d, 5 long/5 short] 11 signal(s) | equity 10,294.79 (+2.9%, -0.0% below peak) | cash 4,921.48 | open: kPEPE long, WLD short, NEAR short, HYPE long, UNI long, ZEC long, XMR long, TRUMP short, XPL short, ENA short
 2026-11-09 11:39:26,827 INFO Scoreboard: MA crossover 20/50 10,442 | Breakout 20/10 10,440 | Momentum 14d, 5 long/5 short 10,295
 2026-11-09 11:39:26,827 INFO Evaluation runs until 2026-12-27; then the best strategy is kept.
+2026-11-10 12:23:22,764 INFO ---- Futures run started ----
+2026-11-10 12:23:33,981 INFO Signals use the day ending 2026-11-10 00:00 UTC; 20 coins in the universe
+2026-11-10 12:23:35,719 INFO [MA crossover 20/50] 0 signal(s) | equity 10,397.12 (+4.0%, 0.4% below peak) | cash 7,998.20 | open: SUI short, WLD short, NEAR short, ZRO short
+2026-11-10 12:23:39,221 INFO [Breakout 20/10] 0 signal(s) | equity 10,331.10 (+3.3%, 1.0% below peak) | cash 5,897.11 | open: SOL short, XPL short, NEAR short, ENA short, WLD short, XRP short, PUMP short, SUI short
+2026-11-10 12:23:43,622 INFO [Momentum 14d, 5 long/5 short] 0 signal(s) | equity 10,239.06 (+2.4%, 0.5% below peak) | cash 4,921.48 | open: kPEPE long, WLD short, NEAR short, HYPE long, UNI long, ZEC long, XMR long, TRUMP short, XPL short, ENA short
+2026-11-10 12:23:43,623 INFO Scoreboard: MA crossover 20/50 10,397 | Breakout 20/10 10,331 | Momentum 14d, 5 long/5 short 10,239
+2026-11-10 12:23:43,624 INFO Evaluation runs until 2026-12-27; then the best strategy is kept.
