@@ -109,3 +109,15 @@
 2026-11-10 12:23:43,622 INFO [Momentum 14d, 5 long/5 short] 0 signal(s) | equity 10,239.06 (+2.4%, 0.5% below peak) | cash 4,921.48 | open: kPEPE long, WLD short, NEAR short, HYPE long, UNI long, ZEC long, XMR long, TRUMP short, XPL short, ENA short
 2026-11-10 12:23:43,623 INFO Scoreboard: MA crossover 20/50 10,397 | Breakout 20/10 10,331 | Momentum 14d, 5 long/5 short 10,239
 2026-11-10 12:23:43,624 INFO Evaluation runs until 2026-12-27; then the best strategy is kept.
+2026-11-11 11:29:28,188 INFO ---- Futures run started ----
+2026-11-11 11:29:39,862 INFO Signals use the day ending 2026-11-11 00:00 UTC; 20 coins in the universe
+2026-11-11 11:29:41,429 INFO [MA crossover 20/50] 0 signal(s) | equity 10,416.71 (+4.2%, 0.2% below peak) | cash 7,998.20 | open: SUI short, WLD short, NEAR short, ZRO short
+2026-11-11 11:29:44,860 INFO HYPE: opened short 13.915 @ 71.8649, 2x, margin 500.00, fee 0.45, stop 77.6141, liquidation 102.664
+2026-11-11 11:29:45,029 INFO ZEC: opened short 0.996314 @ 1003.7, 2x, margin 500.00, fee 0.45, stop 1084, liquidation 1433.86
+2026-11-11 11:29:45,193 INFO VVV: opened short 52.6307 @ 19.0003, 2x, margin 500.00, fee 0.45, stop 20.5203, liquidation 24.429
+2026-11-11 11:29:45,193 INFO [Breakout 20/10] 3 signal(s) | equity 10,474.48 (+4.7%, 0.0% below peak) | cash 4,395.76 | open: SOL short, XPL short, NEAR short, ENA short, WLD short, XRP short, PUMP short, SUI short, HYPE short, ZEC short, VVV short
+2026-11-11 11:29:47,507 INFO ZEC: closed long @ 1123.82 (stop-loss), profit -80.41 after 0.41 fee, funding -0.38
+2026-11-11 11:29:47,865 INFO XMR: closed long @ 546.314 (stop-loss), profit -80.41 after 0.41 fee, funding -1.67
+2026-11-11 11:29:49,316 INFO [Momentum 14d, 5 long/5 short] 0 signal(s) | equity 10,101.45 (+1.0%, 1.9% below peak) | cash 5,758.61 | open: kPEPE long, WLD short, NEAR short, HYPE long, UNI long, TRUMP short, XPL short, ENA short
+2026-11-11 11:29:49,317 INFO Scoreboard: MA crossover 20/50 10,417 | Breakout 20/10 10,474 | Momentum 14d, 5 long/5 short 10,101
+2026-11-11 11:29:49,317 INFO Evaluation runs until 2026-12-27; then the best strategy is kept.
