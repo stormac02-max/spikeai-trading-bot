@@ -1,19 +1,19 @@
 {
   "created": "2026-10-31 20:46 UTC",
   "starting_balance": 10000,
-  "balance": 4395.755072577145,
-  "last_sync": 1794376800000,
+  "balance": 4314.85246173355,
+  "last_sync": 1794466800000,
   "positions": {
     "SOL": {
       "side": "short",
       "size": 10.959624742448819,
       "entry": 91.244,
       "leverage": 2,
-      "margin": 500.625914698286,
+      "margin": 500.8024908415405,
       "mm_rate": 0.025,
       "stop": 98.54352,
       "opened": 1793688734937,
-      "funding": 0.6259146982859146,
+      "funding": 0.8024908415402656,
       "signal_id": "breakout-SOL-short-2026-11-02"
     },
     "XPL": {
@@ -21,11 +21,11 @@
       "size": 15920.567463855807,
       "entry": 0.06281183144195601,
       "leverage": 2,
-      "margin": 501.6476194831751,
+      "margin": 501.9088895277393,
       "mm_rate": 0.05,
       "stop": 0.0678367779573125,
       "opened": 1793688735311,
-      "funding": 1.6476194831754658,
+      "funding": 1.9088895277396836,
       "signal_id": "breakout-XPL-short-2026-11-02"
     },
     "NEAR": {
@@ -33,11 +33,11 @@
       "size": 271.57677475422304,
       "entry": 3.6822,
       "leverage": 2,
-      "margin": 500.86772965146105,
+      "margin": 501.1914027407337,
       "mm_rate": 0.05,
       "stop": 3.976776,
       "opened": 1793947989982,
-      "funding": 0.867729651461083,
+      "funding": 1.1914027407338006,
       "signal_id": "breakout-NEAR-short-2026-11-05"
     },
     "ENA": {
@@ -45,11 +45,11 @@
       "size": 6075.371103955283,
       "entry": 0.16459899862725497,
       "leverage": 2,
-      "margin": 501.20800345077635,
+      "margin": 501.4240819332313,
       "mm_rate": 0.05,
       "stop": 0.17776691851743537,
       "opened": 1793947990128,
-      "funding": 1.2080034507760118,
+      "funding": 1.4240819332310732,
       "signal_id": "breakout-ENA-short-2026-11-05"
     },
     "WLD": {
@@ -57,11 +57,11 @@
       "size": 2903.48243663076,
       "entry": 0.3444140000241963,
       "leverage": 2,
-      "margin": 498.43374872391627,
+      "margin": 498.4512506260474,
       "mm_rate": 0.05,
       "stop": 0.371967120026132,
       "opened": 1793947990273,
-      "funding": -1.5662512760837308,
+      "funding": -1.548749373952643,
       "signal_id": "breakout-WLD-short-2026-11-05"
     },
     "XRP": {
@@ -69,11 +69,11 @@
       "size": 860.6592649969878,
       "entry": 1.1619,
       "leverage": 2,
-      "margin": 500.30742682780783,
+      "margin": 500.43794140776305,
       "mm_rate": 0.025,
       "stop": 1.254852,
       "opened": 1794031365757,
-      "funding": 0.30742682780790076,
+      "funding": 0.43794140776314666,
       "signal_id": "breakout-XRP-short-2026-11-06"
     },
     "PUMP": {
@@ -81,11 +81,11 @@
       "size": 272182.9069134458,
       "entry": 0.003674,
       "leverage": 2,
-      "margin": 500.6133544238435,
+      "margin": 500.7562522739796,
       "mm_rate": 0.05,
       "stop": 0.003967920000000001,
       "opened": 1794118019360,
-      "funding": 0.6133544238432227,
+      "funding": 0.7562522739793142,
       "signal_id": "breakout-PUMP-short-2026-11-07"
     },
     "SUI": {
@@ -93,11 +93,11 @@
       "size": 1219.6856585270655,
       "entry": 0.8198833797944584,
       "leverage": 2,
-      "margin": 500.2767585009345,
+      "margin": 500.3660020762687,
       "mm_rate": 0.05,
       "stop": 0.8854740501780151,
       "opened": 1794206361814,
-      "funding": 0.2767585009344688,
+      "funding": 0.3660020762687356,
       "signal_id": "breakout-SUI-short-2026-11-08"
     },
     "HYPE": {
@@ -105,11 +105,11 @@
       "size": 13.914999025937883,
       "entry": 71.86489902988686,
       "leverage": 2,
-      "margin": 500,
+      "margin": 500.2997722001953,
       "mm_rate": 0.05,
       "stop": 77.6140909522778,
       "opened": 1794378584860,
-      "funding": 0.0,
+      "funding": 0.2997722001952684,
       "signal_id": "breakout-HYPE-short-2026-11-10"
     },
     "ZEC": {
@@ -117,24 +117,24 @@
       "size": 0.9963136395337252,
       "entry": 1003.7,
       "leverage": 2,
-      "margin": 500,
+      "margin": 500.28957300807815,
       "mm_rate": 0.05,
       "stop": 1083.996,
       "opened": 1794378585029,
-      "funding": 0.0,
+      "funding": 0.2895730080781111,
       "signal_id": "breakout-ZEC-short-2026-11-10"
     },
-    "VVV": {
+    "UNI": {
       "side": "short",
-      "size": 52.63069529975262,
-      "entry": 19.00031900214513,
+      "size": 163.06297492091446,
+      "entry": 6.1326,
       "leverage": 2,
       "margin": 500,
-      "mm_rate": 0.16666666666666666,
-      "stop": 20.52034452231674,
-      "opened": 1794378585193,
+      "mm_rate": 0.05,
+      "stop": 6.623208000000001,
+      "opened": 1794467802301,
       "funding": 0.0,
-      "signal_id": "breakout-VVV-short-2026-11-10"
+      "signal_id": "breakout-UNI-short-2026-11-11"
     }
   },
   "history": [
@@ -347,6 +347,34 @@
       "funding": 0.0,
       "balance": 4395.755073,
       "signal_id": "breakout-VVV-short-2026-11-10"
+    },
+    {
+      "time": "2026-11-11 17:00 UTC",
+      "coin": "VVV",
+      "action": "close",
+      "side": "short",
+      "size": 52.63069529975262,
+      "price": 20.52034452231674,
+      "leverage": 2,
+      "fee": 0.486,
+      "pnl": -80.0,
+      "funding": 0.033389,
+      "balance": 4815.302462,
+      "reason": "stop-loss"
+    },
+    {
+      "time": "2026-11-12 07:16 UTC",
+      "coin": "UNI",
+      "action": "open",
+      "side": "short",
+      "size": 163.06297492091446,
+      "price": 6.1326,
+      "leverage": 2,
+      "fee": 0.45,
+      "pnl": 0.0,
+      "funding": 0.0,
+      "balance": 4314.852462,
+      "signal_id": "breakout-UNI-short-2026-11-11"
     }
   ],
   "equity_history": [
@@ -397,6 +425,10 @@
     {
       "date": "2026-11-10",
       "equity": 10474.48
+    },
+    {
+      "date": "2026-11-11",
+      "equity": 10591.82
     }
   ]
 }

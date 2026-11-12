@@ -83,3 +83,13 @@
 2026-11-11 11:30:02,157 INFO XMR: sold 0.84041623 @ 545.979 (stop-loss), profit $-42.30 after fees
 2026-11-11 11:30:02,619 INFO [Momentum 14d, 5 long/5 short, spot] 0 signal(s) | equity 9,752.48 (-2.5%) | cash 8,246.22 | holding: PEPE, HYPE, UNI | on Alpaca: 2
 2026-11-11 11:30:02,620 INFO Spot scoreboard: MA crossover 20/50 10,000 | Breakout 20/10 10,000 | Momentum 14d, 5 long/5 short 9,752
+2026-11-12 12:16:46,754 INFO ---- Spot run started ----
+2026-11-12 12:16:47,049 INFO Alpaca lists 8 of this week's coins: HYPE, SOL, XRP, PEPE, UNI, TRUMP, AAVE, LINK
+2026-11-12 12:16:57,860 INFO [MA crossover 20/50, spot] 0 signal(s) | equity 10,000.00 (+0.0%) | cash 10,000.00 | holding: none | on Alpaca: 0
+2026-11-12 12:16:57,863 INFO [Breakout 20/10, spot] 0 signal(s) | equity 10,000.00 (+0.0%) | cash 10,000.00 | holding: none | on Alpaca: 0
+2026-11-12 12:16:58,175 INFO PEPE: sold 1.0297178e+08 @ 4.45608e-06 (stop-loss), profit $-42.30 after fees
+2026-11-12 12:16:59,236 INFO UNI: sold 73.607466 @ 6.23374 (stop-loss), profit $-42.30 after fees
+2026-11-12 12:16:59,599 INFO Alpaca: PEPE/USD lot was already closed by its stop @ 4.373e-06
+2026-11-12 12:16:59,657 INFO Alpaca: UNI/USD lot was already closed by its stop @ 6.2363
+2026-11-12 12:16:59,733 INFO [Momentum 14d, 5 long/5 short, spot] 0 signal(s) | equity 9,639.79 (-3.6%) | cash 9,161.62 | holding: HYPE | on Alpaca: 0
+2026-11-12 12:16:59,734 INFO Spot scoreboard: MA crossover 20/50 10,000 | Breakout 20/10 10,000 | Momentum 14d, 5 long/5 short 9,640

@@ -1,27 +1,9 @@
 {
   "created": "2026-11-01 00:43 UTC",
   "starting_balance": 10000,
-  "balance": 8246.217250000002,
-  "last_sync": 1794376800000,
+  "balance": 9161.623000000003,
+  "last_sync": 1794466800000,
   "positions": {
-    "PEPE": {
-      "qty": 102971779.71332005,
-      "gross": 103229854.34919302,
-      "entry": 4.843560064597811e-06,
-      "cost": 500,
-      "stop": 4.456075259429987e-06,
-      "opened": 1793599998514,
-      "alpaca": {
-        "symbol": "PEPE/USD",
-        "qty": 102971779.71332003,
-        "entry": 4.852e-06,
-        "buy_order": "72255fd5-ca6b-4c54-afce-d058003ecc95",
-        "stop_order": "1ff15e2d-228b-4ee2-9919-adc29b8c3ff6",
-        "stop": 4.463e-06,
-        "status": "open"
-      },
-      "signal_id": "momentum-PEPE-long-2026-11-01"
-    },
     "HYPE": {
       "qty": 6.72715722147289,
       "gross": 6.744017264634476,
@@ -35,24 +17,6 @@
         "error": "Alpaca buy c72d8506-8628-4a5d-9505-ca49a8f72d4d ended as new"
       },
       "signal_id": "momentum-HYPE-long-2026-11-08"
-    },
-    "UNI": {
-      "qty": 73.60746601702357,
-      "gross": 73.79194588172788,
-      "entry": 6.775807224292324,
-      "cost": 500,
-      "stop": 6.233742646348938,
-      "opened": 1794206409407,
-      "alpaca": {
-        "symbol": "UNI/USD",
-        "qty": 73.607466016,
-        "entry": 6.787,
-        "buy_order": "485f4ab8-961a-49bb-8b4e-3db85797a831",
-        "stop_order": "537fa866-7e9e-4a92-96c2-42cfafa62b18",
-        "stop": 6.24404,
-        "status": "open"
-      },
-      "signal_id": "momentum-UNI-long-2026-11-08"
     }
   },
   "history": [
@@ -235,6 +199,50 @@
       "pnl": -42.297125,
       "balance": 8246.21725,
       "reason": "stop-loss"
+    },
+    {
+      "time": "2026-11-12 06:00 UTC",
+      "coin": "PEPE",
+      "action": "sell",
+      "side": "long",
+      "qty": 102971779.71332005,
+      "price": 4.456075259429987e-06,
+      "fee": 1.147125,
+      "pnl": -42.297125,
+      "balance": 8703.920125,
+      "reason": "stop-loss",
+      "alpaca": {
+        "symbol": "PEPE/USD",
+        "qty": 102971779.71332003,
+        "entry": 4.852e-06,
+        "buy_order": "72255fd5-ca6b-4c54-afce-d058003ecc95",
+        "stop_order": "1ff15e2d-228b-4ee2-9919-adc29b8c3ff6",
+        "stop": 4.463e-06,
+        "status": "stopped on Alpaca",
+        "exit": 4.373e-06
+      }
+    },
+    {
+      "time": "2026-11-11 23:00 UTC",
+      "coin": "UNI",
+      "action": "sell",
+      "side": "long",
+      "qty": 73.60746601702357,
+      "price": 6.233742646348938,
+      "fee": 1.147125,
+      "pnl": -42.297125,
+      "balance": 9161.623,
+      "reason": "stop-loss",
+      "alpaca": {
+        "symbol": "UNI/USD",
+        "qty": 73.607466016,
+        "entry": 6.787,
+        "buy_order": "485f4ab8-961a-49bb-8b4e-3db85797a831",
+        "stop_order": "537fa866-7e9e-4a92-96c2-42cfafa62b18",
+        "stop": 6.24404,
+        "status": "stopped on Alpaca",
+        "exit": 6.2363
+      }
     }
   ],
   "equity_history": [
@@ -281,6 +289,10 @@
     {
       "date": "2026-11-10",
       "equity": 9752.48
+    },
+    {
+      "date": "2026-11-11",
+      "equity": 9639.79
     }
   ],
   "last_rebalance": "2026-11-08"

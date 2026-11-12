@@ -1,31 +1,19 @@
 {
   "created": "2026-10-31 20:46 UTC",
   "starting_balance": 10000,
-  "balance": 5758.608309807519,
-  "last_sync": 1794376800000,
+  "balance": 6596.506037595971,
+  "last_sync": 1794466800000,
   "positions": {
-    "kPEPE": {
-      "side": "long",
-      "size": 206398.34881320948,
-      "entry": 0.004845,
-      "leverage": 2,
-      "margin": 499.37262977675994,
-      "mm_rate": 0.05,
-      "stop": 0.0044574,
-      "opened": 1793599954470,
-      "funding": -0.6273702232404532,
-      "signal_id": "momentum-kPEPE-long-2026-11-01"
-    },
     "WLD": {
       "side": "short",
       "size": 2593.831867818328,
       "entry": 0.38553,
       "leverage": 2,
-      "margin": 497.4077172748036,
+      "margin": 497.4233526342335,
       "mm_rate": 0.05,
       "stop": 0.41637240000000003,
       "opened": 1793599954616,
-      "funding": -2.592282725196482,
+      "funding": -2.576647365766606,
       "signal_id": "momentum-WLD-short-2026-11-01"
     },
     "NEAR": {
@@ -33,11 +21,11 @@
       "size": 237.98236750041647,
       "entry": 4.201991981604477,
       "leverage": 2,
-      "margin": 501.60082852570326,
+      "margin": 501.88446282451616,
       "mm_rate": 0.05,
       "stop": 4.538151340132836,
       "opened": 1793599954766,
-      "funding": 1.6008285257035404,
+      "funding": 1.8844628245164843,
       "signal_id": "momentum-NEAR-short-2026-11-01"
     },
     "HYPE": {
@@ -45,35 +33,23 @@
       "size": 13.509132173349183,
       "entry": 74.024,
       "leverage": 2,
-      "margin": 499.70083655798913,
+      "margin": 499.3977198472062,
       "mm_rate": 0.05,
       "stop": 68.10208,
       "opened": 1794206365623,
-      "funding": -0.2991634420106992,
+      "funding": -0.6022801527936885,
       "signal_id": "momentum-HYPE-long-2026-11-08"
-    },
-    "UNI": {
-      "side": "long",
-      "size": 147.44609078980346,
-      "entry": 6.782139795252912,
-      "leverage": 2,
-      "margin": 499.5442423948321,
-      "mm_rate": 0.05,
-      "stop": 6.23956861163268,
-      "opened": 1794206365811,
-      "funding": -0.45575760516813896,
-      "signal_id": "momentum-UNI-long-2026-11-08"
     },
     "TRUMP": {
       "side": "short",
       "size": 873.080310835589,
       "entry": 1.1453700050147064,
       "leverage": 2,
-      "margin": 500.0992258453794,
+      "margin": 500.26873983839465,
       "mm_rate": 0.05,
       "stop": 1.236999605415883,
       "opened": 1794206366444,
-      "funding": 0.09922584537958172,
+      "funding": 0.26873983839488425,
       "signal_id": "momentum-TRUMP-short-2026-11-08"
     },
     "XPL": {
@@ -81,11 +57,11 @@
       "size": 19416.46092308887,
       "entry": 0.051502691657410185,
       "leverage": 2,
-      "margin": 500.50127488779106,
+      "margin": 500.8199155155307,
       "mm_rate": 0.05,
       "stop": 0.055622906990003,
       "opened": 1794206366639,
-      "funding": 0.5012748877909465,
+      "funding": 0.8199155155306197,
       "signal_id": "momentum-XPL-short-2026-11-08"
     },
     "ENA": {
@@ -93,11 +69,11 @@
       "size": 6688.433616480503,
       "entry": 0.14951183750048289,
       "leverage": 2,
-      "margin": 500.5653922565544,
+      "margin": 500.80327510537484,
       "mm_rate": 0.05,
       "stop": 0.16147278450052152,
       "opened": 1794206366825,
-      "funding": 0.5653922565544484,
+      "funding": 0.8032751053749315,
       "signal_id": "momentum-ENA-short-2026-11-08"
     }
   },
@@ -469,6 +445,34 @@
       "funding": -1.667842,
       "balance": 5758.60831,
       "reason": "stop-loss"
+    },
+    {
+      "time": "2026-11-12 06:00 UTC",
+      "coin": "kPEPE",
+      "action": "close",
+      "side": "long",
+      "size": 206398.34881320948,
+      "price": 0.0044574,
+      "leverage": 2,
+      "fee": 0.414,
+      "pnl": -80.0,
+      "funding": -0.620903,
+      "balance": 6177.573406,
+      "reason": "stop-loss"
+    },
+    {
+      "time": "2026-11-11 23:00 UTC",
+      "coin": "UNI",
+      "action": "close",
+      "side": "long",
+      "size": 147.44609078980346,
+      "price": 6.23956861163268,
+      "leverage": 2,
+      "fee": 0.414,
+      "pnl": -80.0,
+      "funding": -0.653369,
+      "balance": 6596.506038,
+      "reason": "stop-loss"
     }
   ],
   "equity_history": [
@@ -519,6 +523,10 @@
     {
       "date": "2026-11-10",
       "equity": 10101.45
+    },
+    {
+      "date": "2026-11-11",
+      "equity": 10003.86
     }
   ]
 }
