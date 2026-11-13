@@ -1,21 +1,21 @@
 # SpikeAI paper trading
 
-_Updated **Thu 12 Nov 2026, 12:17 PKT** (Thu 02:17 ET). Refreshed after every daily run. Paper trading only: no real money._
+_Updated **Fri 13 Nov 2026, 11:50 PKT** (Fri 01:50 ET). Refreshed after every daily run. Paper trading only: no real money._
 
 ## Strategy test: MA crossover vs breakout vs momentum
 
-**45 days left** in the evaluation (until 2026-12-27), then the best strategy is kept.  
+**44 days left** in the evaluation (until 2026-12-27), then the best strategy is kept.  
 Each simulated account started with $10,000. Futures: 2x, long and short, $500 margin per trade. Spot: 1x, buy-only, $500 per buy, copied to Alpaca for coins it lists. Both use an 8% stop.
 
 ### Futures
 
 | Strategy | Value | Return | Below peak | Open | Closed (won) | Fees | Funding |
 |---|--:|--:|--:|--:|--:|--:|--:|
-| 🔵 MA crossover 20/50 | **$10,463.55** | +4.64% | −0.02% | 4 | 0 | $1.80 | +$1.56 |
-| 🟠 Breakout 20/10 | **$10,586.46** | +5.86% | −0.05% | 11 | 3 (0) | $7.73 | +$6.87 |
-| 🟢 Momentum 14d, 5 long/5 short | **$10,001.82** | +0.02% | −2.85% | 6 | 11 (3) | $12.24 | −$0.48 |
+| 🔵 MA crossover 20/50 | **$10,505.69** | +5.06% | at peak | 4 | 0 | $1.80 | +$2.17 |
+| 🟠 Breakout 20/10 | **$10,869.70** | +8.70% | at peak | 13 | 3 (0) | $8.63 | +$8.03 |
+| 🟢 Momentum 14d, 5 long/5 short | **$10,143.86** | +1.44% | −1.47% | 6 | 11 (3) | $12.24 | −$0.24 |
 
-**Futures leader:** 🟠 Breakout 20/10, $122.91 ahead of MA crossover 20/50.
+**Futures leader:** 🟠 Breakout 20/10, $364.01 ahead of MA crossover 20/50.
 
 ### Spot
 
@@ -23,7 +23,7 @@ Each simulated account started with $10,000. Futures: 2x, long and short, $500 m
 |---|--:|--:|--:|--:|--:|--:|--:|
 | 🔵 MA crossover 20/50 | **$10,000.00** | 0.00% | at peak | 0 | 0 | $0.00 | 0 |
 | 🟠 Breakout 20/10 | **$10,000.00** | 0.00% | at peak | 0 | 0 | $0.00 | 0 |
-| 🟢 Momentum 14d, 5 long/5 short | **$9,639.79** | −3.60% | −3.60% | 1 | 8 (0) | $20.43 | 0 |
+| 🟢 Momentum 14d, 5 long/5 short | **$9,643.96** | −3.56% | −3.56% | 1 | 8 (0) | $20.43 | 0 |
 
 _Spot: no clear leader yet._
 
@@ -48,7 +48,8 @@ _Solid lines = futures, dashed = spot._
 | 2026-11-09 | $10,397.12 | $10,331.10 | $10,239.06 | $10,000.00 | $10,000.00 | $9,837.31 |
 | 2026-11-10 | $10,416.71 | $10,474.48 | $10,101.45 | $10,000.00 | $10,000.00 | $9,752.48 |
 | 2026-11-11 | $10,465.16 | $10,591.82 | $10,003.86 | $10,000.00 | $10,000.00 | $9,639.79 |
-| now | $10,463.55 | $10,586.46 | $10,001.82 | $10,000.00 | $10,000.00 | $9,639.79 |
+| 2026-11-12 | $10,502.65 | $10,863.61 | $10,142.84 | $10,000.00 | $10,000.00 | $9,643.96 |
+| now | $10,505.69 | $10,869.70 | $10,143.86 | $10,000.00 | $10,000.00 | $9,643.96 |
 
 </details>
 
@@ -56,28 +57,30 @@ _Solid lines = futures, dashed = spot._
 
 | Strategy | Coin | Side | Entry → now | Profit | To stop | To liquidation / Alpaca |
 |---|---|---|---|--:|--:|--:|
-| 🔵 MA | **SUI** | ▼ Short | 0.89681 → 0.814 | +$92.34 (+18.4%) | ✅ 19.0% | ✅ 57.6% |
-| 🔵 MA | **WLD** | ▼ Short | 0.38553 → 0.307 | +$203.69 (+40.9%) | ✅ 35.6% | ✅ 79.1% |
-| 🔵 MA | **NEAR** | ▼ Short | 4.0459 → 3.5218 | +$129.54 (+25.8%) | ✅ 24.1% | ✅ 64.3% |
-| 🔵 MA | **ZRO** | ▼ Short | 1.6048 → 1.5435 | +$38.21 (+7.6%) | ✅ 12.3% | ✅ 41.9% |
-| 🟠 Breakout | **SOL** | ▼ Short | 91.244 → 82.773 | +$92.84 (+18.5%) | ✅ 19.1% | ✅ 61.4% |
-| 🟠 Breakout | **XPL** | ▼ Short | 0.062812 → 0.05104 | +$187.41 (+37.3%) | ✅ 32.9% | ✅ 76.0% |
-| 🟠 Breakout | **NEAR** | ▼ Short | 3.6822 → 3.5218 | +$43.56 (+8.7%) | ✅ 12.9% | ✅ 49.5% |
-| 🟠 Breakout | **ENA** | ▼ Short | 0.1646 → 0.1428 | +$132.45 (+26.4%) | ✅ 24.5% | ✅ 64.8% |
-| 🟠 Breakout | **WLD** | ▼ Short | 0.34441 → 0.307 | +$108.63 (+21.8%) | ✅ 21.2% | ✅ 60.1% |
-| 🟠 Breakout | **XRP** | ▼ Short | 1.1619 → 1.0435 | +$101.86 (+20.4%) | ✅ 20.2% | ✅ 63.0% |
-| 🟠 Breakout | **PUMP** | ▼ Short | 0.003674 → 0.003437 | +$64.51 (+12.9%) | ✅ 15.4% | ✅ 52.8% |
-| 🟠 Breakout | **SUI** | ▼ Short | 0.81988 → 0.814 | +$7.18 (+1.4%) | ✅ 8.8% | ✅ 43.9% |
-| 🟠 Breakout | **HYPE** | ▼ Short | 71.8649 → 71.106 | +$10.56 (+2.1%) | ✅ 9.2% | ✅ 44.4% |
-| 🟠 Breakout | **ZEC** | ▼ Short | 1,003.70 → 986.48 | +$17.16 (+3.4%) | ✅ 9.9% | ✅ 45.4% |
-| 🟠 Breakout | **UNI** | ▼ Short | 6.1326 → 6.1355 | −$0.47 (−0.1%) | ✅ 7.9% | ✅ 42.8% |
-| 🟢 Momentum | **WLD** | ▼ Short | 0.38553 → 0.307 | +$203.69 (+40.9%) | ✅ 35.6% | ✅ 79.1% |
-| 🟢 Momentum | **NEAR** | ▼ Short | 4.202 → 3.5218 | +$161.87 (+32.3%) | ✅ 28.9% | ✅ 70.7% |
-| 🟢 Momentum | **HYPE** | ▲ Long | 74.024 → 71.106 | −$39.42 (−7.9%) | ⚠️ 4.2% | ✅ 45.1% |
-| 🟢 Momentum | **TRUMP** | ▼ Short | 1.1454 → 1.1171 | +$24.68 (+4.9%) | ✅ 10.7% | ✅ 46.5% |
-| 🟢 Momentum | **XPL** | ▼ Short | 0.051503 → 0.05104 | +$8.98 (+1.8%) | ✅ 9.0% | ✅ 44.2% |
-| 🟢 Momentum | **ENA** | ▼ Short | 0.14951 → 0.1428 | +$44.91 (+9.0%) | ✅ 13.1% | ✅ 49.7% |
-| 🟢 Momentum (spot) | **HYPE** | ▲ Long | 74.1398 → 71.08 | −$23.03 (−4.6%) | ⚠️ 4.0% | 🔴 copy failed |
+| 🔵 MA | **SUI** | ▼ Short | 0.89681 → 0.78884 | +$120.39 (+24.0%) | ✅ 22.8% | ✅ 62.6% |
+| 🔵 MA | **WLD** | ▼ Short | 0.38553 → 0.29634 | +$231.34 (+46.5%) | ✅ 40.5% | ✅ 85.5% |
+| 🔵 MA | **NEAR** | ▼ Short | 4.0459 → 3.4586 | +$145.16 (+28.9%) | ✅ 26.3% | ✅ 67.3% |
+| 🔵 MA | **ZRO** | ▼ Short | 1.6048 → 1.5913 | +$8.43 (+1.7%) | ✅ 8.9% | ✅ 37.6% |
+| 🟠 Breakout | **SOL** | ▼ Short | 91.244 → 79.77 | +$125.75 (+25.1%) | ✅ 23.5% | ✅ 67.5% |
+| 🟠 Breakout | **XPL** | ▼ Short | 0.062812 → 0.050171 | +$201.25 (+40.1%) | ✅ 35.2% | ✅ 79.1% |
+| 🟠 Breakout | **NEAR** | ▼ Short | 3.6822 → 3.4586 | +$60.72 (+12.1%) | ✅ 15.0% | ✅ 52.2% |
+| 🟠 Breakout | **ENA** | ▼ Short | 0.1646 → 0.13712 | +$166.95 (+33.3%) | ✅ 29.6% | ✅ 71.6% |
+| 🟠 Breakout | **WLD** | ▼ Short | 0.34441 → 0.29634 | +$139.58 (+28.0%) | ✅ 25.5% | ✅ 65.9% |
+| 🟠 Breakout | **XRP** | ▼ Short | 1.1619 → 1.0207 | +$121.53 (+24.3%) | ✅ 22.9% | ✅ 66.7% |
+| 🟠 Breakout | **PUMP** | ▼ Short | 0.003674 → 0.003399 | +$74.85 (+14.9%) | ✅ 16.7% | ✅ 54.5% |
+| 🟠 Breakout | **SUI** | ▼ Short | 0.81988 → 0.78884 | +$37.86 (+7.6%) | ✅ 12.3% | ✅ 48.5% |
+| 🟠 Breakout | **HYPE** | ▼ Short | 71.8649 → 71.655 | +$2.92 (+0.6%) | ✅ 8.3% | ✅ 43.3% |
+| 🟠 Breakout | **ZEC** | ▼ Short | 1,003.70 → 942.39 | +$61.08 (+12.2%) | ✅ 15.0% | ✅ 52.2% |
+| 🟠 Breakout | **UNI** | ▼ Short | 6.1326 → 5.7823 | +$57.12 (+11.4%) | ✅ 14.5% | ✅ 51.5% |
+| 🟠 Breakout | **BNB** | ▼ Short | 632.05 → 632.33 | −$0.44 (−0.1%) | ✅ 8.0% | ✅ 42.8% |
+| 🟠 Breakout | **AAVE** | ▼ Short | 111.00 → 111.06 | −$0.51 (−0.1%) | ✅ 7.9% | ✅ 42.8% |
+| 🟢 Momentum | **WLD** | ▼ Short | 0.38553 → 0.29634 | +$231.34 (+46.5%) | ✅ 40.5% | ✅ 85.5% |
+| 🟢 Momentum | **NEAR** | ▼ Short | 4.202 → 3.4586 | +$176.91 (+35.2%) | ✅ 31.2% | ✅ 73.8% |
+| 🟢 Momentum | **HYPE** | ▲ Long | 74.024 → 71.655 | −$32.00 (−6.4%) | ⚠️ 5.0% | ✅ 45.5% |
+| 🟢 Momentum | **TRUMP** | ▼ Short | 1.1454 → 1.0749 | +$61.53 (+12.3%) | ✅ 15.1% | ✅ 52.3% |
+| 🟢 Momentum | **XPL** | ▼ Short | 0.051503 → 0.050171 | +$25.86 (+5.2%) | ✅ 10.9% | ✅ 46.8% |
+| 🟢 Momentum | **ENA** | ▼ Short | 0.14951 → 0.13712 | +$82.88 (+16.6%) | ✅ 17.8% | ✅ 55.8% |
+| 🟢 Momentum (spot) | **HYPE** | ▲ Long | 74.1398 → 71.7 | −$18.87 (−3.8%) | ⚠️ 4.9% | 🔴 copy failed |
 
 _Distance = how far the price can still move against the position. ✅ over 5% · ⚠️ 2–5% · 🔴 under 2%. Spot can't be liquidated; its last column shows whether the trade is copied to Alpaca._
 
@@ -85,6 +88,8 @@ _Distance = how far the price can still move against the position. ✅ over 5% �
 
 | Time (PKT) | Strategy | Coin | What | Price | Result |
 |---|---|---|---|--:|--:|
+| Fri 13 Nov, 11:49 | 🟠 Breakout | **BNB** | Opened short | 632.05 | fee $0.45 |
+| Fri 13 Nov, 11:49 | 🟠 Breakout | **AAVE** | Opened short | 111.00 | fee $0.45 |
 | Thu 12 Nov, 12:16 | 🟠 Breakout | **UNI** | Opened short | 6.1326 | fee $0.45 |
 | Thu 12 Nov, 11:00 | 🟢 Momentum | **kPEPE** | Stopped out | 0.0044574 | −$81.03 |
 | Thu 12 Nov, 11:00 | 🟢 Momentum (spot) | **PEPE** | Stopped out (Alpaca: stopped on Alpaca) | 0.0000044561 | −$42.30 |
@@ -98,35 +103,33 @@ _Distance = how far the price can still move against the position. ✅ over 5% �
 | Tue 10 Nov, 20:00 | 🟢 Momentum (spot) | **ZEC** | Stopped out | 1,124.59 | −$42.30 |
 | Tue 10 Nov, 15:00 | 🟢 Momentum | **XMR** | Stopped out | 546.31 | −$82.08 |
 | Tue 10 Nov, 15:00 | 🟢 Momentum (spot) | **XMR** | Stopped out | 545.98 | −$42.30 |
-| Mon 09 Nov, 11:40 | 🟢 Momentum (spot) | **UNI** | Bought | 6.7758 | fee $1.25 |
-| Mon 09 Nov, 11:40 | 🟢 Momentum (spot) | **ZEC** | Bought | 1,222.38 | fee $1.25 |
 
-### Signal board (daily candle of 2026-11-11)
+### Signal board (daily candle of 2026-11-12)
 
 What each strategy sees per coin. 🔔 = the condition for a trade is met.
 
 | Coin | MA: 20d vs 50d | Breakout: vs 20-day range | Momentum: 14d return |
 |---|---|---|---|
-| **HYPE** | below (−4.1%) | +34.8% to high / −2.5% to low | −10.6% (#7) |
-| **ZEC** | below (−4.7%) | 🔔 below 20d low | −26.5% (#16) 🔔 bottom 5: short |
-| **SOL** | below (−10.7%) | +29.1% to high / −2.4% to low | −18.7% (#11) |
-| **NEAR** | below (−11.7%) | +48.8% to high / −3.9% to low | −24.3% (#15) |
-| **XRP** | below (−8.8%) | +30.2% to high / −2.0% to low | −20.6% (#13) |
-| **XMR** | above (+4.6%) | +13.8% to high / −7.3% to low | −2.9% (#2) 🔔 top 5: long |
-| **PUMP** | below (−14.3%) | +50.4% to high / −3.6% to low | −23.6% (#14) |
-| **LIT** | below (−10.7%) | +20.3% to high / −21.2% to low | +10.8% (#1) 🔔 top 5: long |
-| **kPEPE** | above (+7.6%) | +26.2% to high / −7.0% to low | −10.1% (#4) 🔔 top 5: long |
-| **WLD** | below (−17.7%) | +92.3% to high / −1.4% to low | −29.9% (#17) 🔔 bottom 5: short |
-| **ENA** | below (−13.5%) | +49.8% to high / −0.8% to low | −30.6% (#18) 🔔 bottom 5: short |
-| **UNI** | below (−9.3%) | 🔔 below 20d low | −14.1% (#10) |
-| **TRUMP** | below (−16.5%) | +65.6% to high / −2.6% to low | −35.0% (#20) 🔔 bottom 5: short |
-| **XPL** | below (−17.6%) | +67.2% to high / −3.3% to low | −32.8% (#19) 🔔 bottom 5: short |
-| **BNB** | below (−3.6%) | +12.2% to high / −1.4% to low | −10.6% (#6) |
-| **SUI** | below (−12.3%) | +26.1% to high / −2.5% to low | −12.9% (#8) |
-| **AAVE** | below (−12.3%) | +29.4% to high / −4.5% to low | −10.1% (#5) 🔔 top 5: long |
-| **ZRO** | below (−6.8%) | +28.7% to high / −8.0% to low | −9.2% (#3) 🔔 top 5: long |
-| **LINK** | below (−10.3%) | +23.8% to high / −1.0% to low | −13.8% (#9) |
-| **VVV** | below (−8.8%) | +44.1% to high / −7.1% to low | −18.8% (#12) |
+| **HYPE** | below (−3.9%) | +33.6% to high / −3.3% to low | −18.3% (#15) |
+| **ZEC** | below (−4.8%) | +46.3% to high / −0.6% to low | −21.8% (#18) 🔔 bottom 5: short |
+| **SOL** | below (−11.1%) | +28.8% to high / −0.5% to low | −14.6% (#11) |
+| **NEAR** | below (−12.7%) | 🔔 below 20d low | −15.6% (#13) |
+| **XRP** | below (−9.1%) | +29.1% to high / −1.0% to low | −15.9% (#14) |
+| **XMR** | above (+4.3%) | +20.5% to high / −1.4% to low | −9.8% (#9) |
+| **PUMP** | below (−15.0%) | +34.6% to high / −4.1% to low | −11.7% (#10) |
+| **LIT** | below (−9.5%) | +11.1% to high / −20.3% to low | +19.1% (#1) 🔔 top 5: long |
+| **kPEPE** | above (+7.5%) | +26.0% to high / −7.1% to low | −0.7% (#3) 🔔 top 5: long |
+| **WLD** | below (−19.3%) | +86.9% to high / −0.7% to low | −21.2% (#17) 🔔 bottom 5: short |
+| **ENA** | below (−14.4%) | 🔔 below 20d low | −19.9% (#16) 🔔 bottom 5: short |
+| **UNI** | below (−9.2%) | 🔔 below 20d low | −6.2% (#7) |
+| **TRUMP** | below (−17.4%) | +61.6% to high / −1.8% to low | −28.3% (#19) 🔔 bottom 5: short |
+| **XPL** | below (−18.4%) | +72.0% to high / −0.5% to low | −30.9% (#20) 🔔 bottom 5: short |
+| **BNB** | below (−3.9%) | 🔔 below 20d low | −5.8% (#6) |
+| **SUI** | below (−12.7%) | +24.6% to high / −0.5% to low | −7.4% (#8) |
+| **AAVE** | below (−13.0%) | 🔔 below 20d low | −4.4% (#4) 🔔 top 5: long |
+| **ZRO** | below (−7.3%) | +25.8% to high / −8.5% to low | +1.9% (#2) 🔔 top 5: long |
+| **LINK** | below (−10.7%) | +21.0% to high / −1.3% to low | −4.4% (#5) 🔔 top 5: long |
+| **VVV** | below (−9.2%) | +39.0% to high / −3.7% to low | −14.8% (#12) |
 
 _Momentum trades its top/bottom 5 at the Monday rebalance; MA and breakout act at each daily run. Spot uses the same signals but only buys: a short signal just sells what it holds._
 
@@ -138,8 +141,8 @@ _The 20 most-traded Hyperliquid futures over the past week, excluding BTC and ET
 
 ## Alpaca paper account
 
-Value **$49,597.16** · cash $47,004.76 · account ending YUU8  
-Holding: 2 MU (−$308.46), 7e-09 PEPEUSD ($0.00)
+Value **$49,600.06** · cash $47,004.76 · account ending YUU8  
+Holding: 2 MU (−$305.56), 7e-09 PEPEUSD ($0.00)
 
 **0** simulated spot trade(s) copied and open · 🔴 1 copy error(s): see the spot log. Copies use the same number of coins as the simulation, with a real stop order on Alpaca.
 
