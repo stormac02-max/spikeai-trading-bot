@@ -1,24 +1,9 @@
 {
   "created": "2026-11-01 00:43 UTC",
   "starting_balance": 10000,
-  "balance": 9161.623000000003,
-  "last_sync": 1794549600000,
-  "positions": {
-    "HYPE": {
-      "qty": 6.72715722147289,
-      "gross": 6.744017264634476,
-      "entry": 74.13978647741494,
-      "cost": 500,
-      "stop": 68.20860355922176,
-      "opened": 1794206378868,
-      "alpaca": {
-        "symbol": "HYPE/USD",
-        "status": "error",
-        "error": "Alpaca buy c72d8506-8628-4a5d-9505-ca49a8f72d4d ended as new"
-      },
-      "signal_id": "momentum-HYPE-long-2026-11-08"
-    }
-  },
+  "balance": 9619.325875000004,
+  "last_sync": 1794636000000,
+  "positions": {},
   "history": [
     {
       "time": "2026-11-02 06:12 UTC",
@@ -243,6 +228,18 @@
         "status": "stopped on Alpaca",
         "exit": 6.2363
       }
+    },
+    {
+      "time": "2026-11-14 03:00 UTC",
+      "coin": "HYPE",
+      "action": "sell",
+      "side": "long",
+      "qty": 6.72715722147289,
+      "price": 68.20860355922176,
+      "fee": 1.147125,
+      "pnl": -42.297125,
+      "balance": 9619.325875,
+      "reason": "stop-loss"
     }
   ],
   "equity_history": [
@@ -297,6 +294,10 @@
     {
       "date": "2026-11-12",
       "equity": 9643.96
+    },
+    {
+      "date": "2026-11-13",
+      "equity": 9619.33
     }
   ],
   "last_rebalance": "2026-11-08"

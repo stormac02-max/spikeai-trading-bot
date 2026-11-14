@@ -1,19 +1,19 @@
 {
   "created": "2026-10-31 20:46 UTC",
   "starting_balance": 10000,
-  "balance": 6596.506037595971,
-  "last_sync": 1794549600000,
+  "balance": 7015.0250890757015,
+  "last_sync": 1794636000000,
   "positions": {
     "WLD": {
       "side": "short",
       "size": 2593.831867818328,
       "entry": 0.38553,
       "leverage": 2,
-      "margin": 497.37649734616514,
+      "margin": 496.89036856311833,
       "mm_rate": 0.05,
       "stop": 0.41637240000000003,
       "opened": 1793599954616,
-      "funding": -2.623502653834979,
+      "funding": -3.1096314368816933,
       "signal_id": "momentum-WLD-short-2026-11-01"
     },
     "NEAR": {
@@ -21,35 +21,23 @@
       "size": 237.98236750041647,
       "entry": 4.201991981604477,
       "leverage": 2,
-      "margin": 502.11820791596307,
+      "margin": 502.35819396101624,
       "mm_rate": 0.05,
       "stop": 4.538151340132836,
       "opened": 1793599954766,
-      "funding": 2.118207915963556,
+      "funding": 2.3581939610166334,
       "signal_id": "momentum-NEAR-short-2026-11-01"
-    },
-    "HYPE": {
-      "side": "long",
-      "size": 13.509132173349183,
-      "entry": 74.024,
-      "leverage": 2,
-      "margin": 499.1415782709067,
-      "mm_rate": 0.05,
-      "stop": 68.10208,
-      "opened": 1794206365623,
-      "funding": -0.858421729093267,
-      "signal_id": "momentum-HYPE-long-2026-11-08"
     },
     "TRUMP": {
       "side": "short",
       "size": 873.080310835589,
       "entry": 1.1453700050147064,
       "leverage": 2,
-      "margin": 500.3133527070975,
+      "margin": 500.0105150113561,
       "mm_rate": 0.05,
       "stop": 1.236999605415883,
       "opened": 1794206366444,
-      "funding": 0.3133527070978184,
+      "funding": 0.010515011356391664,
       "signal_id": "momentum-TRUMP-short-2026-11-08"
     },
     "XPL": {
@@ -57,11 +45,11 @@
       "size": 19416.46092308887,
       "entry": 0.051502691657410185,
       "leverage": 2,
-      "margin": 501.0963865026145,
+      "margin": 501.38698029525654,
       "mm_rate": 0.05,
       "stop": 0.055622906990003,
       "opened": 1794206366639,
-      "funding": 1.096386502614482,
+      "funding": 1.386980295256515,
       "signal_id": "momentum-XPL-short-2026-11-08"
     },
     "ENA": {
@@ -69,11 +57,11 @@
       "size": 6688.433616480503,
       "entry": 0.14951183750048289,
       "leverage": 2,
-      "margin": 500.7920956785887,
+      "margin": 500.92441556287156,
       "mm_rate": 0.05,
       "stop": 0.16147278450052152,
       "opened": 1794206366825,
-      "funding": 0.7920956785887776,
+      "funding": 0.9244155628717603,
       "signal_id": "momentum-ENA-short-2026-11-08"
     }
   },
@@ -473,6 +461,20 @@
       "funding": -0.653369,
       "balance": 6596.506038,
       "reason": "stop-loss"
+    },
+    {
+      "time": "2026-11-14 03:00 UTC",
+      "coin": "HYPE",
+      "action": "close",
+      "side": "long",
+      "size": 13.509132173349183,
+      "price": 68.10208,
+      "leverage": 2,
+      "fee": 0.414,
+      "pnl": -80.0,
+      "funding": -1.066949,
+      "balance": 7015.025089,
+      "reason": "stop-loss"
     }
   ],
   "equity_history": [
@@ -531,6 +533,10 @@
     {
       "date": "2026-11-12",
       "equity": 10142.84
+    },
+    {
+      "date": "2026-11-13",
+      "equity": 10203.16
     }
   ]
 }
