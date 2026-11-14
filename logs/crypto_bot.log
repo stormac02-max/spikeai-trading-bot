@@ -37,3 +37,6 @@
 2026-11-13 11:32:58,416 INFO ---- Crypto run started ----
 2026-11-13 11:32:58,857 INFO Paper account ending YUU8: cash 47004.76, crypto buying power 47793.69
 2026-11-13 11:32:58,858 INFO No coins on the watchlist yet; add them to symbols in crypto_config.toml.
+2026-11-14 11:11:08,120 INFO ---- Crypto run started ----
+2026-11-14 11:11:08,219 INFO Paper account ending YUU8: cash 47004.76, crypto buying power 47783.07
+2026-11-14 11:11:08,219 INFO No coins on the watchlist yet; add them to symbols in crypto_config.toml.
