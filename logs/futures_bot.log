@@ -149,3 +149,16 @@
 2026-11-14 11:29:24,711 INFO [Momentum 14d, 5 long/5 short] 0 signal(s) | equity 10,203.16 (+2.0%, 0.9% below peak) | cash 7,015.03 | open: WLD short, NEAR short, TRUMP short, XPL short, ENA short
 2026-11-14 11:29:24,712 INFO Scoreboard: MA crossover 20/50 10,569 | Breakout 20/10 11,143 | Momentum 14d, 5 long/5 short 10,203
 2026-11-14 11:29:24,712 INFO Evaluation runs until 2026-12-27; then the best strategy is kept.
+2026-11-15 11:38:10,368 INFO ---- Futures run started ----
+2026-11-15 11:38:20,208 INFO Signals use the day ending 2026-11-15 00:00 UTC; 20 coins in the universe
+2026-11-15 11:38:21,649 INFO [MA crossover 20/50] 0 signal(s) | equity 10,842.64 (+8.4%, -0.0% below peak) | cash 7,998.20 | open: SUI short, WLD short, NEAR short, ZRO short
+2026-11-15 11:38:26,298 INFO XMR: opened short 2.03736 @ 490.832, 2x, margin 500.00, fee 0.45, stop 530.099, liquidation 669.316
+2026-11-15 11:38:26,506 INFO kPEPE: opened short 254842 @ 0.003924, 2x, margin 500.00, fee 0.45, stop 0.00423792, liquidation 0.00560571
+2026-11-15 11:38:26,649 INFO TRUMP: opened short 1064.18 @ 0.939689, 2x, margin 500.00, fee 0.45, stop 1.01486, liquidation 1.34241
+2026-11-15 11:38:26,795 INFO ZRO: opened short 686.722 @ 1.45619, 2x, margin 500.00, fee 0.45, stop 1.57269, liquidation 1.98572
+2026-11-15 11:38:26,957 INFO LINK: opened short 110.075 @ 9.08468, 2x, margin 500.00, fee 0.45, stop 9.81145, liquidation 12.9781
+2026-11-15 11:38:27,106 INFO VVV: opened short 51.4271 @ 19.445, 2x, margin 500.00, fee 0.45, stop 21.0006, liquidation 25.0007
+2026-11-15 11:38:27,106 INFO [Breakout 20/10] 6 signal(s) | equity 12,031.38 (+20.3%, -0.0% below peak) | cash 311.25 | open: SOL short, XPL short, NEAR short, ENA short, WLD short, XRP short, PUMP short, SUI short, HYPE short, ZEC short, UNI short, BNB short, AAVE short, XMR short, kPEPE short, TRUMP short, ZRO short, LINK short, VVV short
+2026-11-15 11:38:28,695 INFO [Momentum 14d, 5 long/5 short] 0 signal(s) | equity 10,629.43 (+6.3%, -0.0% below peak) | cash 7,015.03 | open: WLD short, NEAR short, TRUMP short, XPL short, ENA short
+2026-11-15 11:38:28,696 INFO Scoreboard: MA crossover 20/50 10,843 | Breakout 20/10 12,031 | Momentum 14d, 5 long/5 short 10,629
+2026-11-15 11:38:28,696 INFO Evaluation runs until 2026-12-27; then the best strategy is kept.
