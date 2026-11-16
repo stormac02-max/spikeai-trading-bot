@@ -1,26 +1,26 @@
 {
-  "refreshed": "2026-11-09",
+  "refreshed": "2026-11-16",
   "kind": "weekly",
   "coins": [
     "HYPE",
     "ZEC",
     "SOL",
-    "NEAR",
     "XRP",
+    "NEAR",
+    "kPEPE",
     "XMR",
     "PUMP",
     "LIT",
-    "kPEPE",
-    "WLD",
-    "ENA",
+    "AVAX",
     "UNI",
-    "TRUMP",
-    "XPL",
-    "BNB",
+    "ENA",
+    "DOGE",
     "SUI",
+    "BNB",
+    "GRAM",
+    "VVV",
+    "WLD",
     "AAVE",
-    "ZRO",
-    "LINK",
-    "VVV"
+    "ZRO"
   ]
 }

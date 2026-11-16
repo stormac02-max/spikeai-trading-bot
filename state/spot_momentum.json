@@ -1,9 +1,58 @@
 {
   "created": "2026-11-01 00:43 UTC",
   "starting_balance": 10000,
-  "balance": 9619.325875000004,
-  "last_sync": 1794722400000,
-  "positions": {},
+  "balance": 7619.325875000004,
+  "last_sync": 1794808800000,
+  "positions": {
+    "BNB": {
+      "qty": 0.8456019338950866,
+      "gross": 0.8477212369875555,
+      "entry": 589.8165318787926,
+      "cost": 500,
+      "stop": 542.6312093284893,
+      "opened": 1794810982869,
+      "alpaca": null,
+      "signal_id": "momentum-BNB-long-2026-11-15"
+    },
+    "AVAX": {
+      "qty": 70.18716577540107,
+      "gross": 70.36307345904869,
+      "entry": 7.106,
+      "cost": 500,
+      "stop": 6.53752,
+      "opened": 1794810982991,
+      "alpaca": {
+        "symbol": "AVAX/USD",
+        "qty": 70.187165775,
+        "entry": 7.11072,
+        "buy_order": "326198e6-981b-45aa-833b-5b00cae4855c",
+        "stop_order": "595aaaf2-a371-4745-8d40-0bb93f95a231",
+        "stop": 6.5418624,
+        "status": "open"
+      },
+      "signal_id": "momentum-AVAX-long-2026-11-15"
+    },
+    "VVV": {
+      "qty": 24.8749145855775,
+      "gross": 24.937257729902253,
+      "entry": 20.050320103980408,
+      "cost": 500,
+      "stop": 18.446294495661977,
+      "opened": 1794810984282,
+      "alpaca": null,
+      "signal_id": "momentum-VVV-long-2026-11-15"
+    },
+    "LIT": {
+      "qty": 6530.691997480367,
+      "gross": 6547.059646596858,
+      "entry": 0.07637016110887251,
+      "cost": 500,
+      "stop": 0.07026054822016271,
+      "opened": 1794810984411,
+      "alpaca": null,
+      "signal_id": "momentum-LIT-long-2026-11-15"
+    }
+  },
   "history": [
     {
       "time": "2026-11-02 06:12 UTC",
@@ -240,6 +289,54 @@
       "pnl": -42.297125,
       "balance": 9619.325875,
       "reason": "stop-loss"
+    },
+    {
+      "time": "2026-11-16 06:36 UTC",
+      "coin": "BNB",
+      "action": "buy",
+      "side": "long",
+      "qty": 0.8456019338950866,
+      "price": 589.8165318787926,
+      "fee": 1.25,
+      "pnl": 0.0,
+      "balance": 9119.325875,
+      "signal_id": "momentum-BNB-long-2026-11-15"
+    },
+    {
+      "time": "2026-11-16 06:36 UTC",
+      "coin": "AVAX",
+      "action": "buy",
+      "side": "long",
+      "qty": 70.18716577540107,
+      "price": 7.106,
+      "fee": 1.25,
+      "pnl": 0.0,
+      "balance": 8619.325875,
+      "signal_id": "momentum-AVAX-long-2026-11-15"
+    },
+    {
+      "time": "2026-11-16 06:36 UTC",
+      "coin": "VVV",
+      "action": "buy",
+      "side": "long",
+      "qty": 24.8749145855775,
+      "price": 20.050320103980408,
+      "fee": 1.25,
+      "pnl": 0.0,
+      "balance": 8119.325875,
+      "signal_id": "momentum-VVV-long-2026-11-15"
+    },
+    {
+      "time": "2026-11-16 06:36 UTC",
+      "coin": "LIT",
+      "action": "buy",
+      "side": "long",
+      "qty": 6530.691997480367,
+      "price": 0.07637016110887251,
+      "fee": 1.25,
+      "pnl": 0.0,
+      "balance": 7619.325875,
+      "signal_id": "momentum-LIT-long-2026-11-15"
     }
   ],
   "equity_history": [
@@ -302,7 +399,11 @@
     {
       "date": "2026-11-14",
       "equity": 9619.33
+    },
+    {
+      "date": "2026-11-15",
+      "equity": 9614.19
     }
   ],
-  "last_rebalance": "2026-11-08"
+  "last_rebalance": "2026-11-15"
 }
