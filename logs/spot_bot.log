@@ -124,3 +124,9 @@
 2026-11-16 11:36:24,411 INFO LIT: bought 6530.692 @ 0.0763702 for $500.00 (fee $1.25), stop 0.0702605
 2026-11-16 11:36:24,542 INFO [Momentum 14d, 5 long/5 short, spot] 5 signal(s) | equity 9,614.19 (-3.9%) | cash 7,619.33 | holding: BNB, AVAX, VVV, LIT | on Alpaca: 1
 2026-11-16 11:36:24,543 INFO Spot scoreboard: MA crossover 20/50 10,000 | Breakout 20/10 10,000 | Momentum 14d, 5 long/5 short 9,614
+2026-11-17 12:58:42,418 INFO ---- Spot run started ----
+2026-11-17 12:58:43,024 INFO Alpaca lists 8 of this week's coins: HYPE, SOL, XRP, PEPE, AVAX, UNI, DOGE, AAVE
+2026-11-17 12:58:52,226 INFO [MA crossover 20/50, spot] 0 signal(s) | equity 10,000.00 (+0.0%) | cash 10,000.00 | holding: none | on Alpaca: 0
+2026-11-17 12:58:52,241 INFO [Breakout 20/10, spot] 0 signal(s) | equity 10,000.00 (+0.0%) | cash 10,000.00 | holding: none | on Alpaca: 0
+2026-11-17 12:58:54,743 INFO [Momentum 14d, 5 long/5 short, spot] 0 signal(s) | equity 9,678.18 (-3.2%) | cash 7,619.33 | holding: BNB, AVAX, VVV, LIT | on Alpaca: 1
+2026-11-17 12:58:54,744 INFO Spot scoreboard: MA crossover 20/50 10,000 | Breakout 20/10 10,000 | Momentum 14d, 5 long/5 short 9,678
