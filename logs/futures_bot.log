@@ -201,3 +201,10 @@
 2026-11-18 12:34:06,173 INFO [Momentum 14d, 5 long/5 short] 0 signal(s) | equity 10,654.51 (+6.5%, 0.0% below peak) | cash 5,950.15 | open: WLD short, ENA short, BNB long, AVAX long, GRAM long, VVV long, PUMP short, UNI short
 2026-11-18 12:34:06,174 INFO Scoreboard: MA crossover 20/50 10,823 | Breakout 20/10 11,790 | Momentum 14d, 5 long/5 short 10,655
 2026-11-18 12:34:06,174 INFO Evaluation runs until 2026-12-27; then the best strategy is kept.
+2026-11-19 12:30:07,122 INFO ---- Futures run started ----
+2026-11-19 12:30:17,892 INFO Signals use the day ending 2026-11-19 00:00 UTC; 20 coins in the universe
+2026-11-19 12:30:19,597 INFO [MA crossover 20/50] 0 signal(s) | equity 10,770.65 (+7.7%, 1.0% below peak) | cash 7,998.20 | open: SUI short, WLD short, NEAR short, ZRO short
+2026-11-19 12:30:25,995 INFO [Breakout 20/10] 0 signal(s) | equity 11,796.49 (+18.0%, 2.2% below peak) | cash 2,549.97 | open: SOL short, NEAR short, ENA short, WLD short, XRP short, PUMP short, SUI short, HYPE short, ZEC short, UNI short, BNB short, AAVE short, XMR short, kPEPE short, ZRO short
+2026-11-19 12:30:29,393 INFO [Momentum 14d, 5 long/5 short] 0 signal(s) | equity 10,712.06 (+7.1%, -0.0% below peak) | cash 5,950.15 | open: WLD short, ENA short, BNB long, AVAX long, GRAM long, VVV long, PUMP short, UNI short
+2026-11-19 12:30:29,395 INFO Scoreboard: MA crossover 20/50 10,771 | Breakout 20/10 11,796 | Momentum 14d, 5 long/5 short 10,712
+2026-11-19 12:30:29,395 INFO Evaluation runs until 2026-12-27; then the best strategy is kept.
