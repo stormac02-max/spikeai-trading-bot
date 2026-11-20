@@ -1,19 +1,19 @@
 {
   "created": "2026-10-31 20:46 UTC",
   "starting_balance": 10000,
-  "balance": 7998.199999999998,
-  "last_sync": 1795071600000,
+  "balance": 7497.749999999998,
+  "last_sync": 1795158000000,
   "positions": {
     "SUI": {
       "side": "short",
       "size": 1115.0633913537986,
       "entry": 0.89681,
       "leverage": 2,
-      "margin": 501.345671937974,
+      "margin": 501.30116889822756,
       "mm_rate": 0.05,
       "stop": 0.9685548,
       "opened": 1793479572393,
-      "funding": 1.3456719379734832,
+      "funding": 1.3011688982270484,
       "signal_id": "ma_crossover-SUI-short-2026-10-30"
     },
     "WLD": {
@@ -21,11 +21,11 @@
       "size": 2593.831867818328,
       "entry": 0.38553,
       "leverage": 2,
-      "margin": 494.28356949769926,
+      "margin": 493.87228260004406,
       "mm_rate": 0.05,
       "stop": 0.41637240000000003,
       "opened": 1793599953323,
-      "funding": -5.71643050230073,
+      "funding": -6.127717399955907,
       "signal_id": "ma_crossover-WLD-short-2026-11-01"
     },
     "NEAR": {
@@ -33,11 +33,11 @@
       "size": 247.1637954472429,
       "entry": 4.0459,
       "leverage": 2,
-      "margin": 502.593570410576,
+      "margin": 502.4495902954595,
       "mm_rate": 0.05,
       "stop": 4.369572,
       "opened": 1793861549134,
-      "funding": 2.593570410576139,
+      "funding": 2.4495902954596014,
       "signal_id": "ma_crossover-NEAR-short-2026-11-04"
     },
     "ZRO": {
@@ -45,12 +45,24 @@
       "size": 623.1213600099726,
       "entry": 1.604823817922075,
       "leverage": 2,
-      "margin": 502.35411166897586,
+      "margin": 502.6077158312863,
       "mm_rate": 0.1,
       "stop": 1.7332097233558412,
       "opened": 1794118015927,
-      "funding": 2.354111668975392,
+      "funding": 2.6077158312858506,
       "signal_id": "ma_crossover-ZRO-short-2026-11-07"
+    },
+    "XMR": {
+      "side": "short",
+      "size": 2.0875083500334,
+      "entry": 479.04,
+      "leverage": 2,
+      "margin": 500,
+      "mm_rate": 0.1,
+      "stop": 517.3632,
+      "opened": 1795159279304,
+      "funding": 0.0,
+      "signal_id": "ma_crossover-XMR-short-2026-11-19"
     }
   },
   "history": [
@@ -109,6 +121,20 @@
       "funding": 0.0,
       "balance": 7998.2,
       "signal_id": "ma_crossover-ZRO-short-2026-11-07"
+    },
+    {
+      "time": "2026-11-20 07:21 UTC",
+      "coin": "XMR",
+      "action": "open",
+      "side": "short",
+      "size": 2.0875083500334,
+      "price": 479.04,
+      "leverage": 2,
+      "fee": 0.45,
+      "pnl": 0.0,
+      "funding": 0.0,
+      "balance": 7497.75,
+      "signal_id": "ma_crossover-XMR-short-2026-11-19"
     }
   ],
   "equity_history": [
@@ -191,6 +217,10 @@
     {
       "date": "2026-11-18",
       "equity": 10770.65
+    },
+    {
+      "date": "2026-11-19",
+      "equity": 11045.66
     }
   ]
 }

@@ -208,3 +208,11 @@
 2026-11-19 12:30:29,393 INFO [Momentum 14d, 5 long/5 short] 0 signal(s) | equity 10,712.06 (+7.1%, -0.0% below peak) | cash 5,950.15 | open: WLD short, ENA short, BNB long, AVAX long, GRAM long, VVV long, PUMP short, UNI short
 2026-11-19 12:30:29,395 INFO Scoreboard: MA crossover 20/50 10,771 | Breakout 20/10 11,796 | Momentum 14d, 5 long/5 short 10,712
 2026-11-19 12:30:29,395 INFO Evaluation runs until 2026-12-27; then the best strategy is kept.
+2026-11-20 12:21:07,204 INFO ---- Futures run started ----
+2026-11-20 12:21:17,411 INFO Signals use the day ending 2026-11-20 00:00 UTC; 20 coins in the universe
+2026-11-20 12:21:19,304 INFO XMR: opened short 2.08751 @ 479.04, 2x, margin 500.00, fee 0.45, stop 517.363, liquidation 653.236
+2026-11-20 12:21:19,305 INFO [MA crossover 20/50] 1 signal(s) | equity 11,045.66 (+10.5%, -0.0% below peak) | cash 7,497.75 | open: SUI short, WLD short, NEAR short, ZRO short, XMR short
+2026-11-20 12:21:25,321 INFO [Breakout 20/10] 0 signal(s) | equity 12,571.77 (+25.7%, 0.0% below peak) | cash 2,549.97 | open: SOL short, NEAR short, ENA short, WLD short, XRP short, PUMP short, SUI short, HYPE short, ZEC short, UNI short, BNB short, AAVE short, XMR short, kPEPE short, ZRO short
+2026-11-20 12:21:28,628 INFO [Momentum 14d, 5 long/5 short] 0 signal(s) | equity 10,718.62 (+7.2%, 0.0% below peak) | cash 5,950.15 | open: WLD short, ENA short, BNB long, AVAX long, GRAM long, VVV long, PUMP short, UNI short
+2026-11-20 12:21:28,630 INFO Scoreboard: MA crossover 20/50 11,046 | Breakout 20/10 12,572 | Momentum 14d, 5 long/5 short 10,719
+2026-11-20 12:21:28,630 INFO Evaluation runs until 2026-12-27; then the best strategy is kept.
