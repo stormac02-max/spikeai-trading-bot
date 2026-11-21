@@ -1,19 +1,19 @@
 {
   "created": "2026-10-31 20:46 UTC",
   "starting_balance": 10000,
-  "balance": 5950.14524162439,
-  "last_sync": 1795158000000,
+  "balance": 7208.976401495082,
+  "last_sync": 1795244400000,
   "positions": {
     "WLD": {
       "side": "short",
       "size": 2593.831867818328,
       "entry": 0.38553,
       "leverage": 2,
-      "margin": 493.87228260004406,
+      "margin": 492.96635109743465,
       "mm_rate": 0.05,
       "stop": 0.41637240000000003,
       "opened": 1793599954616,
-      "funding": -6.127717399955907,
+      "funding": -7.033648902565303,
       "signal_id": "momentum-WLD-short-2026-11-01"
     },
     "ENA": {
@@ -21,59 +21,23 @@
       "size": 6688.433616480503,
       "entry": 0.14951183750048289,
       "leverage": 2,
-      "margin": 501.5799478098328,
+      "margin": 501.6848470446279,
       "mm_rate": 0.05,
       "stop": 0.16147278450052152,
       "opened": 1794206366825,
-      "funding": 1.5799478098330317,
+      "funding": 1.6848470446280652,
       "signal_id": "momentum-ENA-short-2026-11-08"
-    },
-    "BNB": {
-      "side": "long",
-      "size": 1.6951853333559357,
-      "entry": 589.9060004373171,
-      "leverage": 2,
-      "margin": 499.2091518411422,
-      "mm_rate": 0.05,
-      "stop": 542.7135204023317,
-      "opened": 1794810971104,
-      "funding": -0.7908481588577649,
-      "signal_id": "momentum-BNB-long-2026-11-15"
-    },
-    "AVAX": {
-      "side": "long",
-      "size": 140.80540692762602,
-      "entry": 7.102,
-      "leverage": 2,
-      "margin": 500.0692828734033,
-      "mm_rate": 0.05,
-      "stop": 6.5338400000000005,
-      "opened": 1794810971251,
-      "funding": 0.06928287340326669,
-      "signal_id": "momentum-AVAX-long-2026-11-15"
-    },
-    "GRAM": {
-      "side": "long",
-      "size": 951.053637660485,
-      "entry": 1.0514654067881166,
-      "leverage": 2,
-      "margin": 500.58794905896957,
-      "mm_rate": 0.1,
-      "stop": 0.9673481742450674,
-      "opened": 1794810971400,
-      "funding": 0.5879490589694475,
-      "signal_id": "momentum-GRAM-long-2026-11-15"
     },
     "VVV": {
       "side": "long",
       "size": 49.86436976465895,
       "entry": 20.05439965890722,
       "leverage": 2,
-      "margin": 497.7070040854315,
+      "margin": 496.93712362216644,
       "mm_rate": 0.16666666666666666,
       "stop": 18.45004768619464,
       "opened": 1794810971550,
-      "funding": -2.2929959145685905,
+      "funding": -3.0628763778335433,
       "signal_id": "momentum-VVV-long-2026-11-15"
     },
     "PUMP": {
@@ -81,11 +45,11 @@
       "size": 348432.0557491289,
       "entry": 0.00287,
       "leverage": 2,
-      "margin": 500.80705244331017,
+      "margin": 500.90348727982587,
       "mm_rate": 0.05,
       "stop": 0.0030996000000000005,
       "opened": 1794810971849,
-      "funding": 0.8070524433101044,
+      "funding": 0.9034872798257837,
       "signal_id": "momentum-PUMP-short-2026-11-15"
     },
     "UNI": {
@@ -93,11 +57,11 @@
       "size": 193.794693901281,
       "entry": 5.1601,
       "leverage": 2,
-      "margin": 500.46743507726205,
+      "margin": 500.4049698681266,
       "mm_rate": 0.05,
       "stop": 5.572908,
       "opened": 1794810971995,
-      "funding": 0.4674350772620685,
+      "funding": 0.4049698681265866,
       "signal_id": "momentum-UNI-short-2026-11-15"
     }
   },
@@ -694,6 +658,48 @@
       "funding": 0.359127,
       "balance": 5950.145242,
       "reason": "stop-loss"
+    },
+    {
+      "time": "2026-11-20 16:00 UTC",
+      "coin": "BNB",
+      "action": "close",
+      "side": "long",
+      "size": 1.6951853333559357,
+      "price": 542.7135204023317,
+      "leverage": 2,
+      "fee": 0.414,
+      "pnl": -80.0,
+      "funding": -0.681827,
+      "balance": 6369.049415,
+      "reason": "stop-loss"
+    },
+    {
+      "time": "2026-11-20 15:00 UTC",
+      "coin": "AVAX",
+      "action": "close",
+      "side": "long",
+      "size": 140.80540692762602,
+      "price": 6.5338400000000005,
+      "leverage": 2,
+      "fee": 0.414,
+      "pnl": -80.0,
+      "funding": 0.129474,
+      "balance": 6788.764889,
+      "reason": "stop-loss"
+    },
+    {
+      "time": "2026-11-20 18:00 UTC",
+      "coin": "GRAM",
+      "action": "close",
+      "side": "long",
+      "size": 951.053637660485,
+      "price": 0.9673481742450674,
+      "leverage": 2,
+      "fee": 0.414,
+      "pnl": -80.0,
+      "funding": 0.625513,
+      "balance": 7208.976401,
+      "reason": "stop-loss"
     }
   ],
   "equity_history": [
@@ -780,6 +786,10 @@
     {
       "date": "2026-11-19",
       "equity": 10718.62
+    },
+    {
+      "date": "2026-11-20",
+      "equity": 10920.02
     }
   ]
 }

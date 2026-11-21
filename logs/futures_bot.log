@@ -216,3 +216,16 @@
 2026-11-20 12:21:28,628 INFO [Momentum 14d, 5 long/5 short] 0 signal(s) | equity 10,718.62 (+7.2%, 0.0% below peak) | cash 5,950.15 | open: WLD short, ENA short, BNB long, AVAX long, GRAM long, VVV long, PUMP short, UNI short
 2026-11-20 12:21:28,630 INFO Scoreboard: MA crossover 20/50 11,046 | Breakout 20/10 12,572 | Momentum 14d, 5 long/5 short 10,719
 2026-11-20 12:21:28,630 INFO Evaluation runs until 2026-12-27; then the best strategy is kept.
+2026-11-21 12:13:56,822 INFO ---- Futures run started ----
+2026-11-21 12:14:07,498 INFO Signals use the day ending 2026-11-21 00:00 UTC; 20 coins in the universe
+2026-11-21 12:14:09,335 INFO [MA crossover 20/50] 0 signal(s) | equity 11,449.50 (+14.5%, -0.0% below peak) | cash 7,497.75 | open: SUI short, WLD short, NEAR short, ZRO short, XMR short
+2026-11-21 12:14:16,164 INFO AVAX: opened short 158.592 @ 6.3055, 2x, margin 500.00, fee 0.45, stop 6.80994, liquidation 9.00785
+2026-11-21 12:14:16,368 INFO DOGE: opened short 18750.8 @ 0.053331, 2x, margin 500.00, fee 0.45, stop 0.0575975, liquidation 0.0761871
+2026-11-21 12:14:16,581 INFO GRAM: opened short 1088.47 @ 0.91872, 2x, margin 500.00, fee 0.45, stop 0.992218, liquidation 1.2528
+2026-11-21 12:14:16,581 INFO [Breakout 20/10] 3 signal(s) | equity 13,737.30 (+37.4%, 0.0% below peak) | cash 1,048.62 | open: SOL short, NEAR short, ENA short, WLD short, XRP short, PUMP short, SUI short, HYPE short, ZEC short, UNI short, BNB short, AAVE short, XMR short, kPEPE short, ZRO short, AVAX short, DOGE short, GRAM short
+2026-11-21 12:14:17,752 INFO BNB: closed long @ 542.714 (stop-loss), profit -80.41 after 0.41 fee, funding -0.68
+2026-11-21 12:14:18,111 INFO AVAX: closed long @ 6.53384 (stop-loss), profit -80.41 after 0.41 fee, funding 0.13
+2026-11-21 12:14:18,472 INFO GRAM: closed long @ 0.967348 (stop-loss), profit -80.41 after 0.41 fee, funding 0.63
+2026-11-21 12:14:19,599 INFO [Momentum 14d, 5 long/5 short] 0 signal(s) | equity 10,920.02 (+9.2%, 0.0% below peak) | cash 7,208.98 | open: WLD short, ENA short, VVV long, PUMP short, UNI short
+2026-11-21 12:14:19,600 INFO Scoreboard: MA crossover 20/50 11,450 | Breakout 20/10 13,737 | Momentum 14d, 5 long/5 short 10,920
+2026-11-21 12:14:19,600 INFO Evaluation runs until 2026-12-27; then the best strategy is kept.

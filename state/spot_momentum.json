@@ -1,37 +1,9 @@
 {
   "created": "2026-11-01 00:43 UTC",
   "starting_balance": 10000,
-  "balance": 7619.325875000004,
-  "last_sync": 1795158000000,
+  "balance": 8534.731625000004,
+  "last_sync": 1795244400000,
   "positions": {
-    "BNB": {
-      "qty": 0.8456019338950866,
-      "gross": 0.8477212369875555,
-      "entry": 589.8165318787926,
-      "cost": 500,
-      "stop": 542.6312093284893,
-      "opened": 1794810982869,
-      "alpaca": null,
-      "signal_id": "momentum-BNB-long-2026-11-15"
-    },
-    "AVAX": {
-      "qty": 70.18716577540107,
-      "gross": 70.36307345904869,
-      "entry": 7.106,
-      "cost": 500,
-      "stop": 6.53752,
-      "opened": 1794810982991,
-      "alpaca": {
-        "symbol": "AVAX/USD",
-        "qty": 70.187165775,
-        "entry": 7.11072,
-        "buy_order": "326198e6-981b-45aa-833b-5b00cae4855c",
-        "stop_order": "595aaaf2-a371-4745-8d40-0bb93f95a231",
-        "stop": 6.5418624,
-        "status": "open"
-      },
-      "signal_id": "momentum-AVAX-long-2026-11-15"
-    },
     "VVV": {
       "qty": 24.8749145855775,
       "gross": 24.937257729902253,
@@ -337,6 +309,40 @@
       "pnl": 0.0,
       "balance": 7619.325875,
       "signal_id": "momentum-LIT-long-2026-11-15"
+    },
+    {
+      "time": "2026-11-20 16:00 UTC",
+      "coin": "BNB",
+      "action": "sell",
+      "side": "long",
+      "qty": 0.8456019338950866,
+      "price": 542.6312093284893,
+      "fee": 1.147125,
+      "pnl": -42.297125,
+      "balance": 8077.02875,
+      "reason": "stop-loss"
+    },
+    {
+      "time": "2026-11-20 15:00 UTC",
+      "coin": "AVAX",
+      "action": "sell",
+      "side": "long",
+      "qty": 70.18716577540107,
+      "price": 6.53752,
+      "fee": 1.147125,
+      "pnl": -42.297125,
+      "balance": 8534.731625,
+      "reason": "stop-loss",
+      "alpaca": {
+        "symbol": "AVAX/USD",
+        "qty": 70.187165775,
+        "entry": 7.11072,
+        "buy_order": "326198e6-981b-45aa-833b-5b00cae4855c",
+        "stop_order": "595aaaf2-a371-4745-8d40-0bb93f95a231",
+        "stop": 6.5418624,
+        "status": "stopped on Alpaca",
+        "exit": 6.533930255
+      }
     }
   ],
   "equity_history": [
@@ -419,6 +425,10 @@
     {
       "date": "2026-11-19",
       "equity": 9759.36
+    },
+    {
+      "date": "2026-11-20",
+      "equity": 9645.85
     }
   ],
   "last_rebalance": "2026-11-15"

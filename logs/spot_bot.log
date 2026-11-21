@@ -148,3 +148,12 @@
 2026-11-20 12:21:39,616 INFO [Breakout 20/10, spot] 0 signal(s) | equity 10,000.00 (+0.0%) | cash 10,000.00 | holding: none | on Alpaca: 0
 2026-11-20 12:21:41,509 INFO [Momentum 14d, 5 long/5 short, spot] 0 signal(s) | equity 9,759.36 (-2.4%) | cash 7,619.33 | holding: BNB, AVAX, VVV, LIT | on Alpaca: 1
 2026-11-20 12:21:41,510 INFO Spot scoreboard: MA crossover 20/50 10,000 | Breakout 20/10 10,000 | Momentum 14d, 5 long/5 short 9,759
+2026-11-21 12:14:20,301 INFO ---- Spot run started ----
+2026-11-21 12:14:20,434 INFO Alpaca lists 8 of this week's coins: HYPE, SOL, XRP, PEPE, AVAX, UNI, DOGE, AAVE
+2026-11-21 12:14:30,274 INFO [MA crossover 20/50, spot] 0 signal(s) | equity 10,000.00 (+0.0%) | cash 10,000.00 | holding: none | on Alpaca: 0
+2026-11-21 12:14:30,277 INFO [Breakout 20/10, spot] 0 signal(s) | equity 10,000.00 (+0.0%) | cash 10,000.00 | holding: none | on Alpaca: 0
+2026-11-21 12:14:30,459 INFO BNB: sold 0.84560193 @ 542.631 (stop-loss), profit $-42.30 after fees
+2026-11-21 12:14:30,869 INFO AVAX: sold 70.187166 @ 6.53752 (stop-loss), profit $-42.30 after fees
+2026-11-21 12:14:32,027 INFO Alpaca: AVAX/USD lot was already closed by its stop @ 6.53393
+2026-11-21 12:14:32,157 INFO [Momentum 14d, 5 long/5 short, spot] 0 signal(s) | equity 9,645.85 (-3.5%) | cash 8,534.73 | holding: VVV, LIT | on Alpaca: 0
+2026-11-21 12:14:32,158 INFO Spot scoreboard: MA crossover 20/50 10,000 | Breakout 20/10 10,000 | Momentum 14d, 5 long/5 short 9,646
