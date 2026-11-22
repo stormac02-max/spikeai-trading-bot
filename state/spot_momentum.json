@@ -1,8 +1,8 @@
 {
   "created": "2026-11-01 00:43 UTC",
   "starting_balance": 10000,
-  "balance": 8534.731625000004,
-  "last_sync": 1795244400000,
+  "balance": 8992.434500000005,
+  "last_sync": 1795327200000,
   "positions": {
     "VVV": {
       "qty": 24.8749145855775,
@@ -13,16 +13,6 @@
       "opened": 1794810984282,
       "alpaca": null,
       "signal_id": "momentum-VVV-long-2026-11-15"
-    },
-    "LIT": {
-      "qty": 6530.691997480367,
-      "gross": 6547.059646596858,
-      "entry": 0.07637016110887251,
-      "cost": 500,
-      "stop": 0.07026054822016271,
-      "opened": 1794810984411,
-      "alpaca": null,
-      "signal_id": "momentum-LIT-long-2026-11-15"
     }
   },
   "history": [
@@ -343,6 +333,18 @@
         "status": "stopped on Alpaca",
         "exit": 6.533930255
       }
+    },
+    {
+      "time": "2026-11-21 15:00 UTC",
+      "coin": "LIT",
+      "action": "sell",
+      "side": "long",
+      "qty": 6530.691997480367,
+      "price": 0.07026054822016271,
+      "fee": 1.147125,
+      "pnl": -42.297125,
+      "balance": 8992.4345,
+      "reason": "stop-loss"
     }
   ],
   "equity_history": [
@@ -429,6 +431,10 @@
     {
       "date": "2026-11-20",
       "equity": 9645.85
+    },
+    {
+      "date": "2026-11-21",
+      "equity": 9612.09
     }
   ],
   "last_rebalance": "2026-11-15"

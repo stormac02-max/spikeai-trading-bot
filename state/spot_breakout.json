@@ -1,10 +1,34 @@
 {
   "created": "2026-11-01 00:43 UTC",
   "starting_balance": 10000,
-  "balance": 10000,
-  "last_sync": 1795244400000,
-  "positions": {},
-  "history": [],
+  "balance": 9500,
+  "last_sync": 1795327200000,
+  "positions": {
+    "VVV": {
+      "qty": 20.012204234472797,
+      "gross": 20.062360134809822,
+      "entry": 24.922292125165246,
+      "cost": 500,
+      "stop": 22.928508755152027,
+      "opened": 1795330471073,
+      "alpaca": null,
+      "signal_id": "breakout-VVV-long-2026-11-21"
+    }
+  },
+  "history": [
+    {
+      "time": "2026-11-22 06:54 UTC",
+      "coin": "VVV",
+      "action": "buy",
+      "side": "long",
+      "qty": 20.012204234472797,
+      "price": 24.922292125165246,
+      "fee": 1.25,
+      "pnl": 0.0,
+      "balance": 9500,
+      "signal_id": "breakout-VVV-long-2026-11-21"
+    }
+  ],
   "equity_history": [
     {
       "date": "2026-10-31",
@@ -89,6 +113,10 @@
     {
       "date": "2026-11-20",
       "equity": 10000
+    },
+    {
+      "date": "2026-11-21",
+      "equity": 9998.52
     }
   ],
   "last_rebalance": "2026-11-15"
