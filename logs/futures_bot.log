@@ -237,3 +237,47 @@
 2026-11-22 11:54:19,799 INFO [Momentum 14d, 5 long/5 short] 0 signal(s) | equity 11,004.09 (+10.0%, 0.0% below peak) | cash 7,208.98 | open: WLD short, ENA short, VVV long, PUMP short, UNI short
 2026-11-22 11:54:19,801 INFO Scoreboard: MA crossover 20/50 11,254 | Breakout 20/10 13,278 | Momentum 14d, 5 long/5 short 11,004
 2026-11-22 11:54:19,801 INFO Evaluation runs until 2026-12-27; then the best strategy is kept.
+2026-11-23 12:43:54,079 INFO ---- Futures run started ----
+2026-11-23 12:44:37,813 INFO Universe refreshed (weekly, 20 coins): HYPE, ZEC, SOL, XRP, NEAR, LIT, XMR, PUMP, VVV, kPEPE, AAVE, UNI, ENA, DOGE, WLD, BNB, ZRO, LINK, ADA, XPL
+2026-11-23 12:44:49,880 INFO Signals use the day ending 2026-11-23 00:00 UTC; 20 coins in the universe
+2026-11-23 12:44:52,218 INFO SUI: closed short @ 0.667344 (left universe), profit 255.53 after 0.33 fee, funding 0.26
+2026-11-23 12:44:52,408 INFO kPEPE: opened short 292234 @ 0.00342191, 2x, margin 500.00, fee 0.45, stop 0.00369566, liquidation 0.00488844
+2026-11-23 12:44:52,409 INFO [MA crossover 20/50] 1 signal(s) | equity 11,083.23 (+10.8%, 3.2% below peak) | cash 7,753.10 | open: WLD short, NEAR short, ZRO short, XMR short, kPEPE short
+2026-11-23 12:44:58,586 ERROR [Breakout 20/10] run failed
+Traceback (most recent call last):
+  File "/home/runner/work/spikeai-trading-bot/spikeai-trading-bot/futures_bot.py", line 187, in main
+    results[key] = run_strategy(key, config, markets, universe, refresh, closes, ind, day, args.dry_run)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/spikeai-trading-bot/spikeai-trading-bot/futures_bot.py", line 119, in run_strategy
+    account.sync()
+  File "/home/runner/work/spikeai-trading-bot/spikeai-trading-bot/paper_futures.py", line 282, in sync
+    candles = [c for c in get_candles(coin, "1h", start, current_hour - 1) if start <= c["t"] < current_hour]
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/spikeai-trading-bot/spikeai-trading-bot/paper_futures.py", line 71, in get_candles
+    rows = hl_info({
+           ^^^^^^^^^
+  File "/home/runner/work/spikeai-trading-bot/spikeai-trading-bot/paper_futures.py", line 48, in hl_info
+    response.raise_for_status()
+  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/requests/models.py", line 1167, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 429 Client Error: Too Many Requests for url: https://api.hyperliquid.xyz/info
+2026-11-23 12:44:58,775 ERROR [Momentum 14d, 5 long/5 short] run failed
+Traceback (most recent call last):
+  File "/home/runner/work/spikeai-trading-bot/spikeai-trading-bot/futures_bot.py", line 187, in main
+    results[key] = run_strategy(key, config, markets, universe, refresh, closes, ind, day, args.dry_run)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/spikeai-trading-bot/spikeai-trading-bot/futures_bot.py", line 119, in run_strategy
+    account.sync()
+  File "/home/runner/work/spikeai-trading-bot/spikeai-trading-bot/paper_futures.py", line 282, in sync
+    candles = [c for c in get_candles(coin, "1h", start, current_hour - 1) if start <= c["t"] < current_hour]
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/spikeai-trading-bot/spikeai-trading-bot/paper_futures.py", line 71, in get_candles
+    rows = hl_info({
+           ^^^^^^^^^
+  File "/home/runner/work/spikeai-trading-bot/spikeai-trading-bot/paper_futures.py", line 48, in hl_info
+    response.raise_for_status()
+  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/requests/models.py", line 1167, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 429 Client Error: Too Many Requests for url: https://api.hyperliquid.xyz/info
+2026-11-23 12:44:58,777 INFO Scoreboard: MA crossover 20/50 11,083
+2026-11-23 12:44:58,777 INFO Evaluation runs until 2026-12-27; then the best strategy is kept.

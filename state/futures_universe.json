@@ -1,5 +1,5 @@
 {
-  "refreshed": "2026-11-16",
+  "refreshed": "2026-11-23",
   "kind": "weekly",
   "coins": [
     "HYPE",
@@ -7,20 +7,20 @@
     "SOL",
     "XRP",
     "NEAR",
-    "kPEPE",
+    "LIT",
     "XMR",
     "PUMP",
-    "LIT",
-    "AVAX",
+    "VVV",
+    "kPEPE",
+    "AAVE",
     "UNI",
     "ENA",
     "DOGE",
-    "SUI",
-    "BNB",
-    "GRAM",
-    "VVV",
     "WLD",
-    "AAVE",
-    "ZRO"
+    "BNB",
+    "ZRO",
+    "LINK",
+    "ADA",
+    "XPL"
   ]
 }
