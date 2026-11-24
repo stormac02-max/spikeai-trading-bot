@@ -178,3 +178,9 @@
 2026-11-23 12:45:43,273 INFO XPL: bought 10985.683 @ 0.0454 for $500.00 (fee $1.25), stop 0.041768
 2026-11-23 12:45:43,450 INFO [Momentum 14d, 5 long/5 short, spot] 4 signal(s) | equity 9,635.59 (-3.6%) | cash 6,992.43 | holding: VVV, XRP, HYPE, LINK, XPL | on Alpaca: 2
 2026-11-23 12:45:43,451 INFO Spot scoreboard: MA crossover 20/50 10,000 | Breakout 20/10 10,021 | Momentum 14d, 5 long/5 short 9,636
+2026-11-24 14:58:37,705 INFO ---- Spot run started ----
+2026-11-24 14:58:37,976 INFO Alpaca lists 9 of this week's coins: HYPE, SOL, XRP, PEPE, AAVE, UNI, DOGE, LINK, ADA
+2026-11-24 14:58:48,545 INFO [MA crossover 20/50, spot] 0 signal(s) | equity 10,000.00 (+0.0%) | cash 10,000.00 | holding: none | on Alpaca: 0
+2026-11-24 14:58:49,496 INFO [Breakout 20/10, spot] 0 signal(s) | equity 10,004.27 (+0.0%) | cash 9,500.00 | holding: VVV | on Alpaca: 0
+2026-11-24 14:58:52,559 INFO [Momentum 14d, 5 long/5 short, spot] 0 signal(s) | equity 9,613.54 (-3.9%) | cash 6,992.43 | holding: VVV, XRP, HYPE, LINK, XPL | on Alpaca: 2
+2026-11-24 14:58:52,560 INFO Spot scoreboard: MA crossover 20/50 10,000 | Breakout 20/10 10,004 | Momentum 14d, 5 long/5 short 9,614
