@@ -1,8 +1,8 @@
 {
   "created": "2026-11-01 00:43 UTC",
   "starting_balance": 10000,
-  "balance": 6992.434500000005,
-  "last_sync": 1795593600000,
+  "balance": 7450.137375000005,
+  "last_sync": 1795680000000,
   "positions": {
     "VVV": {
       "qty": 24.8749145855775,
@@ -31,20 +31,6 @@
         "status": "open"
       },
       "signal_id": "momentum-XRP-long-2026-11-22"
-    },
-    "HYPE": {
-      "qty": 7.934328273942094,
-      "gross": 7.954213808463251,
-      "entry": 62.85976364728869,
-      "cost": 500,
-      "stop": 57.83098255550559,
-      "opened": 1795419912225,
-      "alpaca": {
-        "symbol": "HYPE/USD",
-        "status": "error",
-        "error": "Alpaca buy f7530b30-4c52-4dc1-a1ef-97550ed965d9 ended as new"
-      },
-      "signal_id": "momentum-HYPE-long-2026-11-22"
     },
     "LINK": {
       "qty": 55.94622880353032,
@@ -453,6 +439,18 @@
       "pnl": 0.0,
       "balance": 6992.4345,
       "signal_id": "momentum-XPL-long-2026-11-22"
+    },
+    {
+      "time": "2026-11-25 09:00 UTC",
+      "coin": "HYPE",
+      "action": "sell",
+      "side": "long",
+      "qty": 7.934328273942094,
+      "price": 57.83098255550559,
+      "fee": 1.147125,
+      "pnl": -42.297125,
+      "balance": 7450.137375,
+      "reason": "stop-loss"
     }
   ],
   "equity_history": [
@@ -555,6 +553,10 @@
     {
       "date": "2026-11-24",
       "equity": 9550.56
+    },
+    {
+      "date": "2026-11-25",
+      "equity": 9658.04
     }
   ],
   "last_rebalance": "2026-11-22"
