@@ -197,3 +197,9 @@
 2026-11-26 13:25:35,584 INFO HYPE: sold 7.9343283 @ 57.831 (stop-loss), profit $-42.30 after fees
 2026-11-26 13:25:36,918 INFO [Momentum 14d, 5 long/5 short, spot] 0 signal(s) | equity 9,658.04 (-3.4%) | cash 7,450.14 | holding: VVV, XRP, LINK, XPL | on Alpaca: 2
 2026-11-26 13:25:36,919 INFO Spot scoreboard: MA crossover 20/50 10,000 | Breakout 20/10 10,041 | Momentum 14d, 5 long/5 short 9,658
+2026-11-27 13:39:50,862 INFO ---- Spot run started ----
+2026-11-27 13:39:50,997 INFO Alpaca lists 9 of this week's coins: HYPE, SOL, XRP, PEPE, AAVE, UNI, DOGE, LINK, ADA
+2026-11-27 13:40:00,837 INFO [MA crossover 20/50, spot] 0 signal(s) | equity 10,000.00 (+0.0%) | cash 10,000.00 | holding: none | on Alpaca: 0
+2026-11-27 13:40:01,427 INFO [Breakout 20/10, spot] 0 signal(s) | equity 10,036.95 (+0.4%) | cash 9,500.00 | holding: VVV | on Alpaca: 0
+2026-11-27 13:40:03,187 INFO [Momentum 14d, 5 long/5 short, spot] 0 signal(s) | equity 9,710.48 (-2.9%) | cash 7,450.14 | holding: VVV, XRP, LINK, XPL | on Alpaca: 2
+2026-11-27 13:40:03,188 INFO Spot scoreboard: MA crossover 20/50 10,000 | Breakout 20/10 10,037 | Momentum 14d, 5 long/5 short 9,710
