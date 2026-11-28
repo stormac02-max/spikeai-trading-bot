@@ -2,7 +2,7 @@
   "created": "2026-11-01 00:43 UTC",
   "starting_balance": 10000,
   "balance": 9500,
-  "last_sync": 1795766400000,
+  "last_sync": 1795849200000,
   "positions": {
     "VVV": {
       "qty": 20.012204234472797,
@@ -137,6 +137,10 @@
     {
       "date": "2026-11-26",
       "equity": 10036.95
+    },
+    {
+      "date": "2026-11-27",
+      "equity": 10026.9
     }
   ],
   "last_rebalance": "2026-11-22"

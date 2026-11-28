@@ -14,191 +14,197 @@
 <line class="base" x1="64" x2="610" y1="187.6" y2="187.6" stroke-dasharray="4 4"/>
 <text x="68" y="182.6">start</text>
 <text x="64.0" y="250" text-anchor="middle">2026-10-30</text>
-<text x="161.5" y="250" text-anchor="middle">2026-11-04</text>
-<text x="259.0" y="250" text-anchor="middle">2026-11-09</text>
-<text x="356.5" y="250" text-anchor="middle">2026-11-14</text>
-<text x="454.0" y="250" text-anchor="middle">2026-11-19</text>
-<text x="551.5" y="250" text-anchor="middle">2026-11-24</text>
+<text x="158.1" y="250" text-anchor="middle">2026-11-04</text>
+<text x="252.3" y="250" text-anchor="middle">2026-11-09</text>
+<text x="346.4" y="250" text-anchor="middle">2026-11-14</text>
+<text x="440.6" y="250" text-anchor="middle">2026-11-19</text>
+<text x="534.7" y="250" text-anchor="middle">2026-11-24</text>
 <text x="610.0" y="250" text-anchor="middle">now</text>
-<path class="ma_crossover" d="M64.0,187.7L83.5,188.1L103.0,187.6L122.5,183.8L142.0,187.6L161.5,188.2L181.0,178.3L200.5,179.0L220.0,176.7L239.5,170.3L259.0,172.0L278.5,171.3L298.0,169.3L317.5,167.9L337.0,165.3L356.5,154.5L376.0,153.0L395.5,158.0L415.0,155.3L434.5,157.3L454.0,146.5L473.5,130.6L493.0,138.3L512.5,145.0L532.0,144.8L551.5,141.9L571.0,146.6L590.5,149.6L610.0,149.6" style="fill:none" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<path class="ma_crossover" d="M64.0,187.7L82.8,188.1L101.7,187.6L120.5,183.8L139.3,187.6L158.1,188.2L177.0,178.3L195.8,179.0L214.6,176.7L233.4,170.3L252.3,172.0L271.1,171.3L289.9,169.3L308.8,167.9L327.6,165.3L346.4,154.5L365.2,153.0L384.1,158.0L402.9,155.3L421.7,157.3L440.6,146.5L459.4,130.6L478.2,138.3L497.0,145.0L515.9,144.8L534.7,141.9L553.5,146.6L572.3,149.6L591.2,147.0L610.0,147.0" style="fill:none" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
 <circle class="ma_crossover" cx="64.0" cy="187.7" r="4" stroke="none"/>
-<circle class="ma_crossover" cx="83.5" cy="188.1" r="4" stroke="none"/>
-<circle class="ma_crossover" cx="103.0" cy="187.6" r="4" stroke="none"/>
-<circle class="ma_crossover" cx="122.5" cy="183.8" r="4" stroke="none"/>
-<circle class="ma_crossover" cx="142.0" cy="187.6" r="4" stroke="none"/>
-<circle class="ma_crossover" cx="161.5" cy="188.2" r="4" stroke="none"/>
-<circle class="ma_crossover" cx="181.0" cy="178.3" r="4" stroke="none"/>
-<circle class="ma_crossover" cx="200.5" cy="179.0" r="4" stroke="none"/>
-<circle class="ma_crossover" cx="220.0" cy="176.7" r="4" stroke="none"/>
-<circle class="ma_crossover" cx="239.5" cy="170.3" r="4" stroke="none"/>
-<circle class="ma_crossover" cx="259.0" cy="172.0" r="4" stroke="none"/>
-<circle class="ma_crossover" cx="278.5" cy="171.3" r="4" stroke="none"/>
-<circle class="ma_crossover" cx="298.0" cy="169.3" r="4" stroke="none"/>
-<circle class="ma_crossover" cx="317.5" cy="167.9" r="4" stroke="none"/>
-<circle class="ma_crossover" cx="337.0" cy="165.3" r="4" stroke="none"/>
-<circle class="ma_crossover" cx="356.5" cy="154.5" r="4" stroke="none"/>
-<circle class="ma_crossover" cx="376.0" cy="153.0" r="4" stroke="none"/>
-<circle class="ma_crossover" cx="395.5" cy="158.0" r="4" stroke="none"/>
-<circle class="ma_crossover" cx="415.0" cy="155.3" r="4" stroke="none"/>
-<circle class="ma_crossover" cx="434.5" cy="157.3" r="4" stroke="none"/>
-<circle class="ma_crossover" cx="454.0" cy="146.5" r="4" stroke="none"/>
-<circle class="ma_crossover" cx="473.5" cy="130.6" r="4" stroke="none"/>
-<circle class="ma_crossover" cx="493.0" cy="138.3" r="4" stroke="none"/>
-<circle class="ma_crossover" cx="512.5" cy="145.0" r="4" stroke="none"/>
-<circle class="ma_crossover" cx="532.0" cy="144.8" r="4" stroke="none"/>
-<circle class="ma_crossover" cx="551.5" cy="141.9" r="4" stroke="none"/>
-<circle class="ma_crossover" cx="571.0" cy="146.6" r="4" stroke="none"/>
-<circle class="ma_crossover" cx="590.5" cy="149.6" r="4" stroke="none"/>
-<circle class="ma_crossover" cx="610.0" cy="149.6" r="4" stroke="none"/>
-<path class="breakout" d="M64.0,187.6L83.5,187.6L103.0,188.1L122.5,188.9L142.0,192.3L161.5,195.8L181.0,187.8L200.5,188.8L220.0,183.4L239.5,170.3L259.0,174.6L278.5,169.0L298.0,164.4L317.5,153.7L337.0,142.7L356.5,107.8L376.0,106.4L395.5,122.4L415.0,117.2L434.5,117.0L454.0,86.5L473.5,40.7L493.0,58.7L532.0,72.0L551.5,61.2L571.0,77.1L590.5,84.1L610.0,84.2" style="fill:none" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<circle class="ma_crossover" cx="82.8" cy="188.1" r="4" stroke="none"/>
+<circle class="ma_crossover" cx="101.7" cy="187.6" r="4" stroke="none"/>
+<circle class="ma_crossover" cx="120.5" cy="183.8" r="4" stroke="none"/>
+<circle class="ma_crossover" cx="139.3" cy="187.6" r="4" stroke="none"/>
+<circle class="ma_crossover" cx="158.1" cy="188.2" r="4" stroke="none"/>
+<circle class="ma_crossover" cx="177.0" cy="178.3" r="4" stroke="none"/>
+<circle class="ma_crossover" cx="195.8" cy="179.0" r="4" stroke="none"/>
+<circle class="ma_crossover" cx="214.6" cy="176.7" r="4" stroke="none"/>
+<circle class="ma_crossover" cx="233.4" cy="170.3" r="4" stroke="none"/>
+<circle class="ma_crossover" cx="252.3" cy="172.0" r="4" stroke="none"/>
+<circle class="ma_crossover" cx="271.1" cy="171.3" r="4" stroke="none"/>
+<circle class="ma_crossover" cx="289.9" cy="169.3" r="4" stroke="none"/>
+<circle class="ma_crossover" cx="308.8" cy="167.9" r="4" stroke="none"/>
+<circle class="ma_crossover" cx="327.6" cy="165.3" r="4" stroke="none"/>
+<circle class="ma_crossover" cx="346.4" cy="154.5" r="4" stroke="none"/>
+<circle class="ma_crossover" cx="365.2" cy="153.0" r="4" stroke="none"/>
+<circle class="ma_crossover" cx="384.1" cy="158.0" r="4" stroke="none"/>
+<circle class="ma_crossover" cx="402.9" cy="155.3" r="4" stroke="none"/>
+<circle class="ma_crossover" cx="421.7" cy="157.3" r="4" stroke="none"/>
+<circle class="ma_crossover" cx="440.6" cy="146.5" r="4" stroke="none"/>
+<circle class="ma_crossover" cx="459.4" cy="130.6" r="4" stroke="none"/>
+<circle class="ma_crossover" cx="478.2" cy="138.3" r="4" stroke="none"/>
+<circle class="ma_crossover" cx="497.0" cy="145.0" r="4" stroke="none"/>
+<circle class="ma_crossover" cx="515.9" cy="144.8" r="4" stroke="none"/>
+<circle class="ma_crossover" cx="534.7" cy="141.9" r="4" stroke="none"/>
+<circle class="ma_crossover" cx="553.5" cy="146.6" r="4" stroke="none"/>
+<circle class="ma_crossover" cx="572.3" cy="149.6" r="4" stroke="none"/>
+<circle class="ma_crossover" cx="591.2" cy="147.0" r="4" stroke="none"/>
+<circle class="ma_crossover" cx="610.0" cy="147.0" r="4" stroke="none"/>
+<path class="breakout" d="M64.0,187.6L82.8,187.6L101.7,188.1L120.5,188.9L139.3,192.3L158.1,195.8L177.0,187.8L195.8,188.8L214.6,183.4L233.4,170.3L252.3,174.6L271.1,169.0L289.9,164.4L308.8,153.7L327.6,142.7L346.4,107.8L365.2,106.4L384.1,122.4L402.9,117.2L421.7,117.0L440.6,86.5L459.4,40.7L478.2,58.7L515.9,72.0L534.7,61.2L553.5,77.1L572.3,84.1L591.2,70.0L610.0,69.9" style="fill:none" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
 <circle class="breakout" cx="64.0" cy="187.6" r="4" stroke="none"/>
-<circle class="breakout" cx="83.5" cy="187.6" r="4" stroke="none"/>
-<circle class="breakout" cx="103.0" cy="188.1" r="4" stroke="none"/>
-<circle class="breakout" cx="122.5" cy="188.9" r="4" stroke="none"/>
-<circle class="breakout" cx="142.0" cy="192.3" r="4" stroke="none"/>
-<circle class="breakout" cx="161.5" cy="195.8" r="4" stroke="none"/>
-<circle class="breakout" cx="181.0" cy="187.8" r="4" stroke="none"/>
-<circle class="breakout" cx="200.5" cy="188.8" r="4" stroke="none"/>
-<circle class="breakout" cx="220.0" cy="183.4" r="4" stroke="none"/>
-<circle class="breakout" cx="239.5" cy="170.3" r="4" stroke="none"/>
-<circle class="breakout" cx="259.0" cy="174.6" r="4" stroke="none"/>
-<circle class="breakout" cx="278.5" cy="169.0" r="4" stroke="none"/>
-<circle class="breakout" cx="298.0" cy="164.4" r="4" stroke="none"/>
-<circle class="breakout" cx="317.5" cy="153.7" r="4" stroke="none"/>
-<circle class="breakout" cx="337.0" cy="142.7" r="4" stroke="none"/>
-<circle class="breakout" cx="356.5" cy="107.8" r="4" stroke="none"/>
-<circle class="breakout" cx="376.0" cy="106.4" r="4" stroke="none"/>
-<circle class="breakout" cx="395.5" cy="122.4" r="4" stroke="none"/>
-<circle class="breakout" cx="415.0" cy="117.2" r="4" stroke="none"/>
-<circle class="breakout" cx="434.5" cy="117.0" r="4" stroke="none"/>
-<circle class="breakout" cx="454.0" cy="86.5" r="4" stroke="none"/>
-<circle class="breakout" cx="473.5" cy="40.7" r="4" stroke="none"/>
-<circle class="breakout" cx="493.0" cy="58.7" r="4" stroke="none"/>
-<circle class="breakout" cx="532.0" cy="72.0" r="4" stroke="none"/>
-<circle class="breakout" cx="551.5" cy="61.2" r="4" stroke="none"/>
-<circle class="breakout" cx="571.0" cy="77.1" r="4" stroke="none"/>
-<circle class="breakout" cx="590.5" cy="84.1" r="4" stroke="none"/>
-<circle class="breakout" cx="610.0" cy="84.2" r="4" stroke="none"/>
-<path class="momentum" d="M64.0,187.6L83.5,187.6L103.0,187.8L122.5,186.6L142.0,188.8L161.5,190.8L181.0,180.0L200.5,180.6L220.0,180.2L239.5,176.0L259.0,178.2L278.5,183.6L298.0,187.5L317.5,182.0L337.0,179.6L356.5,162.9L376.0,162.7L395.5,164.6L415.0,161.9L434.5,159.6L454.0,159.4L473.5,151.5L493.0,148.2L532.0,152.1L551.5,149.0L571.0,152.5L590.5,155.9L610.0,155.9" style="fill:none" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<circle class="breakout" cx="82.8" cy="187.6" r="4" stroke="none"/>
+<circle class="breakout" cx="101.7" cy="188.1" r="4" stroke="none"/>
+<circle class="breakout" cx="120.5" cy="188.9" r="4" stroke="none"/>
+<circle class="breakout" cx="139.3" cy="192.3" r="4" stroke="none"/>
+<circle class="breakout" cx="158.1" cy="195.8" r="4" stroke="none"/>
+<circle class="breakout" cx="177.0" cy="187.8" r="4" stroke="none"/>
+<circle class="breakout" cx="195.8" cy="188.8" r="4" stroke="none"/>
+<circle class="breakout" cx="214.6" cy="183.4" r="4" stroke="none"/>
+<circle class="breakout" cx="233.4" cy="170.3" r="4" stroke="none"/>
+<circle class="breakout" cx="252.3" cy="174.6" r="4" stroke="none"/>
+<circle class="breakout" cx="271.1" cy="169.0" r="4" stroke="none"/>
+<circle class="breakout" cx="289.9" cy="164.4" r="4" stroke="none"/>
+<circle class="breakout" cx="308.8" cy="153.7" r="4" stroke="none"/>
+<circle class="breakout" cx="327.6" cy="142.7" r="4" stroke="none"/>
+<circle class="breakout" cx="346.4" cy="107.8" r="4" stroke="none"/>
+<circle class="breakout" cx="365.2" cy="106.4" r="4" stroke="none"/>
+<circle class="breakout" cx="384.1" cy="122.4" r="4" stroke="none"/>
+<circle class="breakout" cx="402.9" cy="117.2" r="4" stroke="none"/>
+<circle class="breakout" cx="421.7" cy="117.0" r="4" stroke="none"/>
+<circle class="breakout" cx="440.6" cy="86.5" r="4" stroke="none"/>
+<circle class="breakout" cx="459.4" cy="40.7" r="4" stroke="none"/>
+<circle class="breakout" cx="478.2" cy="58.7" r="4" stroke="none"/>
+<circle class="breakout" cx="515.9" cy="72.0" r="4" stroke="none"/>
+<circle class="breakout" cx="534.7" cy="61.2" r="4" stroke="none"/>
+<circle class="breakout" cx="553.5" cy="77.1" r="4" stroke="none"/>
+<circle class="breakout" cx="572.3" cy="84.1" r="4" stroke="none"/>
+<circle class="breakout" cx="591.2" cy="70.0" r="4" stroke="none"/>
+<circle class="breakout" cx="610.0" cy="69.9" r="4" stroke="none"/>
+<path class="momentum" d="M64.0,187.6L82.8,187.6L101.7,187.8L120.5,186.6L139.3,188.8L158.1,190.8L177.0,180.0L195.8,180.6L214.6,180.2L233.4,176.0L252.3,178.2L271.1,183.6L289.9,187.5L308.8,182.0L327.6,179.6L346.4,162.9L365.2,162.7L384.1,164.6L402.9,161.9L421.7,159.6L440.6,159.4L459.4,151.5L478.2,148.2L515.9,152.1L534.7,149.0L553.5,152.5L572.3,155.9L591.2,152.6L610.0,152.6" style="fill:none" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
 <circle class="momentum" cx="64.0" cy="187.6" r="4" stroke="none"/>
-<circle class="momentum" cx="83.5" cy="187.6" r="4" stroke="none"/>
-<circle class="momentum" cx="103.0" cy="187.8" r="4" stroke="none"/>
-<circle class="momentum" cx="122.5" cy="186.6" r="4" stroke="none"/>
-<circle class="momentum" cx="142.0" cy="188.8" r="4" stroke="none"/>
-<circle class="momentum" cx="161.5" cy="190.8" r="4" stroke="none"/>
-<circle class="momentum" cx="181.0" cy="180.0" r="4" stroke="none"/>
-<circle class="momentum" cx="200.5" cy="180.6" r="4" stroke="none"/>
-<circle class="momentum" cx="220.0" cy="180.2" r="4" stroke="none"/>
-<circle class="momentum" cx="239.5" cy="176.0" r="4" stroke="none"/>
-<circle class="momentum" cx="259.0" cy="178.2" r="4" stroke="none"/>
-<circle class="momentum" cx="278.5" cy="183.6" r="4" stroke="none"/>
-<circle class="momentum" cx="298.0" cy="187.5" r="4" stroke="none"/>
-<circle class="momentum" cx="317.5" cy="182.0" r="4" stroke="none"/>
-<circle class="momentum" cx="337.0" cy="179.6" r="4" stroke="none"/>
-<circle class="momentum" cx="356.5" cy="162.9" r="4" stroke="none"/>
-<circle class="momentum" cx="376.0" cy="162.7" r="4" stroke="none"/>
-<circle class="momentum" cx="395.5" cy="164.6" r="4" stroke="none"/>
-<circle class="momentum" cx="415.0" cy="161.9" r="4" stroke="none"/>
-<circle class="momentum" cx="434.5" cy="159.6" r="4" stroke="none"/>
-<circle class="momentum" cx="454.0" cy="159.4" r="4" stroke="none"/>
-<circle class="momentum" cx="473.5" cy="151.5" r="4" stroke="none"/>
-<circle class="momentum" cx="493.0" cy="148.2" r="4" stroke="none"/>
-<circle class="momentum" cx="532.0" cy="152.1" r="4" stroke="none"/>
-<circle class="momentum" cx="551.5" cy="149.0" r="4" stroke="none"/>
-<circle class="momentum" cx="571.0" cy="152.5" r="4" stroke="none"/>
-<circle class="momentum" cx="590.5" cy="155.9" r="4" stroke="none"/>
-<circle class="momentum" cx="610.0" cy="155.9" r="4" stroke="none"/>
-<path class="ma_crossover" d="M83.5,187.6L103.0,187.6L122.5,187.6L142.0,187.6L161.5,187.6L181.0,187.6L200.5,187.6L220.0,187.6L239.5,187.6L259.0,187.6L278.5,187.6L298.0,187.6L317.5,187.6L337.0,187.6L356.5,187.6L376.0,187.6L395.5,187.6L415.0,187.6L434.5,187.6L454.0,187.6L473.5,187.6L493.0,187.6L512.5,187.6L532.0,187.6L551.5,187.6L571.0,187.6L590.5,187.6L610.0,187.6" style="fill:none" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="6 4"/>
-<circle class="ma_crossover" cx="83.5" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
-<circle class="ma_crossover" cx="103.0" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
-<circle class="ma_crossover" cx="122.5" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
-<circle class="ma_crossover" cx="142.0" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
-<circle class="ma_crossover" cx="161.5" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
-<circle class="ma_crossover" cx="181.0" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
-<circle class="ma_crossover" cx="200.5" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
-<circle class="ma_crossover" cx="220.0" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
-<circle class="ma_crossover" cx="239.5" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
-<circle class="ma_crossover" cx="259.0" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
-<circle class="ma_crossover" cx="278.5" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
-<circle class="ma_crossover" cx="298.0" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
-<circle class="ma_crossover" cx="317.5" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
-<circle class="ma_crossover" cx="337.0" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
-<circle class="ma_crossover" cx="356.5" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
-<circle class="ma_crossover" cx="376.0" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
-<circle class="ma_crossover" cx="395.5" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
-<circle class="ma_crossover" cx="415.0" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
-<circle class="ma_crossover" cx="434.5" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
-<circle class="ma_crossover" cx="454.0" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
-<circle class="ma_crossover" cx="473.5" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
-<circle class="ma_crossover" cx="493.0" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
-<circle class="ma_crossover" cx="512.5" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
-<circle class="ma_crossover" cx="532.0" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
-<circle class="ma_crossover" cx="551.5" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
-<circle class="ma_crossover" cx="571.0" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
-<circle class="ma_crossover" cx="590.5" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
+<circle class="momentum" cx="82.8" cy="187.6" r="4" stroke="none"/>
+<circle class="momentum" cx="101.7" cy="187.8" r="4" stroke="none"/>
+<circle class="momentum" cx="120.5" cy="186.6" r="4" stroke="none"/>
+<circle class="momentum" cx="139.3" cy="188.8" r="4" stroke="none"/>
+<circle class="momentum" cx="158.1" cy="190.8" r="4" stroke="none"/>
+<circle class="momentum" cx="177.0" cy="180.0" r="4" stroke="none"/>
+<circle class="momentum" cx="195.8" cy="180.6" r="4" stroke="none"/>
+<circle class="momentum" cx="214.6" cy="180.2" r="4" stroke="none"/>
+<circle class="momentum" cx="233.4" cy="176.0" r="4" stroke="none"/>
+<circle class="momentum" cx="252.3" cy="178.2" r="4" stroke="none"/>
+<circle class="momentum" cx="271.1" cy="183.6" r="4" stroke="none"/>
+<circle class="momentum" cx="289.9" cy="187.5" r="4" stroke="none"/>
+<circle class="momentum" cx="308.8" cy="182.0" r="4" stroke="none"/>
+<circle class="momentum" cx="327.6" cy="179.6" r="4" stroke="none"/>
+<circle class="momentum" cx="346.4" cy="162.9" r="4" stroke="none"/>
+<circle class="momentum" cx="365.2" cy="162.7" r="4" stroke="none"/>
+<circle class="momentum" cx="384.1" cy="164.6" r="4" stroke="none"/>
+<circle class="momentum" cx="402.9" cy="161.9" r="4" stroke="none"/>
+<circle class="momentum" cx="421.7" cy="159.6" r="4" stroke="none"/>
+<circle class="momentum" cx="440.6" cy="159.4" r="4" stroke="none"/>
+<circle class="momentum" cx="459.4" cy="151.5" r="4" stroke="none"/>
+<circle class="momentum" cx="478.2" cy="148.2" r="4" stroke="none"/>
+<circle class="momentum" cx="515.9" cy="152.1" r="4" stroke="none"/>
+<circle class="momentum" cx="534.7" cy="149.0" r="4" stroke="none"/>
+<circle class="momentum" cx="553.5" cy="152.5" r="4" stroke="none"/>
+<circle class="momentum" cx="572.3" cy="155.9" r="4" stroke="none"/>
+<circle class="momentum" cx="591.2" cy="152.6" r="4" stroke="none"/>
+<circle class="momentum" cx="610.0" cy="152.6" r="4" stroke="none"/>
+<path class="ma_crossover" d="M82.8,187.6L101.7,187.6L120.5,187.6L139.3,187.6L158.1,187.6L177.0,187.6L195.8,187.6L214.6,187.6L233.4,187.6L252.3,187.6L271.1,187.6L289.9,187.6L308.8,187.6L327.6,187.6L346.4,187.6L365.2,187.6L384.1,187.6L402.9,187.6L421.7,187.6L440.6,187.6L459.4,187.6L478.2,187.6L497.0,187.6L515.9,187.6L534.7,187.6L553.5,187.6L572.3,187.6L591.2,187.6L610.0,187.6" style="fill:none" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="6 4"/>
+<circle class="ma_crossover" cx="82.8" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
+<circle class="ma_crossover" cx="101.7" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
+<circle class="ma_crossover" cx="120.5" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
+<circle class="ma_crossover" cx="139.3" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
+<circle class="ma_crossover" cx="158.1" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
+<circle class="ma_crossover" cx="177.0" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
+<circle class="ma_crossover" cx="195.8" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
+<circle class="ma_crossover" cx="214.6" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
+<circle class="ma_crossover" cx="233.4" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
+<circle class="ma_crossover" cx="252.3" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
+<circle class="ma_crossover" cx="271.1" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
+<circle class="ma_crossover" cx="289.9" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
+<circle class="ma_crossover" cx="308.8" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
+<circle class="ma_crossover" cx="327.6" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
+<circle class="ma_crossover" cx="346.4" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
+<circle class="ma_crossover" cx="365.2" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
+<circle class="ma_crossover" cx="384.1" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
+<circle class="ma_crossover" cx="402.9" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
+<circle class="ma_crossover" cx="421.7" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
+<circle class="ma_crossover" cx="440.6" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
+<circle class="ma_crossover" cx="459.4" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
+<circle class="ma_crossover" cx="478.2" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
+<circle class="ma_crossover" cx="497.0" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
+<circle class="ma_crossover" cx="515.9" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
+<circle class="ma_crossover" cx="534.7" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
+<circle class="ma_crossover" cx="553.5" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
+<circle class="ma_crossover" cx="572.3" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
+<circle class="ma_crossover" cx="591.2" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
 <circle class="ma_crossover" cx="610.0" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
-<path class="breakout" d="M83.5,187.6L103.0,187.6L122.5,187.6L142.0,187.6L161.5,187.6L181.0,187.6L200.5,187.6L220.0,187.6L239.5,187.6L259.0,187.6L278.5,187.6L298.0,187.6L317.5,187.6L337.0,187.6L356.5,187.6L376.0,187.6L395.5,187.6L415.0,187.6L434.5,187.6L454.0,187.6L473.5,187.6L493.0,187.7L512.5,186.8L532.0,187.5L551.5,187.8L571.0,186.0L590.5,186.2L610.0,186.2" style="fill:none" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="6 4"/>
-<circle class="breakout" cx="83.5" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
-<circle class="breakout" cx="103.0" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
-<circle class="breakout" cx="122.5" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
-<circle class="breakout" cx="142.0" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
-<circle class="breakout" cx="161.5" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
-<circle class="breakout" cx="181.0" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
-<circle class="breakout" cx="200.5" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
-<circle class="breakout" cx="220.0" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
-<circle class="breakout" cx="239.5" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
-<circle class="breakout" cx="259.0" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
-<circle class="breakout" cx="278.5" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
-<circle class="breakout" cx="298.0" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
-<circle class="breakout" cx="317.5" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
-<circle class="breakout" cx="337.0" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
-<circle class="breakout" cx="356.5" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
-<circle class="breakout" cx="376.0" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
-<circle class="breakout" cx="395.5" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
-<circle class="breakout" cx="415.0" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
-<circle class="breakout" cx="434.5" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
-<circle class="breakout" cx="454.0" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
-<circle class="breakout" cx="473.5" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
-<circle class="breakout" cx="493.0" cy="187.7" r="3" style="fill:none" stroke-width="2"/>
-<circle class="breakout" cx="512.5" cy="186.8" r="3" style="fill:none" stroke-width="2"/>
-<circle class="breakout" cx="532.0" cy="187.5" r="3" style="fill:none" stroke-width="2"/>
-<circle class="breakout" cx="551.5" cy="187.8" r="3" style="fill:none" stroke-width="2"/>
-<circle class="breakout" cx="571.0" cy="186.0" r="3" style="fill:none" stroke-width="2"/>
-<circle class="breakout" cx="590.5" cy="186.2" r="3" style="fill:none" stroke-width="2"/>
-<circle class="breakout" cx="610.0" cy="186.2" r="3" style="fill:none" stroke-width="2"/>
-<path class="momentum" d="M83.5,187.6L103.0,187.9L122.5,193.4L142.0,192.8L161.5,193.1L181.0,194.0L200.5,194.0L220.0,194.1L239.5,193.8L259.0,194.0L278.5,197.4L298.0,201.8L317.5,201.6L337.0,202.6L356.5,202.6L376.0,202.8L395.5,200.3L415.0,194.7L434.5,192.6L454.0,197.1L473.5,201.6L493.0,202.9L512.5,202.0L532.0,202.8L551.5,205.3L571.0,201.1L590.5,199.0L610.0,199.0" style="fill:none" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="6 4"/>
-<circle class="momentum" cx="83.5" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
-<circle class="momentum" cx="103.0" cy="187.9" r="3" style="fill:none" stroke-width="2"/>
-<circle class="momentum" cx="122.5" cy="193.4" r="3" style="fill:none" stroke-width="2"/>
-<circle class="momentum" cx="142.0" cy="192.8" r="3" style="fill:none" stroke-width="2"/>
-<circle class="momentum" cx="161.5" cy="193.1" r="3" style="fill:none" stroke-width="2"/>
-<circle class="momentum" cx="181.0" cy="194.0" r="3" style="fill:none" stroke-width="2"/>
-<circle class="momentum" cx="200.5" cy="194.0" r="3" style="fill:none" stroke-width="2"/>
-<circle class="momentum" cx="220.0" cy="194.1" r="3" style="fill:none" stroke-width="2"/>
-<circle class="momentum" cx="239.5" cy="193.8" r="3" style="fill:none" stroke-width="2"/>
-<circle class="momentum" cx="259.0" cy="194.0" r="3" style="fill:none" stroke-width="2"/>
-<circle class="momentum" cx="278.5" cy="197.4" r="3" style="fill:none" stroke-width="2"/>
-<circle class="momentum" cx="298.0" cy="201.8" r="3" style="fill:none" stroke-width="2"/>
-<circle class="momentum" cx="317.5" cy="201.6" r="3" style="fill:none" stroke-width="2"/>
-<circle class="momentum" cx="337.0" cy="202.6" r="3" style="fill:none" stroke-width="2"/>
-<circle class="momentum" cx="356.5" cy="202.6" r="3" style="fill:none" stroke-width="2"/>
-<circle class="momentum" cx="376.0" cy="202.8" r="3" style="fill:none" stroke-width="2"/>
-<circle class="momentum" cx="395.5" cy="200.3" r="3" style="fill:none" stroke-width="2"/>
-<circle class="momentum" cx="415.0" cy="194.7" r="3" style="fill:none" stroke-width="2"/>
-<circle class="momentum" cx="434.5" cy="192.6" r="3" style="fill:none" stroke-width="2"/>
-<circle class="momentum" cx="454.0" cy="197.1" r="3" style="fill:none" stroke-width="2"/>
-<circle class="momentum" cx="473.5" cy="201.6" r="3" style="fill:none" stroke-width="2"/>
-<circle class="momentum" cx="493.0" cy="202.9" r="3" style="fill:none" stroke-width="2"/>
-<circle class="momentum" cx="512.5" cy="202.0" r="3" style="fill:none" stroke-width="2"/>
-<circle class="momentum" cx="532.0" cy="202.8" r="3" style="fill:none" stroke-width="2"/>
-<circle class="momentum" cx="551.5" cy="205.3" r="3" style="fill:none" stroke-width="2"/>
-<circle class="momentum" cx="571.0" cy="201.1" r="3" style="fill:none" stroke-width="2"/>
-<circle class="momentum" cx="590.5" cy="199.0" r="3" style="fill:none" stroke-width="2"/>
-<circle class="momentum" cx="610.0" cy="199.0" r="3" style="fill:none" stroke-width="2"/>
-<text class="lbl" x="620" y="88.2">Breakout</text>
-<text class="lbl" x="620" y="153.6">MA</text>
-<text class="lbl" x="620" y="167.6">Momentum</text>
-<text class="lbl" x="620" y="190.2">Breakout (spot)</text>
-<text class="lbl" x="620" y="204.2">MA (spot)</text>
-<text class="lbl" x="620" y="218.2">Momentum (spot)</text>
+<path class="breakout" d="M82.8,187.6L101.7,187.6L120.5,187.6L139.3,187.6L158.1,187.6L177.0,187.6L195.8,187.6L214.6,187.6L233.4,187.6L252.3,187.6L271.1,187.6L289.9,187.6L308.8,187.6L327.6,187.6L346.4,187.6L365.2,187.6L384.1,187.6L402.9,187.6L421.7,187.6L440.6,187.6L459.4,187.6L478.2,187.7L497.0,186.8L515.9,187.5L534.7,187.8L553.5,186.0L572.3,186.2L591.2,186.6L610.0,186.6" style="fill:none" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="6 4"/>
+<circle class="breakout" cx="82.8" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
+<circle class="breakout" cx="101.7" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
+<circle class="breakout" cx="120.5" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
+<circle class="breakout" cx="139.3" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
+<circle class="breakout" cx="158.1" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
+<circle class="breakout" cx="177.0" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
+<circle class="breakout" cx="195.8" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
+<circle class="breakout" cx="214.6" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
+<circle class="breakout" cx="233.4" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
+<circle class="breakout" cx="252.3" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
+<circle class="breakout" cx="271.1" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
+<circle class="breakout" cx="289.9" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
+<circle class="breakout" cx="308.8" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
+<circle class="breakout" cx="327.6" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
+<circle class="breakout" cx="346.4" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
+<circle class="breakout" cx="365.2" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
+<circle class="breakout" cx="384.1" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
+<circle class="breakout" cx="402.9" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
+<circle class="breakout" cx="421.7" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
+<circle class="breakout" cx="440.6" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
+<circle class="breakout" cx="459.4" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
+<circle class="breakout" cx="478.2" cy="187.7" r="3" style="fill:none" stroke-width="2"/>
+<circle class="breakout" cx="497.0" cy="186.8" r="3" style="fill:none" stroke-width="2"/>
+<circle class="breakout" cx="515.9" cy="187.5" r="3" style="fill:none" stroke-width="2"/>
+<circle class="breakout" cx="534.7" cy="187.8" r="3" style="fill:none" stroke-width="2"/>
+<circle class="breakout" cx="553.5" cy="186.0" r="3" style="fill:none" stroke-width="2"/>
+<circle class="breakout" cx="572.3" cy="186.2" r="3" style="fill:none" stroke-width="2"/>
+<circle class="breakout" cx="591.2" cy="186.6" r="3" style="fill:none" stroke-width="2"/>
+<circle class="breakout" cx="610.0" cy="186.6" r="3" style="fill:none" stroke-width="2"/>
+<path class="momentum" d="M82.8,187.6L101.7,187.9L120.5,193.4L139.3,192.8L158.1,193.1L177.0,194.0L195.8,194.0L214.6,194.1L233.4,193.8L252.3,194.0L271.1,197.4L289.9,201.8L308.8,201.6L327.6,202.6L346.4,202.6L365.2,202.8L384.1,200.3L402.9,194.7L421.7,192.6L440.6,197.1L459.4,201.6L478.2,202.9L497.0,202.0L515.9,202.8L534.7,205.3L553.5,201.1L572.3,199.0L591.2,202.4L610.0,202.4" style="fill:none" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="6 4"/>
+<circle class="momentum" cx="82.8" cy="187.6" r="3" style="fill:none" stroke-width="2"/>
+<circle class="momentum" cx="101.7" cy="187.9" r="3" style="fill:none" stroke-width="2"/>
+<circle class="momentum" cx="120.5" cy="193.4" r="3" style="fill:none" stroke-width="2"/>
+<circle class="momentum" cx="139.3" cy="192.8" r="3" style="fill:none" stroke-width="2"/>
+<circle class="momentum" cx="158.1" cy="193.1" r="3" style="fill:none" stroke-width="2"/>
+<circle class="momentum" cx="177.0" cy="194.0" r="3" style="fill:none" stroke-width="2"/>
+<circle class="momentum" cx="195.8" cy="194.0" r="3" style="fill:none" stroke-width="2"/>
+<circle class="momentum" cx="214.6" cy="194.1" r="3" style="fill:none" stroke-width="2"/>
+<circle class="momentum" cx="233.4" cy="193.8" r="3" style="fill:none" stroke-width="2"/>
+<circle class="momentum" cx="252.3" cy="194.0" r="3" style="fill:none" stroke-width="2"/>
+<circle class="momentum" cx="271.1" cy="197.4" r="3" style="fill:none" stroke-width="2"/>
+<circle class="momentum" cx="289.9" cy="201.8" r="3" style="fill:none" stroke-width="2"/>
+<circle class="momentum" cx="308.8" cy="201.6" r="3" style="fill:none" stroke-width="2"/>
+<circle class="momentum" cx="327.6" cy="202.6" r="3" style="fill:none" stroke-width="2"/>
+<circle class="momentum" cx="346.4" cy="202.6" r="3" style="fill:none" stroke-width="2"/>
+<circle class="momentum" cx="365.2" cy="202.8" r="3" style="fill:none" stroke-width="2"/>
+<circle class="momentum" cx="384.1" cy="200.3" r="3" style="fill:none" stroke-width="2"/>
+<circle class="momentum" cx="402.9" cy="194.7" r="3" style="fill:none" stroke-width="2"/>
+<circle class="momentum" cx="421.7" cy="192.6" r="3" style="fill:none" stroke-width="2"/>
+<circle class="momentum" cx="440.6" cy="197.1" r="3" style="fill:none" stroke-width="2"/>
+<circle class="momentum" cx="459.4" cy="201.6" r="3" style="fill:none" stroke-width="2"/>
+<circle class="momentum" cx="478.2" cy="202.9" r="3" style="fill:none" stroke-width="2"/>
+<circle class="momentum" cx="497.0" cy="202.0" r="3" style="fill:none" stroke-width="2"/>
+<circle class="momentum" cx="515.9" cy="202.8" r="3" style="fill:none" stroke-width="2"/>
+<circle class="momentum" cx="534.7" cy="205.3" r="3" style="fill:none" stroke-width="2"/>
+<circle class="momentum" cx="553.5" cy="201.1" r="3" style="fill:none" stroke-width="2"/>
+<circle class="momentum" cx="572.3" cy="199.0" r="3" style="fill:none" stroke-width="2"/>
+<circle class="momentum" cx="591.2" cy="202.4" r="3" style="fill:none" stroke-width="2"/>
+<circle class="momentum" cx="610.0" cy="202.4" r="3" style="fill:none" stroke-width="2"/>
+<text class="lbl" x="620" y="73.9">Breakout</text>
+<text class="lbl" x="620" y="151.0">MA</text>
+<text class="lbl" x="620" y="165.0">Momentum</text>
+<text class="lbl" x="620" y="190.6">Breakout (spot)</text>
+<text class="lbl" x="620" y="204.6">MA (spot)</text>
+<text class="lbl" x="620" y="218.6">Momentum (spot)</text>
 </svg>

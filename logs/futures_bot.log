@@ -314,3 +314,10 @@ requests.exceptions.HTTPError: 429 Client Error: Too Many Requests for url: http
 2026-11-27 13:39:50,136 INFO [Momentum 14d, 5 long/5 short] 0 signal(s) | equity 10,805.93 (+8.1%, 1.8% below peak) | cash 7,208.98 | open: WLD short, ENA short, VVV long, PUMP short, UNI short
 2026-11-27 13:39:50,138 INFO Scoreboard: MA crossover 20/50 10,967 | Breakout 20/10 12,633 | Momentum 14d, 5 long/5 short 10,806
 2026-11-27 13:39:50,138 INFO Evaluation runs until 2026-12-27; then the best strategy is kept.
+2026-11-28 12:53:45,709 INFO ---- Futures run started ----
+2026-11-28 12:53:55,699 INFO Signals use the day ending 2026-11-28 00:00 UTC; 20 coins in the universe
+2026-11-28 12:53:56,692 INFO [MA crossover 20/50] 0 signal(s) | equity 11,032.81 (+10.3%, 3.6% below peak) | cash 8,593.52 | open: WLD short, NEAR short, ZRO short
+2026-11-28 12:54:01,663 INFO [Breakout 20/10] 0 signal(s) | equity 12,991.39 (+29.9%, 5.4% below peak) | cash 1,804.33 | open: SOL short, NEAR short, ENA short, WLD short, XRP short, PUMP short, SUI short, HYPE short, ZEC short, UNI short, BNB short, AAVE short, XMR short, kPEPE short, ZRO short, VVV long
+2026-11-28 12:54:03,179 INFO [Momentum 14d, 5 long/5 short] 0 signal(s) | equity 10,891.11 (+8.9%, 1.0% below peak) | cash 7,208.98 | open: WLD short, ENA short, VVV long, PUMP short, UNI short
+2026-11-28 12:54:03,180 INFO Scoreboard: MA crossover 20/50 11,033 | Breakout 20/10 12,991 | Momentum 14d, 5 long/5 short 10,891
+2026-11-28 12:54:03,181 INFO Evaluation runs until 2026-12-27; then the best strategy is kept.
